@@ -1,6 +1,6 @@
 'use client'
 
-import EarthQuake from "@/pageComponent/earthquake"
+import EarthQuake from "@/pageComponents/earthquake"
 
 export default function EarthQuakePage() {
   return <EarthQuake />

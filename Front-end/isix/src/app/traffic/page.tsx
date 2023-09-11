@@ -1,4 +1,4 @@
-import Traffic from "@/pageComponent/traffic";
+import Traffic from "@/pageComponents/traffic";
 
 
 export default function TrafficPage() {
