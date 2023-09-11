@@ -20,6 +20,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         socket = new Socket("127.0.0.1",8888);
     }
 
+
+
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         if (message.getPayload() instanceof ByteBuffer payloadBuffer) {
@@ -42,6 +44,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
             String payload = message.toString();
             session.sendMessage(new TextMessage(payload));
             System.out.println(message.getPayload().getClass());
+            System.out.println(message.getPayload());
         }
     }
 
@@ -59,9 +62,10 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         super.afterConnectionEstablished(session);
 
         // Set the desired buffer size for the WebSocket session
-        int bufferSize = 100000; // Adjust the buffer size as needed
+        int bufferSize = 100000; // Adjust the buffer size as neededq
         session.setTextMessageSizeLimit(bufferSize);
         session.setBinaryMessageSizeLimit(bufferSize);
+        System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
 
     }
 }
