@@ -1,6 +1,8 @@
 venv/
 .idea/
 media/
+cache/
+yolov8n.pt
 db.sqlite3
 pythonserver/settings.py
 # temporary files
