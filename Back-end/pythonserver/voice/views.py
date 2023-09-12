@@ -4,6 +4,12 @@ import os
 import whisper
 
 fire_answer = ['불이야', '부리야', '부리아', '후리아']
+"""
+    일시 : 2023/09/11(월)
+    개발 메소드 : voice_recognition
+    개발 내용 : 프론트에서 전달받은 mp3 파일을 whisper.ai를 통해 분석하여 정답을 판정한 뒤 정답유무에 따른 Response 개발 완료
+    특이사항 : 모든 api 개발 완료 이후에 정확도를 좀 더 높이는 방법을 생각해보면 좋을 듯 
+"""
 @csrf_exempt
 def voice_recognition(request):
     if request.method == 'POST':
