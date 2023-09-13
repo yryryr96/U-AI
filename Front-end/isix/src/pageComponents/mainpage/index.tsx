@@ -1,14 +1,12 @@
-"use client";
-
-import React from "react";
-import FirstComponent from "./components/first";
-import SecondComponent from "./components/second";
+import { MainCanvas } from "./components/maincanvas";
+import { NavBar } from "./components/navbar";
+import "@/styles/main/style.css"
 
 const MainPage = () => {
   return (
     <>
-        <FirstComponent />
-        <SecondComponent />
+      <MainCanvas />
+      <NavBar />
     </>
   );
 };
