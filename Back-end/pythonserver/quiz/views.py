@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 
 """
-    일시 : 2023/09/12(화)
+    수정 일시 : 2023/09/12(화)
     개발 메소드 : get_cached_yolo_model
     개발 내용 : 모델을 전역적으로 한번만 호출하기 위해 캐시를 사용해봤음.
     특이사항 : 굳이 필요 없는 것 같지만 일단 캐시 프레임워크 써본 것
@@ -18,10 +18,13 @@ def get_cached_yolo_model():
         cache.set('yolo_model', yolo_model, None)
     return yolo_model
 """
-    일시 : 2023/09/12(화)
+    개발 일시 : 2023/09/12(화)
     개발 메소드 : ox_quiz
     개발 내용 : 화면 정중앙을 기준으로 왼쪽, 오른쪽 사람 객채 수에 따른 Reponse 개발 완료 
     특이사항 : x
+    
+    수정 일시 : 2023/09/13(수)
+    수정 내용 : Response 내용 정형화
 """
 #
 @csrf_exempt
@@ -30,7 +33,7 @@ def ox_quiz(request):
         # 욜로 모델 로드
         model = YOLO('yolov8n.pt')
         # 판단할 이미지 소스 경로
-        source = 'media/jpg/단체.jpg'
+        source = 'media/jpg/아기.jpg'
         # Run inference on the source
         results = model.predict(source,classes=[0,1])
 
@@ -46,7 +49,7 @@ def ox_quiz(request):
                 persons.append( (x, y) )
                 cv2.circle(image, (x, y), 20, (0, 255, 255), -1)  # 빨간색 원 그리기 (5는 원의 반지름, (0, 0, 255)는 BGR 색상)
 
-        cv2.line(image, ( int(image.shape[1] / 2), 0), ( int(image.shape[1] / 2), image.shape[0]), (222, 222, 222), thickness=5)
+        cv2.line(image, ( int(image.shape[1] / 2), 0), ( int(image.shape[1] / 2), image.shape[0]), (0, 0, 255), thickness=5)
         left_side_person_cnt, right_side_person_cnt = 0, 0
         for person in persons:
             person_x = person[0]
@@ -65,10 +68,10 @@ def ox_quiz(request):
         cv2.destroyAllWindows()
 
         response = {
+            'result' : 1,
             'left' : left_side_person_cnt,
             'right' : right_side_person_cnt,
         }
-
         return JsonResponse(response)
     else:
-        return JsonResponse({'error': 'Invalid request.'}, status=400)
+        return JsonResponse({'result': -1, 'message' : 'Invalid request.'}, status=400)
