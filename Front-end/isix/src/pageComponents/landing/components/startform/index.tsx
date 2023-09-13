@@ -16,7 +16,7 @@ export default function StartForm() {
         </div>
       </div>
       <div>
-        <Link href='/portal' prefetch={true} passHref> 
+        <Link href='/main' prefetch={true} passHref> 
           시작하기
         </Link> 
       </div>
