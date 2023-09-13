@@ -1,8 +1,8 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import Scene from '../scene'
-import Effects from '../effects'
+import Scene from './scene'
+import Effects from './effects'
 
 const LandingCanvas = () => {
   return (
