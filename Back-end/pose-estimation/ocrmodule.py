@@ -152,7 +152,7 @@ class EasyPororoOcr(BaseOcr):
 
 if __name__ == "__main__":
     p_ocr = PororoOcr()
-    # e_ocr = EasyOcr()
+    e_ocr = EasyOcr()
     m_ocr = EasyPororoOcr()
     image_path = input("Enter image path: ")
 

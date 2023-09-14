@@ -4,12 +4,14 @@ from PIL import Image
 from src.detection_keypoint import DetectKeypoint
 from src.classification_keypoint import KeypointClassification
 
+dataset_root = './datasets/Motions'
+
 detection_keypoint = DetectKeypoint()
 classification_keypoint = KeypointClassification(
-    './pose_classification.pt'
+    f'{dataset_root}/pose_classification.pt'
 )
 
-image = cv2.imread('./image/tree-pose.webp')
+image = cv2.imread('./image/test5.jpg')
 results = detection_keypoint(image)
 
 print(results.keypoints)
@@ -18,6 +20,8 @@ print(results.keypoints)
 results_keypoint = detection_keypoint.get_xy_keypoint(results)
 
 input_classification = results_keypoint[10:]
+print('input_classification')
+print(input_classification)
 results_classification = classification_keypoint(input_classification)
 print(results_classification)
 
@@ -50,5 +54,9 @@ cv2.putText(image_draw,
         )
 
 print(f'Keypoint classification : {results_classification}')
-Image.fromarray(cv2.cvtColor(image_draw, cv2.COLOR_BGR2RGB))
+# Image.fromarray(cv2.cvtColor(image_draw, cv2.COLOR_BGR2RGB))
+annotated_frame = image_draw
 
+cv2.imshow("prediction",annotated_frame)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

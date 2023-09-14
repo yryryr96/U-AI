@@ -8,10 +8,10 @@ import ultralytics
 
 model = ultralytics.YOLO(model='yolov8l-pose.pt')
 
-image = cv2.imread('./datasets/yoga/archive/YogaPoses/Tree/00000000.jpg')
-result = model.predict(image, save=False)[0]
-result_keypoint = result.keypoints.xyn.cpu().numpy()[0]
-print(result.boxes.xyxy)
+# image = cv2.imread('./datasets/yoga/archive/YogaPoses/Tree/00000000.jpg')
+# result = model.predict(image, save=False)[0]
+# result_keypoint = result.keypoints.xyn.cpu().numpy()[0]
+# print(result.boxes.xyxy)
 
 
 class GetKeypoint(BaseModel):
@@ -39,7 +39,7 @@ get_keypoint = GetKeypoint()
 import os
 import glob
 
-dataset_root = './datasets/yoga/archive/YogaPoses'
+dataset_root = './datasets/Motions'
 pose_list = os.listdir(dataset_root)
 
 
@@ -93,6 +93,8 @@ def extract_keypoint(keypoint):
 
 
 dataset_csv = []
+print(len(pose_list))
+
 for pose in pose_list:
     image_path_list = glob.glob(f'{dataset_root}/{pose}/*.jpg')
     for image_path in image_path_list:
@@ -176,7 +178,7 @@ header = [
     'right_ankle_y'
 ]
 
-with open('yoga_pose_keypoint.csv', 'w', encoding='UTF8', newline='') as f:
+with open(f'{dataset_root}/dataset.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
     # write the header
@@ -186,6 +188,6 @@ with open('yoga_pose_keypoint.csv', 'w', encoding='UTF8', newline='') as f:
     writer.writerows(dataset_csv)
 
 
-df = pd.read_csv('yoga_pose_keypoint.csv')
+df = pd.read_csv(f'{dataset_root}/dataset.csv')
 df = df.drop('image_name', axis=1)
 df.head()

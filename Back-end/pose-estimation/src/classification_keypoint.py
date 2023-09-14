@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+dataset_root = './datasets/Motions'
+
 class NeuralNet(nn.Module):
     def __init__(
         self, 
@@ -22,7 +24,7 @@ class NeuralNet(nn.Module):
 class KeypointClassification:
     def __init__(self, path_model):
         self.path_model = path_model
-        self.classes = ['Downdog', 'Goddess', 'Plank', 'Tree', 'Warrior2']
+        self.classes = ['Downdog', 'EvacuateFromFire', 'Goddess', 'Plank', 'Warrior2']
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.load_model()
 
@@ -38,12 +40,14 @@ class KeypointClassification:
             )
         out = self.model(input_keypoint)
         _, predict = torch.max(out, -1)
+        print(predict)
+        print(len(self.classes))
         label_predict = self.classes[predict]
         return label_predict
 
 if __name__ == '__main__':
     keypoint_classification = KeypointClassification(
-        path_model='../pose_classification.pt'
+        path_model=f'{dataset_root}/pose_classification.pt'
     )
     dummy_input = torch.randn(23)
     classification = keypoint_classification(dummy_input)

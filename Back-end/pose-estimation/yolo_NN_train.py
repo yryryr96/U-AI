@@ -16,7 +16,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print(device)
 
-df = pd.read_csv('yoga_pose_keypoint.csv')
+dataset_root = './datasets/Motions'
+
+
+df = pd.read_csv(f'{dataset_root}/dataset.csv')
 df.head()
 
 df.info()
@@ -66,7 +69,7 @@ train_dataset = DataKeypointClassification(X_train, y_train)
 test_dataset = DataKeypointClassification(X_test, y_test)
 
 
-batch_size = 12
+batch_size = 32
 train_loader = DataLoader(train_dataset, batch_size=batch_size)
 test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
@@ -94,7 +97,7 @@ learning_rate = 0.01
 criterion = nn.CrossEntropyLoss(weight=torch.from_numpy(class_weights.astype(np.float32)))
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-num_epoch = 40
+num_epoch = 80
 for epoch in range(num_epoch):
     train_acc = 0
     train_loss = 0
@@ -126,9 +129,9 @@ print(predictions)
 print(classification_report(test_labels, predictions, target_names=encoder.classes_))
 
 
-PATH_SAVE = 'pose_classification.pt'
+PATH_SAVE = f'{dataset_root}/pose_classification.pt'
 torch.save(model.state_dict(), PATH_SAVE)
-
+print(len(class_weights))
 model_inference =  NeuralNet(
         X_train.shape[1],
         hidden_size,
@@ -139,7 +142,7 @@ model_inference.load_state_dict(
         torch.load(PATH_SAVE, map_location=device)
     )
 
-feature, label = test_dataset.__getitem__(51)
+feature, label = test_dataset.__getitem__(21)
 
 out = model_inference(feature)
 _, predict = torch.max(out, -1)
