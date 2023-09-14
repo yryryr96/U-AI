@@ -96,7 +96,7 @@ dataset_csv = []
 print(len(pose_list))
 
 for pose in pose_list:
-    image_path_list = glob.glob(f'{dataset_root}/{pose}/*.jpg')
+    image_path_list = glob.glob(f'{dataset_root}/{pose}/*')
     for image_path in image_path_list:
         # get image_name
         image_name = image_path.split('/')[-1]
