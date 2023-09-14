@@ -33,7 +33,7 @@ def ox_quiz(request):
         # 욜로 모델 로드
         model = YOLO('yolov8n.pt')
         # 판단할 이미지 소스 경로
-        source = 'media/jpg/아기.jpg'
+        source = 'media/jpg/example5.PNG'
         # Run inference on the source
         results = model.predict(source,classes=[0,1])
 
