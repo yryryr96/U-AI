@@ -1,8 +1,6 @@
-"use client"
-
 import Link from 'next/link';
 
-export default function StartForm() {
+export default function Story() {
   return (
     <div style={{backgroundColor:'skyblue'}} className="tags">
       <div className="">
@@ -11,16 +9,10 @@ export default function StartForm() {
           <input type="text" />
         </div>
       </div>
-      <div className="">
+      <div>
         <div className="">
           <p className="">반 이름 | </p>
           <input type="text" />
-        </div>
-      </div>
-      <div className="">
-        <div className="">
-          <p className="">인원 수 | </p>
-          <input type="number" max={6} min={1} step={1} onKeyDown={(e) => e.preventDefault()} onPaste={(e) => e.preventDefault()} />
         </div>
       </div>
       <div>
