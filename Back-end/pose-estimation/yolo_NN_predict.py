@@ -11,7 +11,7 @@ classification_keypoint = KeypointClassification(
     f'{dataset_root}/pose_classification.pt'
 )
 
-image = cv2.imread('./image/test5.jpg')
+image = cv2.imread('./image/xdhrxdbxuprr.png')
 results = detection_keypoint(image)
 
 print(results.keypoints)
@@ -19,7 +19,7 @@ print(results.keypoints)
 
 results_keypoint = detection_keypoint.get_xy_keypoint(results)
 
-input_classification = results_keypoint[10:]
+input_classification = results_keypoint[0:]
 print('input_classification')
 print(input_classification)
 results_classification = classification_keypoint(input_classification)
