@@ -1,13 +1,13 @@
 "use client"
 
 import React from 'react'
-import { StyledStoryImage } from '../Story.styled';
+import { StyledStoryShow } from '../Story.styled';
 
 const ImageComponent = () => {
   return (
-    <StyledStoryImage>
+    <div>
       ImageComponent
-    </StyledStoryImage>
+    </div>
   )
 }
 

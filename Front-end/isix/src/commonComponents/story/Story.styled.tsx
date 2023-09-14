@@ -6,24 +6,33 @@ const StyledStoryContainer = styled.div`
   justify-content: center;
 `
 
-const StyledStoryImage = styled.div`
-  width: 600px;
-  height: 300px;
+const StyledStoryShow = styled.div`
+  width: 1000px;
+  height: 400px;
   border: solid 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-bottom: 10px;
 `
 
 const StyledStoryText = styled.div`
-  width: 600px;
-  height: 100px;
+  width: 1000px;
+  height: 200px;
   border: solid 1px;
-  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
-export { StyledStoryContainer, StyledStoryImage, StyledStoryText }
+const StyledStoryDual = styled.div`
+  width: 450px;
+  height: 350px;
+  margin: 10px;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export { StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual }
