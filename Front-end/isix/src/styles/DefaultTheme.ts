@@ -19,6 +19,7 @@ const theme: DefaultTheme = {
     HangeulFontSemiBold: "HangeulFontSemiBold",
     EnglishFontBold: "EnglishFontBold",
     EnglishFontLight: "EnglishFontLight",
+    SDChild : "SDChild"
   },
   fontSizes: {
     xsmall: "12px",

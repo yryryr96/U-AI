@@ -30,6 +30,11 @@
   src: url("./fonts/PPNeueMachina-PlainLight.otf");
 }
 
+@font-face {
+  font-family: "SDChild";
+  src: url("./fonts/SDChild.ttf");
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
