@@ -36,7 +36,7 @@ y = encoder.fit_transform(y_label)
 class_weights = compute_class_weight(class_weight='balanced', classes=np.unique(y), y=y)
 
 # Get keypoint dataset
-X = df.iloc[:, 12:]
+X = df.iloc[:, 2:]
 
 print(X)
 
@@ -69,7 +69,7 @@ train_dataset = DataKeypointClassification(X_train, y_train)
 test_dataset = DataKeypointClassification(X_test, y_test)
 
 
-batch_size = 32
+batch_size = 128
 train_loader = DataLoader(train_dataset, batch_size=batch_size)
 test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
@@ -87,17 +87,18 @@ class NeuralNet(nn.Module):
         return out
 
 
-hidden_size = 256
+hidden_size = 2048
+print(X_train.shape[1])
 model = NeuralNet(X_train.shape[1], hidden_size, len(class_weights))
 
 len(class_weights)
 
 
-learning_rate = 0.01
+learning_rate = 0.001
 criterion = nn.CrossEntropyLoss(weight=torch.from_numpy(class_weights.astype(np.float32)))
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-num_epoch = 80
+num_epoch = 1024
 for epoch in range(num_epoch):
     train_acc = 0
     train_loss = 0
@@ -142,7 +143,7 @@ model_inference.load_state_dict(
         torch.load(PATH_SAVE, map_location=device)
     )
 
-feature, label = test_dataset.__getitem__(21)
+feature, label = test_dataset.__getitem__(101)
 
 out = model_inference(feature)
 _, predict = torch.max(out, -1)

@@ -6,9 +6,9 @@ dataset_root = './datasets/Motions'
 class NeuralNet(nn.Module):
     def __init__(
         self, 
-        input_size = 24, 
-        hidden_size = 256, 
-        num_classes = 5
+        input_size = 34,
+        hidden_size = 2048,
+        num_classes = 3
     ):
         super(NeuralNet, self).__init__()
         self.l1 = nn.Linear(input_size, hidden_size)
@@ -24,7 +24,7 @@ class NeuralNet(nn.Module):
 class KeypointClassification:
     def __init__(self, path_model):
         self.path_model = path_model
-        self.classes = ['Downdog', 'EvacuateFromFire', 'Goddess', 'Plank', 'Warrior2']
+        self.classes = ['evacuatefire', 'sit', 'stand']
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.load_model()
 
@@ -40,8 +40,6 @@ class KeypointClassification:
             )
         out = self.model(input_keypoint)
         _, predict = torch.max(out, -1)
-        print(predict)
-        print(len(self.classes))
         label_predict = self.classes[predict]
         return label_predict
 
