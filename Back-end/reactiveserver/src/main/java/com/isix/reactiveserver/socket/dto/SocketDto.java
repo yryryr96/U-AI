@@ -27,5 +27,6 @@ public class SocketDto {
     public static class Response{
         private String macAdd;
         private LocalDateTime startTime;
+        private String sessionId;
     }
 }
