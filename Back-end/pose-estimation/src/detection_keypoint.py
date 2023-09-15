@@ -75,8 +75,9 @@ class DetectKeypoint:
             left_ankle_x, left_ankle_y,right_ankle_x, right_ankle_y
         ]
     
-    def get_xy_keypoint(self, results: Results) -> list:
-        result_keypoint = results.keypoints.xyn.cpu().numpy()[0]
+    def get_xy_keypoint(self, results: Results, idx) -> list:
+        result_keypoint = results.keypoints.xyn.cpu().numpy()[idx]
+        # print(results.keypoints.xyn.cpu().numpy()[0])
         keypoint_data = self.extract_keypoint(result_keypoint)
         return keypoint_data
     
