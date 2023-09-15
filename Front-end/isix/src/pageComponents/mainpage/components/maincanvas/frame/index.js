@@ -6,7 +6,7 @@ import { useRoute, useLocation } from 'wouter'
 import { easing } from 'maath'
 import portalShader from './portaleffect'
 
-const Frame = ({ id, name, bg, width = 2.5, height = 4.045084971875, children, ...props }) => {
+const Frame = ({ id, name, bg, width = 3, height = 4.85410196625, children, ...props }) => {
   const portal = useRef()
   const shaderRef = useRef();
   const [, setLocation] = useLocation()
@@ -27,7 +27,7 @@ const Frame = ({ id, name, bg, width = 2.5, height = 4.045084971875, children, .
   return (
     <group {...props}>
       <mesh name={id} onClick={(e) => (e.stopPropagation(), hover(false),setLocation('/theme/' + e.object.name))} onPointerOver={(e) => (setTime(0),hover(true))} onPointerOut={() => hover(false)}>
-        <roundedPlaneGeometry args={[width, height, 1]} />
+        <roundedPlaneGeometry args={[width, height, 1.55]} />
         {hovered ?
           <shaderMaterial ref={shaderRef} attach="material" args={[portalShader(time)]} /> :
           <MeshPortalMaterial ref={portal} events={params?.id === id} side={THREE.DoubleSide}>

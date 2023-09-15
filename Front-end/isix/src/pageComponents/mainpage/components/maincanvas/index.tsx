@@ -16,17 +16,17 @@ export const MainCanvas = () => {
   return (
     <Canvas camera={{ fov: 6.7, position: [0, 0, 100] }} eventPrefix="client" gl={{alpha: true}}>
       <BackgroundImage />
-      <Frame name={1} id="1" bg="#e4cdac" position={[-3, -1.55, 0]} >
+      <Frame name={1} id="1" bg="#e4cdac" position={[-2.6, -2.6, 0]} >
       {params
         ?
-        <ThemeImage scale={0.4} url='/resources/fireTheme2.svg' args={[18, 22]} position={[-1.6, 1, 0]} />
+        <ThemeImage scale={0.35} url='/resources/fireTheme2.svg' args={[18, 22]} position={[-1.6, 2, 0]} />
         :
-        <ThemeImage scale={0.2} url='/resources/fireTheme2.svg' args={[20, 22]} position={[0,0,0]} />}
+        <ThemeImage scale={0.25} url='/resources/fireTheme2.svg' args={[20, 22]} position={[0,0,0]} />}
       </Frame>
-      <Frame name={2} id="2" position={[0, -1.55, 0]} bg="" >
+      <Frame name={2} id="2" position={[1.4, -2.6, 0]} bg="" >
         <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
       </Frame>
-      <Frame name={3} id="3" bg="#d1d1ca" position={[3, -1.55, 0]} >
+      <Frame name={3} id="3" bg="#d1d1ca" position={[5.4, -2.6, 0]} >
         <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
       </Frame>
       <Rig />

@@ -6,19 +6,19 @@ import '../layermaterial'
 
 const Scene = () => {
   const bgUrl = '/resources/sky1.png'
-  const cloud1Url = '/resources/sun1.png'
+  const cloud1Url = '/resources/back2.png'
   const cloud2Url = '/resources/cloud4.png'
   const cloud3Url = '/resources/cloud5.png'
   const cloud4Url = '/resources/cloud6.png'
-  const scaleW = useAspect(2200, 1000, 1.05)
-  const textures = useTexture([bgUrl, cloud2Url, cloud2Url, cloud3Url, cloud4Url])
+  const scaleW = useAspect(2000, 1080, 1.05)
+  const textures = useTexture([bgUrl, cloud1Url, cloud2Url, cloud3Url, cloud4Url])
   const group = useRef()
   const layersRef = useRef([])
   const [movement] = useState(() => new THREE.Vector3())
   const [temp] = useState(() => new THREE.Vector3())
   const layers = [
     { texture: textures[0], z: 28, scale: scaleW },
-    { texture: textures[1], factor: 0.1, scaleFactor: 1.08, z: 44, wiggle: 0.5, scale: scaleW },
+    { texture: textures[1], factor: 0.02, scaleFactor: 1.02, z: 44, wiggle: 0.5, scale: scaleW },
     { texture: textures[2], factor: 0.04, scaleFactor: 1.07, z: 40, wiggle: 0.4, scale: scaleW },
     { texture: textures[3], factor: 0.05, scaleFactor: 0.98, z: 42, wiggle: 0.6, scale: scaleW },
     { texture: textures[4], factor: 0.05, scaleFactor: 0.95, z: 41, wiggle: 0.6, scale: scaleW }
