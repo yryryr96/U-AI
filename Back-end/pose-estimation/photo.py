@@ -9,15 +9,15 @@ from pydantic import BaseModel
 from ultralytics import YOLO
 
 # Load a pretrained YOLOv8n model
-model = YOLO('yolov8n.pt')
+model = YOLO('./runs/detect/train/weights/best.pt')
 
 # Define path to the image file
-source = './image/test5.jpg'
+source = './image/board1.jpg'
 
 input_image = cv2.imread(source)
 
 # Run inference on the source
-results = model.predict(input_image, classes=[0, 1])  # list of Results objects
+results = model.predict(input_image)  # list of Results objects
 
 annotated_frame = results[0].plot()
 
