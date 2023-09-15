@@ -5,8 +5,8 @@ const portalShader = (time: Number) => {
   return {
     uniforms: {
     time: { value: time },
-    color1: { type: "vec3", value: new THREE.Color(0xCCFFFF) },
-    color2: { type: "vec3", value: new THREE.Color(0x99FFFF) }
+    color1: { type: "vec3", value: new THREE.Color(0xE4CB5A) },
+    color2: { type: "vec3", value: new THREE.Color(0xD01011) }
   },
   
   vertexShader:
