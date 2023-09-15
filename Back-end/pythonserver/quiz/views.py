@@ -1,4 +1,5 @@
 import cv2
+from rest_framework.decorators import api_view
 from ultralytics import YOLO
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -28,50 +29,48 @@ def get_cached_yolo_model():
 """
 #
 @csrf_exempt
+@api_view(['GET'])
 def ox_quiz(request):
-    if request.method == 'GET':
-        # 욜로 모델 로드
-        model = YOLO('yolov8n.pt')
-        # 판단할 이미지 소스 경로
-        source = 'media/jpg/example5.PNG'
-        # Run inference on the source
-        results = model.predict(source,classes=[0,1])
+    # 욜로 모델 로드
+    model = YOLO('yolov8n.pt')
+    # 판단할 이미지 소스 경로
+    source = 'media/jpg/example5.PNG'
+    # Run inference on the source
+    results = model.predict(source,classes=[0,1])
 
-        # annotated_frame = results[0].plot() # 이부분은 전달된 사진 출력해볼 때 사용
-        image = cv2.imread(source)
-        # 화면 중앙 x 좌표
-        image_x = image.shape[1] / 2
-        persons = []
-        for result in results:
-            for i in range(results[0].boxes.xyxy.shape[0]):
-                x = int((result.boxes.xyxy[i][0].item() + result.boxes.xyxy[i][2].item()) / 2)
-                y = int((result.boxes.xyxy[i][1].item() + result.boxes.xyxy[i][3].item()) / 2)
-                persons.append( (x, y) )
-                cv2.circle(image, (x, y), 20, (0, 255, 255), -1)  # 빨간색 원 그리기 (5는 원의 반지름, (0, 0, 255)는 BGR 색상)
+    # annotated_frame = results[0].plot() # 이부분은 전달된 사진 출력해볼 때 사용
+    image = cv2.imread(source)
+    # 화면 중앙 x 좌표
+    image_x = image.shape[1] / 2
+    persons = []
+    for result in results:
+        for i in range(results[0].boxes.xyxy.shape[0]):
+            x = int((result.boxes.xyxy[i][0].item() + result.boxes.xyxy[i][2].item()) / 2)
+            y = int((result.boxes.xyxy[i][1].item() + result.boxes.xyxy[i][3].item()) / 2)
+            persons.append( (x, y) )
+            cv2.circle(image, (x, y), 20, (0, 255, 255), -1)  # 빨간색 원 그리기 (5는 원의 반지름, (0, 0, 255)는 BGR 색상)
 
-        cv2.line(image, ( int(image.shape[1] / 2), 0), ( int(image.shape[1] / 2), image.shape[0]), (0, 0, 255), thickness=5)
-        left_side_person_cnt, right_side_person_cnt = 0, 0
-        for person in persons:
-            person_x = person[0]
+    cv2.line(image, ( int(image.shape[1] / 2), 0), ( int(image.shape[1] / 2), image.shape[0]), (0, 0, 255), thickness=5)
+    left_side_person_cnt, right_side_person_cnt = 0, 0
+    for person in persons:
+        person_x = person[0]
 
-            if person_x < image_x:
-                left_side_person_cnt += 1
-            elif person_x > image_x:
-                right_side_person_cnt += 1
+        if person_x < image_x:
+            left_side_person_cnt += 1
+        elif person_x > image_x:
+            right_side_person_cnt += 1
 
-        print("left_side_person_cnt = ", left_side_person_cnt)
-        print("right_side_person_cnt = ", right_side_person_cnt)
+    print("left_side_person_cnt = ", left_side_person_cnt)
+    print("right_side_person_cnt = ", right_side_person_cnt)
 
-        cv2.imshow("YOLOv8 Inference", image)
-        # cv2.imshow("YOLOv8 Inference", annotated_frame)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+    cv2.imshow("YOLOv8 Inference", image)
+    # cv2.imshow("YOLOv8 Inference", annotated_frame)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-        response = {
-            'result' : 1,
-            'left' : left_side_person_cnt,
-            'right' : right_side_person_cnt,
-        }
-        return JsonResponse(response)
-    else:
-        return JsonResponse({'result': -1, 'message' : 'Invalid request.'}, status=400)
+    response = {
+        'result' : 1,
+        'left' : left_side_person_cnt,
+        'right' : right_side_person_cnt,
+    }
+    return JsonResponse(response)
