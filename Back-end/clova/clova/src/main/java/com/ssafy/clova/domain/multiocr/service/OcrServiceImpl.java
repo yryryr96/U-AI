@@ -1,25 +1,57 @@
-package com.ssafy.clova.domain.multiocr;
+package com.ssafy.clova.domain.multiocr.service;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.UUID;
+import com.google.gson.Gson;
+import com.ssafy.clova.domain.multiocr.dto.OcrResultDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.UUID;
 
-public class OCRGeneralAPIDemo {
+@Service
+public class OcrServiceImpl implements OcrService{
+    @Override
+    public OcrResultDto multiOcr(MultipartFile image) throws IOException {
 
-    public static void main(String[] args) {
-        String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
-        String secretKey = "aFBtU09YS2JCQ09TVGJlaE1Qa2NLVlVZUGVyd2FxRFc=";
-        String imageFile = "C:\\Users\\SSAFY\\Downloads\\korean_ocr_using_pororo-easyocr\\korean_ocr_using_pororo-easyocr\\assets\\images\\fire_4.jpg";
+        MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("file", image.getResource());
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(requestBody);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<byte[]> response = restTemplate.exchange("http://127.0.0.1:8000/review/api/review/", HttpMethod.POST, requestEntity, byte[].class);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            // Process the responseData
+            byte[] bytes = response.getBody();
+            File tempFile = File.createTempFile("temp", ".tmp");
 
+            // Write the byte array to the temporary file
+            assert bytes != null;
+            Files.write(tempFile.toPath(), bytes);
+
+            // Now you have a File object representing the in-memory file
+
+            return ocrResultDto;
+        } else {
+            System.out.println("안됨");
+        }
+
+        ocrResultDto = new OcrResultDto();
+        return ocrResultDto;
+    }
+
+    private String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
+    private String secretKey = "aFBtU09YS2JCQ09TVGJlaE1Qa2NLVlVZUGVyd2FxRFc=";
+    private String imageFile = "C:\\Users\\SSAFY\\S09P22E104\\Back-end\\clova\\clova\\src\\main\\resources\\static\\goldenbell.JPG";
+    public String apiCall(){
         try {
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -66,12 +98,15 @@ public class OCRGeneralAPIDemo {
             br.close();
 
             System.out.println(response);
+
+            return response.toString();
         } catch (Exception e) {
             System.out.println(e);
+            return "요청 실패";
         }
     }
 
-    private static void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws
+    public void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws
             IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("--").append(boundary).append("\r\n");
