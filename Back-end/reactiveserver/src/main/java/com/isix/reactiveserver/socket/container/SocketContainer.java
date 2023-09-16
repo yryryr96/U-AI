@@ -13,7 +13,10 @@ public class SocketContainer {
 
     public String openSocket(SocketDto.SendInfo sendInfo){
 
-        sendInfo.getMacAdd()
+        String macAddress = sendInfo.getMacAdd();
+
+
+        return null;
     }
 
 
