@@ -8,10 +8,10 @@ if __name__ == '__main__':
     print('=========================================')
     print(torch.cuda.is_available())
     # Load a model
-    model = YOLO("yolov8l.yaml")  # build a new model from scratch
+    model = YOLO("yolov8n.yaml")  # build a new model from scratch
 
     # Use the model
-    model.train(data="WhiteBoard.v2i.yolov8/data.yaml", epochs=32, batch=32, imgsz=320)  # valid the model
+    model.train(data="WhiteBoard.v1i.yolov8/data.yaml", epochs=64, batch=40, imgsz=640)  # valid the model
     # metrics = model.val()  # evaluate model performance on the validation set
     # path = model.export(format="pt")  # export the model to ONNX format
 
