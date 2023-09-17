@@ -1,5 +1,6 @@
 package com.isix.reactiveserver.config;
 
+import com.isix.reactiveserver.videostream.handler.MultiSocketHandler;
 import com.isix.reactiveserver.videostream.handler.MyWebSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,18 +25,21 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final MyWebSocketHandler myWebSocketHandler;
+    //private final MyWebSocketHandler myWebSocketHandler;
+    private final MultiSocketHandler multiSocketHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         // Use the addHandler method with a WebSocketHandler and endpoint path
-        registry.addHandler(myWebSocketHandler, "/ws/chat").setAllowedOrigins("*");
+        registry.addHandler(multiSocketHandler, "/ws/chat").setAllowedOrigins("*");
     }
 
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
+
+
     /*@Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // configure message broker options
@@ -45,6 +49,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // register WebSocket endpoints for clients to connect to
     }
-*/
+    */
 }
 

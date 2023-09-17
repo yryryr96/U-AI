@@ -17,7 +17,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     private Socket socket;
 
     public MyWebSocketHandler() throws IOException {
-        socket = new Socket("127.0.0.1",8888);
+        //socket = new Socket("127.0.0.1",8888);
     }
 
 
