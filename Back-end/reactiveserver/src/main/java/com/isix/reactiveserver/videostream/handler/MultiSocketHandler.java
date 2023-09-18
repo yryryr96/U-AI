@@ -26,7 +26,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
-    private final WebSocketClient webSocketClient;
+    private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -46,6 +46,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             // Send the ByteBuffer as a WebSocket message
             WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
             session.sendMessage(newMessage);
+
+            clients.get(session.getId()).sendBinary(payloadBytes);
 
             //System.out.println("Sent ByteBuffer message to another socket.");
         } else {
@@ -73,6 +75,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         session.sendMessage(new TextMessage(session.getId()));
 
         WebSocket ws = connect();
+        clients.put(session.getId(),ws);
 
         ws.sendText("HI");
     }
