@@ -24,10 +24,8 @@ export const MainCanvas = () => {
         <ThemeImage scale={0.25} url='/resources/fireTheme2.svg' args={[20, 22]} position={[0,0,0]} />}
       </Frame>
       <Frame name={2} id="2" position={[-2.7, 1, 0]} bg="" >
-        <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
       </Frame>
       <Frame name={3} id="3" bg="#d1d1ca" position={[7, 1, 0]} >
-        <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
       </Frame>
       <Rig />
     </Canvas>
