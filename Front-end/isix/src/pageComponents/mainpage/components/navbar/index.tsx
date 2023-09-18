@@ -9,7 +9,7 @@ export const NavBar = () => {
   return (
     <div className='tags'>
       {params ?
-        <a href="#" onClick={(e) => (e.preventDefault() ,setLocation('/portal'))}>뒤로가기</a>
+        <a href="#" onClick={(e) => (e.preventDefault() ,setLocation('/main'))}>뒤로가기</a>
         :
         <a href="/" >Home</a>
       }
