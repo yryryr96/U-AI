@@ -33,174 +33,60 @@ import Seq26 from './scene8/seq26'
 import Seq27 from './scene9/seq27'
 
 const Story = () => {
-  const [nowState, setNowState] = useState<string>('seq0');
-  const [speakResult, setSpeakResult] = useState<boolean>(false);
+  const [speakResult, setSpeakResult] = useState<boolean>(true);
+  const [state, setState] = useState<number>(0);
+  
+  console.log(state)
+  const handleKeyDown = (e:any) => {
+    
+    if (e.key === 'ArrowRight') {
+      setState((prev) => prev + 1);
+    } else if (e.key === 'ArrowLeft') {
+      setState((prev) => prev - 1)
+    }
+  };
+
+  const handleMouseClick = (e) => {
+    e.preventDefault();
+    if (e.button === 2) { setState((prev) => prev + 1)}
+  }
 
   useEffect(() => {
-    if (nowState === 'seq0') {
-      // 추후 텍스트 읽어주기 끝나면 바꾸기
-      setTimeout(() => {
-        setNowState('seq1')
-      }, 3000)
-    } else if (nowState === 'seq1') {
-      // 추후 텍스트 읽어주기 끝나면 바꾸기
-      setTimeout(() => {
-        setNowState('seq2')
-      }, 3000)
-    } else if (nowState === 'seq2') {
-      // 백에서 확인되면 바꾸기
-      setTimeout(() => {
-        setNowState('seq3')
-      }, 5200)
-    } else if (nowState === 'seq3') {
-      setTimeout(() => {
-        setNowState('seq4')
-      }, 3000)
-    } else if (nowState === 'seq4') {
-      setTimeout(() => {
-        setNowState('seq5')
-      }, 3000)
-    } else if (nowState === 'seq5') {
-      setTimeout(() => {
-        setNowState('seq6')
-      }, 3000)
-    } else if (nowState === 'seq6') {
-      setTimeout(() => {
-        setNowState('seq7')
-      }, 3000)
-    } else if (nowState === 'seq7') {
-      // '불이야' 정확도 확인해서 처리하기
-      setTimeout(() => {
-        setSpeakResult(true)
-        if(speakResult) {
-          setTimeout(() => {
-            setNowState('seq8_correct')
-          }, 1000)
-        } else {
-          setTimeout(() => {
-            setNowState('seq8_incorrect')
-          }, 1000)
-        }
-      }, 2000)
-    } else if (nowState === 'seq8_correct') {
-      setTimeout(() => {
-        setNowState('seq9')
-      }, 3000)
-    } else if (nowState === 'seq9') {
-      setTimeout(() => {
-        setNowState('seq10')
-      }, 3000)
-    } else if (nowState === 'seq10') {
-      setTimeout(() => {
-        setNowState('seq11')
-      }, 3000)
-    } else if (nowState === 'seq11') {
-      setTimeout(() => {
-        setNowState('seq12')
-      }, 5200)
-    } else if (nowState === 'seq12') {
-      setTimeout(() => {
-        setNowState('seq13')
-      }, 3000)
-    } else if (nowState === 'seq13') {
-      setTimeout(() => {
-        setNowState('seq14')
-      }, 3000)
-    } else if (nowState === 'seq14') {
-      setTimeout(() => {
-        setNowState('seq15')
-      }, 3000)
-    } else if (nowState === 'seq15') {
-      setTimeout(() => {
-        setNowState('seq16')
-      }, 3000)
-    } else if (nowState === 'seq16') {
-      setTimeout(() => {
-        setNowState('seq17')
-      }, 3000)
-    } else if (nowState === 'seq17') {
-      setTimeout(() => {
-        setNowState('seq18')
-      }, 3000)
-    } else if (nowState === 'seq18') {
-      setTimeout(() => {
-        setNowState('seq19')
-      }, 3000)
-    } else if (nowState === 'seq19') {
-      setTimeout(() => {
-        setNowState('seq20')
-      }, 3000)
-    } else if (nowState === 'seq20') {
-      setTimeout(() => {
-        setNowState('seq21')
-      }, 3000)
-    } else if (nowState === 'seq21') {
-      setTimeout(() => {
-        setNowState('seq22')
-      }, 5200)
-    } else if (nowState === 'seq20') {
-      setTimeout(() => {
-        setNowState('seq21')
-      }, 3000)
-    } else if (nowState === 'seq21') {
-      setTimeout(() => {
-        setNowState('seq22')
-      }, 3000)
-    } else if (nowState === 'seq22') {
-      setTimeout(() => {
-        setNowState('seq23')
-      }, 3000)
-    } else if (nowState === 'seq23') {
-      setTimeout(() => {
-        setNowState('seq24')
-      }, 3000)
-    } else if (nowState === 'seq24') {
-      setTimeout(() => {
-        setNowState('seq25')
-      }, 5200)
-    } else if (nowState === 'seq25') {
-      setTimeout(() => {
-        setNowState('seq26')
-      }, 3000)
-    } else if (nowState === 'seq26') {
-      setTimeout(() => {
-        setNowState('seq27')
-      }, 3000)
-    }
-  }, [nowState, speakResult])
-
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('mousedown', handleMouseClick);
+  }, [])
   
   return (
     <StyledStoryContainer>
-      {nowState === 'seq0' && <Seq0 />}
-      {nowState === 'seq1' && <Seq1 />}
-      {nowState === 'seq2' && <Seq2 />}
-      {nowState === 'seq3' && <Seq3 />}
-      {nowState === 'seq4' && <Seq4 />}
-      {nowState === 'seq5' && <Seq5 />}
-      {nowState === 'seq6' && <Seq6 />}
-      {nowState === 'seq7' && <Seq7 />}
-      {nowState === 'seq8_correct' && <Seq8Correct />}
-      {nowState === 'seq8_incorrect' && <Seq8Incorrect />}
-      {nowState === 'seq9' && <Seq9 />}
-      {nowState === 'seq10' && <Seq10 />}
-      {nowState === 'seq11' && <Seq11 />}
-      {nowState === 'seq12' && <Seq12 />}
-      {nowState === 'seq13' && <Seq13 />}
-      {nowState === 'seq14' && <Seq14 />}
-      {nowState === 'seq15' && <Seq15 />}
-      {nowState === 'seq16' && <Seq16 />}
-      {nowState === 'seq17' && <Seq17 />}
-      {nowState === 'seq18' && <Seq18 />}
-      {nowState === 'seq19' && <Seq19 />}
-      {nowState === 'seq20' && <Seq20 />}
-      {nowState === 'seq21' && <Seq21 />}
-      {nowState === 'seq22' && <Seq22 />}
-      {nowState === 'seq23' && <Seq23 />}
-      {nowState === 'seq24' && <Seq24 />}
-      {nowState === 'seq25' && <Seq25 />}
-      {nowState === 'seq26' && <Seq26 />}
-      {nowState === 'seq27' && <Seq27 />}
+      {state === 0 && <Seq0 />}
+      {state === 1 && <Seq1 />}
+      {state === 2 && <Seq2 />}
+      {state === 3 && <Seq3 />}
+      {state === 4 && <Seq4 />}
+      {state === 5 && <Seq5 />}
+      {state === 6 && <Seq6 />}
+      {state === 7 && <Seq7 />}
+      {(state === 8 && speakResult) && <Seq8Correct />}
+      {(state === 8 && !speakResult) && <Seq8Incorrect />}
+      {state === 9 && <Seq9 />}
+      {state === 10 && <Seq10 />}
+      {state === 11 && <Seq11 />}
+      {state === 12 && <Seq12 />}
+      {state === 13 && <Seq13 />}
+      {state === 14 && <Seq14 />}
+      {state === 15 && <Seq15 />}
+      {state === 16 && <Seq16 />}
+      {state === 17 && <Seq17 />}
+      {state === 18 && <Seq18 />}
+      {state === 19 && <Seq19 />}
+      {state === 20 && <Seq20 />}
+      {state === 21 && <Seq21 />}
+      {state === 22 && <Seq22 />}
+      {state === 23 && <Seq23 />}
+      {state === 24 && <Seq24 />}
+      {state === 25 && <Seq25 />}
+      {state === 26 && <Seq26 />}
+      {state === 27 && <Seq27 />}
     </StyledStoryContainer>
   )
 }
