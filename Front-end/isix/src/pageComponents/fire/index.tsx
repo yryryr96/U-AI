@@ -1,12 +1,14 @@
 import ThemeCanvas from "@/commonComponents/themecanvas";
 import Story from "./components/story";
+import { StyledContainer, StyledPaperContainer } from "./Fire.styled";
 
 const Fire = () => {
   return (
-    <>
-      {/* <ThemeCanvas /> */}
-      <Story />
-    </>
+    <StyledContainer>
+      <StyledPaperContainer>
+        <Story />
+      </StyledPaperContainer>
+    </StyledContainer>
   );
 };
 
