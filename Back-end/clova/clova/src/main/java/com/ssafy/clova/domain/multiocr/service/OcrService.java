@@ -11,6 +11,5 @@ import java.net.URL;
 import java.util.UUID;
 public interface OcrService {
     OcrResultDto multiOcr(MultipartFile image) throws IOException;
-    String check();
 }
 
