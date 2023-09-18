@@ -1,25 +1,36 @@
-import Link from 'next/link';
+"use client"
 
-export default function Story() {
+import React, { useEffect, useState } from 'react'
+import { StyledStoryContainer } from '@/pageComponents/fire/components/story/Story.styled'
+import Seq1 from './seq1'
+import Seq2 from './seq2'
+import Seq3 from './seq3'
+
+const Story = () => {
+  const [nowState, setNowState] = useState<string>('start');
+
+  useEffect(() => {
+    if (nowState === 'start') {
+      setTimeout(() => {
+        setNowState('quiz')
+      }, 3000)
+    } else if (nowState === 'quiz') {
+      setTimeout(() => {
+        setNowState('')
+      }, 8000)
+    }
+  }, [nowState])
+
+  
   return (
-    <div style={{backgroundColor:'skyblue'}} className="tags">
-      <div className="">
-        <div className="">
-          <p className="">유치원 | </p>
-          <input type="text" />
-        </div>
-      </div>
+    <StyledStoryContainer>
       <div>
-        <div className="">
-          <p className="">반 이름 | </p>
-          <input type="text" />
-        </div>
+        {nowState === 'start' && <Seq1 />}
+        {nowState === 'quiz' && <Seq2 />}
+        {nowState === '' && <Seq3 />}
       </div>
-      <div>
-        <Link href='/main' prefetch={true} passHref> 
-          시작하기
-        </Link> 
-      </div>
-    </div>
-  );
+    </StyledStoryContainer>
+  )
 }
+
+export default Story
