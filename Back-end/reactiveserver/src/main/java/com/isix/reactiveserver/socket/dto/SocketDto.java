@@ -11,8 +11,10 @@ public class SocketDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @ToString
     public static class SendInfo{
         private String macAdd;
+        private String socketId;
         private LocalDateTime startTime;
         private String kindergartenName;
         private String className;
