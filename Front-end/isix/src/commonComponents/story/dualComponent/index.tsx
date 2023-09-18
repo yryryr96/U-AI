@@ -4,15 +4,16 @@ import ImageComponent from '../imageComponent'
 import RecordComponent from '../recordComponent'
 import { StyledStoryShow, StyledStoryDual } from '@/pageComponents/fire/components/story/Story.styled'
 
-const DualComponent = () => {
+// 듀얼일 때 추후 image, cam 크기 조정해야 함
+const DualComponent = ({imageSrc} : {imageSrc: string}) => {
   return (
     <StyledStoryShow>
       <StyledStoryDual>
-        <ImageComponent src='./resources/panda.png'/>
+        <ImageComponent src={imageSrc}/>
       </StyledStoryDual>
       <StyledStoryDual>
-        {/* <CamComponent/> */}
-        <RecordComponent/>
+        <CamComponent/>
+        {/* <RecordComponent/> */}
       </StyledStoryDual>
     </StyledStoryShow>
   )
