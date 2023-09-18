@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,17 +23,10 @@ import java.util.List;
 public class OcrController {
 
     private final OcrServiceImpl ocrServiceImpl;
-    @GetMapping("/multiOcr")
+    @PostMapping("/review")
     public ResponseEntity<OcrResultDto> multiOcr(@RequestParam("file") MultipartFile image) throws IOException {
         System.out.println("--------------- multiOcr 컨트롤러 -------------------");
         OcrResultDto ocrResultDto = ocrServiceImpl.multiOcr(image);
         return ResponseEntity.ok().body(ocrResultDto);
-    }
-
-    @GetMapping("/check")
-    public ResponseEntity<String> check(){
-        System.out.println("--------------- check 컨트롤러 -----------------");
-        String result = ocrServiceImpl.check();
-        return ResponseEntity.ok().body(result);
     }
 }
