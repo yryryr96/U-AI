@@ -2,7 +2,7 @@ import React from 'react'
 import CamComponent from '../camComponent'
 import ImageComponent from '../imageComponent'
 import RecordComponent from '../recordComponent'
-import { StyledStoryShow, StyledStoryDual } from '../Story.styled'
+import { StyledStoryShow, StyledStoryDual } from '@/pageComponents/fire/components/story/Story.styled'
 
 const DualComponent = () => {
   return (
