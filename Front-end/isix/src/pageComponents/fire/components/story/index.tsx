@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Story() {
+export default function Fire() {
   return (
     <div style={{backgroundColor:'skyblue'}} className="tags">
       <div className="">

@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
-
+import React, { useState } from "react";
+import Story from "@/commonComponents/story";
 
 const Traffic = () => {
   return (
     <>
-        <div>Traffic</div>
+      <div>Traffic</div>
+      <Story/>
     </>
   );
 };

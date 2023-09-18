@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyledStoryText } from '../Story.styled'
 
-const TextComponent = () => {
+const TextComponent = ({text}: {text: string}) => {
   return (
     <StyledStoryText>
-      TextComponent
+      {text}
     </StyledStoryText>
   )
 }

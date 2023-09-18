@@ -8,7 +8,7 @@ const DualComponent = () => {
   return (
     <StyledStoryShow>
       <StyledStoryDual>
-        <ImageComponent/>
+        <ImageComponent src='./resources/panda.png'/>
       </StyledStoryDual>
       <StyledStoryDual>
         {/* <CamComponent/> */}
