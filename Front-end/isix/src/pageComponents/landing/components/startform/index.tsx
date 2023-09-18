@@ -18,21 +18,23 @@ export default function StartForm() {
   }
   
   const savePeople = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPeople(Number(e.target.value));
+    const value = Number(e.target.value);
+    if (!isNaN(value)) {
+      if (value >= 1 && value <= 6) {
+        setPeople(value);
+      } else {
+        alert("유효한 값을 입력해주세요.\n교육은 최소 1명에서 최대 6명까지 수강가능합니다.")
+      }
+    }
   }
 
   const checkLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (kindergarten === '' || className === '') {
       e.preventDefault();
-      // console.log('항목을 입력해주세요')
       alert('항목을 모두 입력해주세요')
     }
   }
 
-  useEffect(() => {
-
-  }, [])
-  // const kindergarten = $('kindergarten').val();
   return (
     <TagContainer>
       <StyledStartFormContainer>
@@ -49,7 +51,7 @@ export default function StartForm() {
         </StyledStartForm>
         <StyledStartForm>
           <StyledStartFormName>인원 수</StyledStartFormName>
-          <StyledStartFormInput value={people} type='number' max={6} min={1} step={1} onKeyDown={(e) => e.preventDefault()} onPaste={(e) => e.preventDefault()} onChange={savePeople}/>
+          <StyledStartFormInput value={people} type='number' max={6} min={1} step={1} onPaste={(e) => e.preventDefault()} onChange={savePeople}/>
         </StyledStartForm>
 
         <StyledStartFormButton>
