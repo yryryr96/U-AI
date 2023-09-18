@@ -33,4 +33,15 @@ const StyledStoryImage = styled.img`
   height: 400px;
 `
 
-export { StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage }
+const StyledQuizBox = styled.div`
+  font-size: 50px;
+  font-weight: bold;
+  color: blue;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 1000px;
+  height: 200px;
+`
+
+export { StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage, StyledQuizBox }
