@@ -8,7 +8,7 @@ const CamComponent = () => {
     const socket = new WebSocket('ws://192.168.30.161:8080/ws/chat');
     socket.onopen = () => console.log('WebSocket is connected.');
     socket.onmessage = (event) => {
-      console.log(event.data)
+      // console.log(event.data)
     }
 
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -58,7 +58,7 @@ const CamComponent = () => {
 
 return (
 <div>
-<video ref={videoRef} autoPlay playsInline muted width='1000' height='500'/>
+<video ref={videoRef} autoPlay playsInline muted width='600' height='400'/>
 <canvas ref={canvasRef} style={{ display: 'none' }}/>
 </div>
 )
