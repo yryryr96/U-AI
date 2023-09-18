@@ -1,11 +1,8 @@
-"use client"
-
 import { useEffect, useRef } from 'react';
-import { StyledStoryShow } from '../Story.styled'
 
 const CamComponent = () => {
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const socket = new WebSocket('ws://192.168.30.161:8080/ws/chat');
@@ -23,48 +20,48 @@ const CamComponent = () => {
       .catch((err) => console.error(err));
 
       const sendFrame = async () => {
-        if (socket.readyState === WebSocket.OPEN) {
-            if (videoRef.current) {
-                const canvas = videoRef.current.getCanvas();
-                canvas.width = '100px';
-                canvas.height = '100px';
-                if (canvas) {
-                    canvas.toBlob(async (blob: any) => {
-                        if (blob) {
-                            const reader = new FileReader();
-                            reader.onload = (event) => {
-                                if (event.target) {
-                                    const frameData = event.target.result;
-                                    console.log(frameData.byteLength)
-                                    console.log(blob)
-                                    socket.send(frameData); // Send the frame to the server
-                                }
-                            };
-                            reader.readAsArrayBuffer(blob);
-                        }
-                    }, 'image/jpeg');
-                }
+        if (socket.readyState === WebSocket.OPEN && canvasRef.current && videoRef.current) {
+
+            const context = canvasRef.current.getContext('2d');
+            if(context){
+                context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+                canvasRef.current.toBlob(async (blob: Blob | null) => {
+                    if(blob){
+                        const reader = new FileReader();
+                        reader.onloadend=(event)=>{
+                            if(event.target?.readyState === FileReader.DONE){
+                                const arrayBuffer=event.target?.result as ArrayBuffer;
+                                socket.send(arrayBuffer);
+                            }
+                        };
+                        reader.readAsArrayBuffer(blob);
+                    }
+                },'image/jpeg')
             }
+
         }
     };
 
-    const interval = setInterval(sendFrame, 100)
+    setInterval(sendFrame, 100);
 
     return () => {
-      clearInterval(interval);
 
-      if (socket) {
+      clearInterval(sendFrame);
+
+      if(socket){
         socket.close();
       }
-    };
-  }, [videoRef]);
 
-  return (
-    <div>
-      <video ref={videoRef} autoPlay playsInline muted width='100' height='100'/>
-      <canvas ref={canvasRef} style={{ display: 'none' }}/>
-    </div>
-  );
+    };
+
+}, [videoRef]);
+
+return (
+<div>
+<video ref={videoRef} autoPlay playsInline muted width='1000' height='500'/>
+<canvas ref={canvasRef} style={{ display: 'none' }}/>
+</div>
+)
 }
 
 export default CamComponent

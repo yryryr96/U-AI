@@ -5,6 +5,7 @@ const TagContainer = styled.div`
   top: 15%;
   left: 35%;
   width: 30%;
+  min-width: 420px;
   height: 70%;
   color: white;
   padding: 0;
@@ -18,6 +19,7 @@ const StyledStartFormContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+  text-align: center;
 `
 
 const StyledServiceName = styled.h1`

@@ -1,13 +1,11 @@
 "use client"
 
 import React from 'react'
-import { StyledStoryShow } from '../Story.styled';
+import { StyledStoryImage } from '@/pageComponents/fire/components/story/Story.styled';
 
-const ImageComponent = () => {
+const ImageComponent = ({src} : {src: string}) => {
   return (
-    <div>
-      ImageComponent
-    </div>
+    <StyledStoryImage src={src}/>
   )
 }
 

@@ -1,12 +1,7 @@
-"use client";
-
-import React from "react";
-
-
 const Traffic = () => {
   return (
     <>
-        <div>Traffic</div>
+      <div>Traffic</div>
     </>
   );
 };
