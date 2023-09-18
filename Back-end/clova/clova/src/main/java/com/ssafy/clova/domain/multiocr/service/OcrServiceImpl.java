@@ -1,9 +1,13 @@
 package com.ssafy.clova.domain.multiocr.service;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.clova.domain.multiocr.dto.OcrDto;
 import com.ssafy.clova.domain.multiocr.dto.OcrResultDto;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,41 +20,111 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class OcrServiceImpl implements OcrService{
+    private String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
+    private String secretKey = "aFBtU09YS2JCQ09TVGJlaE1Qa2NLVlVZUGVyd2FxRFc=";
+    private String imageFile = "C:\\Users\\SSAFY\\S09P22E104\\Back-end\\clova\\clova\\build\\resources\\main\\static\\jpg\\goldenbell.jpg";
     @Override
-    public OcrResultDto multiOcr(MultipartFile image) throws IOException {
-
+    public OcrResultDto multiOcr(MultipartFile image) throws IOException{
+        System.out.println("--------------- multiOcr 서비스 -------------------");
         MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("file", image.getResource());
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(requestBody);
         RestTemplate restTemplate = new RestTemplate();
+
+        long start, end, elapsed;
+
+        start = System.currentTimeMillis();
         ResponseEntity<byte[]> response = restTemplate.exchange("http://127.0.0.1:8000/review/api/review/", HttpMethod.POST, requestEntity, byte[].class);
+        end = System.currentTimeMillis();
+        elapsed = end - start;
+        System.out.println("파이썬 갔다 온 시간 = " + elapsed);
+        OcrResultDto ocrResultDto = new OcrResultDto();
         if (response.getStatusCode().is2xxSuccessful()) {
-            // Process the responseData
+             // 해당 코드는 내 로컬에 사진을 저장하는 방식임 -> 서버에 올리게 되면 어떻게 되는지 몰라서 주석처리
             byte[] bytes = response.getBody();
-            File tempFile = File.createTempFile("temp", ".tmp");
+            // C:\Users\SSAFY\S09P22E104\Back-end\clova\clova\build\resources\main\static\jpg 해당 경로로 이미지가 올라간다.
+            Path resourcesDirectoryPath = Paths.get(new ClassPathResource("static/jpg").getURI());
+            System.out.println("resourcesDirectoryPath = " + resourcesDirectoryPath);
+            // Create a file in the specific directory
+            File file = new File(resourcesDirectoryPath.toFile(), "goldenbell.jpg");
+            // Write the bytes to the file
+            Files.write(file.toPath(), bytes);
+            // 네이버 클로바 OCR API 호출
 
-            // Write the byte array to the temporary file
-            assert bytes != null;
-            Files.write(tempFile.toPath(), bytes);
+            start = System.currentTimeMillis();
+            String resultText = apiCall();
+            end = System.currentTimeMillis();
+            System.out.println("네이버 클로바 api 호출 시간 = " + (end - start));
+            System.out.println(resultText);
 
-            // Now you have a File object representing the in-memory file
+            // JSON 문자열을 파싱하는 ObjectMapper 생성
+            ObjectMapper objectMapper = new ObjectMapper();
 
+            // JSON 문자열을 JsonNode로 파싱
+            JsonNode jsonNode = objectMapper.readTree(resultText);
+            // JSON 내부에서 image 값을 확인하면서 필요한 값만 가져온다.
+            JsonNode imagesNode = jsonNode.get("images");
+
+            start = System.currentTimeMillis();
+            if (imagesNode != null && imagesNode.isArray()) {
+                for (JsonNode imageNode : imagesNode) {
+                    // Extract the "fields" array
+                    JsonNode fieldsNode = imageNode.get("fields");
+                    if (fieldsNode != null && fieldsNode.isArray()) {
+                        List<OcrDto> ocrDtoList = new ArrayList<>();
+                        for (JsonNode field : fieldsNode) {
+                            // Extract the values of "inferText" and "Vertical"
+                            OcrDto ocrDto = new OcrDto();
+                            String inferTextValue = field.get("inferText").asText().replaceAll(" ", "");
+                            System.out.println("inferText = " + inferTextValue);
+                            ocrDto.setInferText(inferTextValue);
+                            JsonNode vertices = imageNode.get("fields").get(0).get("boundingPoly").get("vertices");
+                            System.out.println("Vertices for Image:");
+                            double[] xArray = new double[4];
+                            double[] yArray = new double[4];
+                            int idx = 0;
+                            for (JsonNode vertex : vertices) {
+                                double x = vertex.get("x").asDouble();
+                                double y = vertex.get("y").asDouble();
+                                xArray[idx] = x;
+                                yArray[idx] = y;
+                                idx++;
+                                System.out.println("x: " + x + ", y: " + y);
+                            }
+                            ocrDto.setX(xArray);
+                            ocrDto.setY(yArray);
+                            ocrDtoList.add(ocrDto);
+                        }
+                        ocrResultDto.setOcrDtoList(ocrDtoList);
+                    }
+                }
+            }
+            end = System.currentTimeMillis();
+            System.out.println("json 파싱하는 시간 = " + (end - start));
+            ocrResultDto.setResult(1);
             return ocrResultDto;
         } else {
             System.out.println("안됨");
+            ocrResultDto.setResult(-1);
+            return ocrResultDto;
         }
-
-        ocrResultDto = new OcrResultDto();
-        return ocrResultDto;
     }
 
-    private String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
-    private String secretKey = "aFBtU09YS2JCQ09TVGJlaE1Qa2NLVlVZUGVyd2FxRFc=";
-    private String imageFile = "C:\\Users\\SSAFY\\S09P22E104\\Back-end\\clova\\clova\\src\\main\\resources\\static\\goldenbell.JPG";
+    @Override
+    public String check() {
+        System.out.println("--------------- check 서비스 -----------------");
+
+        return "성공";
+    }
+
     public String apiCall(){
         try {
             URL url = new URL(apiURL);
@@ -79,6 +153,7 @@ public class OcrServiceImpl implements OcrService{
             con.connect();
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             long start = System.currentTimeMillis();
+
             File file = new File(imageFile);
             writeMultiPart(wr, postParams, file, boundary);
             wr.close();

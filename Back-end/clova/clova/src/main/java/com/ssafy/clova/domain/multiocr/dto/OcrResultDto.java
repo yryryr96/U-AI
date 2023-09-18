@@ -12,5 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class OcrResultDto {
-    MultipartFile image;
+    int result;
+    List<OcrDto> ocrDtoList;
 }

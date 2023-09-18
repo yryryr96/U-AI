@@ -23,8 +23,16 @@ public class OcrController {
 
     private final OcrServiceImpl ocrServiceImpl;
     @GetMapping("/multiOcr")
-    public ResponseEntity<OcrResultDto> multiOcr(@RequestParam("file") MultipartFile image){
+    public ResponseEntity<OcrResultDto> multiOcr(@RequestParam("file") MultipartFile image) throws IOException {
+        System.out.println("--------------- multiOcr 컨트롤러 -------------------");
         OcrResultDto ocrResultDto = ocrServiceImpl.multiOcr(image);
         return ResponseEntity.ok().body(ocrResultDto);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<String> check(){
+        System.out.println("--------------- check 컨트롤러 -----------------");
+        String result = ocrServiceImpl.check();
+        return ResponseEntity.ok().body(result);
     }
 }

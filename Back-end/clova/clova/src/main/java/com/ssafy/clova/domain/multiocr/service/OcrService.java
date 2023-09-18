@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 public interface OcrService {
-    public OcrResultDto multiOcr(MultipartFile image) throws IOException;
+    OcrResultDto multiOcr(MultipartFile image) throws IOException;
+    String check();
 }
 
