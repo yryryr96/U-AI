@@ -12,6 +12,9 @@ import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.client.WebSocketClient;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -19,6 +22,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 @Configuration
 @EnableWebSocket
