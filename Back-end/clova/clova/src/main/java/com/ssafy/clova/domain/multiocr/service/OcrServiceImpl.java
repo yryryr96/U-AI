@@ -39,13 +39,13 @@ public class OcrServiceImpl implements OcrService{
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(requestBody);
         RestTemplate restTemplate = new RestTemplate();
 
-        long start, end, elapsed;
+//        long start, end, elapsed;
 
-        start = System.currentTimeMillis();
+//        start = System.currentTimeMillis();
         ResponseEntity<byte[]> response = restTemplate.exchange("http://127.0.0.1:8000/review/api/review/", HttpMethod.POST, requestEntity, byte[].class);
-        end = System.currentTimeMillis();
-        elapsed = end - start;
-        System.out.println("파이썬 갔다 온 시간 = " + elapsed);
+//        end = System.currentTimeMillis();
+//        elapsed = end - start;
+//        System.out.println("파이썬 갔다 온 시간 = " + elapsed);
         OcrResultDto ocrResultDto = new OcrResultDto();
         if (response.getStatusCode().is2xxSuccessful()) {
              // 해당 코드는 내 로컬에 사진을 저장하는 방식임 -> 서버에 올리게 되면 어떻게 되는지 몰라서 주석처리
@@ -59,10 +59,10 @@ public class OcrServiceImpl implements OcrService{
             Files.write(file.toPath(), bytes);
             // 네이버 클로바 OCR API 호출
 
-            start = System.currentTimeMillis();
+//            start = System.currentTimeMillis();
             String resultText = apiCall();
-            end = System.currentTimeMillis();
-            System.out.println("네이버 클로바 api 호출 시간 = " + (end - start));
+//            end = System.currentTimeMillis();
+//            System.out.println("네이버 클로바 api 호출 시간 = " + (end - start));
             System.out.println(resultText);
 
             // JSON 문자열을 파싱하는 ObjectMapper 생성
@@ -73,7 +73,7 @@ public class OcrServiceImpl implements OcrService{
             // JSON 내부에서 image 값을 확인하면서 필요한 값만 가져온다.
             JsonNode imagesNode = jsonNode.get("images");
 
-            start = System.currentTimeMillis();
+//            start = System.currentTimeMillis();
             if (imagesNode != null && imagesNode.isArray()) {
                 for (JsonNode imageNode : imagesNode) {
                     // Extract the "fields" array
@@ -107,8 +107,8 @@ public class OcrServiceImpl implements OcrService{
                     }
                 }
             }
-            end = System.currentTimeMillis();
-            System.out.println("json 파싱하는 시간 = " + (end - start));
+//            end = System.currentTimeMillis();
+//            System.out.println("json 파싱하는 시간 = " + (end - start));
             ocrResultDto.setResult(1);
             return ocrResultDto;
         } else {
@@ -117,14 +117,6 @@ public class OcrServiceImpl implements OcrService{
             return ocrResultDto;
         }
     }
-
-    @Override
-    public String check() {
-        System.out.println("--------------- check 서비스 -----------------");
-
-        return "성공";
-    }
-
     public String apiCall(){
         try {
             URL url = new URL(apiURL);
@@ -152,7 +144,6 @@ public class OcrServiceImpl implements OcrService{
 
             con.connect();
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            long start = System.currentTimeMillis();
 
             File file = new File(imageFile);
             writeMultiPart(wr, postParams, file, boundary);
@@ -180,7 +171,6 @@ public class OcrServiceImpl implements OcrService{
             return "요청 실패";
         }
     }
-
     public void writeMultiPart(OutputStream out, String jsonMessage, File file, String boundary) throws
             IOException {
         StringBuilder sb = new StringBuilder();
