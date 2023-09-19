@@ -10,6 +10,9 @@ const TagContainer = styled.div`
   color: white;
   padding: 0;
   margin: auto;
+  /* background-image: url('/resources/pandaform1.png');
+  background-repeat: no-repeat;
+  background-size: contain; */
 `
 const StyledStartFormContainer = styled.div`
   width: 100%;
