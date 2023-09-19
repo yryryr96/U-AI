@@ -1,5 +1,6 @@
 import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
+import { StyledStoryShow } from "../../Story.styled"
 
 const Seq12 = () => {
   const text: string = `정답은 계단입니다. 엘리베이터는
@@ -7,10 +8,12 @@ const Seq12 = () => {
     계단으로 다 같이 조심해서 이동해야 합니다.`
 
   return (
-    <div>
-      <ImageComponent src='./resources/stair_sol.png'/>
+    <>
+      <StyledStoryShow>
+        <ImageComponent src='./resources/stair_sol.png'/>
+      </StyledStoryShow>
       <TextComponent text={text}/>
-    </div>
+    </>
   )
 }
 
