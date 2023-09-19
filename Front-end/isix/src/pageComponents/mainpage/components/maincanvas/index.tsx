@@ -8,14 +8,16 @@ import BackgroundImage from './backgroundimage'
 import ThemeImage from './themeimage'
 import Frame from './frame'
 import Rig from './rig'
+import CharacterScene from './gifscene'
 
 extend(geometry)
 
 export const MainCanvas = () => {
-  const [, params] = useRoute('/theme/:id')
+  const [match, params] = useRoute('/theme/:id')
   return (
     <Canvas camera={{ fov: 6.7, position: [0, 0, 100] }} eventPrefix="client" gl={{alpha: true}}>
       <BackgroundImage />
+      {!match && <CharacterScene position={[1.6, 4.5, -1]} width={1000} height={1000} gifUrl='/resources/teacherpanda2.gif' />}
       <Frame name={1} id="1" bg="#e4cdac" position={[-6.7, 1, 0]} >
       {params
         ?

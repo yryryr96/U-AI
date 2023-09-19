@@ -5,7 +5,7 @@ const portalShader = (time: Number) => {
   return {
     uniforms: {
     time: { value: time },
-    color1: { type: "vec3", value: new THREE.Color(0x66FFFF) },
+    color1: { type: "vec3", value: new THREE.Color(0x99FF66) },
     color2: { type: "vec3", value: new THREE.Color(0x99FFFF) }
   },
   
@@ -30,7 +30,7 @@ const portalShader = (time: Number) => {
     vec2 swirl(vec2 uv, vec2 uvCenter, float strength) {
         vec2 offset = uv+.25 -uvCenter;
         float distanceSquared = dot(offset, offset);
-        float rotationAngle = strength / (distanceSquared + 0.1 ) * mod(time, 4.712388975);
+        float rotationAngle = strength / (distanceSquared + 0.1 ) * mod(time, 7.853981625);
         mat2 rotationMatrix = mat2(cos(rotationAngle), sin(rotationAngle), -sin(rotationAngle), cos(rotationAngle));
         return rotationMatrix * offset + uvCenter;
     }
