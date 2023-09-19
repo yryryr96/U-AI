@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import { StyledStoryContainer } from '@/pageComponents/fire/components/story/Story.styled'
 import Seq0 from './scene1/seq0'
 import Seq1 from './scene2/seq1'
 import Seq2 from './scene2/seq2'
@@ -31,13 +30,18 @@ import Seq24 from './scene8/seq24'
 import Seq25 from './scene8/seq25'
 import Seq26 from './scene8/seq26'
 import Seq27 from './scene9/seq27'
+import Repeat1 from './repeat/repeat1'
+import Repeat2 from './repeat/repeat2'
+import Repeat2Sol from './repeat/repeat2Sol'
+
+import Final1 from './final/final1'
+import Final2 from './final/final2'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const [state, setState] = useState<number>(0);
   
-  console.log(state)
-  const handleKeyDown = (e:any) => {
+  const handleKeyDown = (e: any) => {
     
     if (e.key === 'ArrowRight') {
       setState((prev) => prev + 1);
@@ -46,7 +50,7 @@ const Story = () => {
     }
   };
 
-  const handleMouseClick = (e) => {
+  const handleMouseClick = (e: any) => {
     e.preventDefault();
     if (e.button === 2) { setState((prev) => prev + 1)}
   }
@@ -57,7 +61,7 @@ const Story = () => {
   }, [])
   
   return (
-    <StyledStoryContainer>
+    <>
       {state === 0 && <Seq0 />}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 />}
@@ -87,7 +91,14 @@ const Story = () => {
       {state === 25 && <Seq25 />}
       {state === 26 && <Seq26 />}
       {state === 27 && <Seq27 />}
-    </StyledStoryContainer>
+      {state === 28 && <Repeat1 />}
+      {state === 29 && <Repeat2 />}
+      {state === 30 && <Repeat2Sol />}
+      {/* 추후 인덱스 확인하기! 지금 31이 마무리1 */}
+      {state === 31 && <Final1 />}
+      {state === 32 && <Final2 />}
+
+    </>
   )
 }
 

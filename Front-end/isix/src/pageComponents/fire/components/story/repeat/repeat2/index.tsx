@@ -1,10 +1,10 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox, StyledSpan, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import { StyledStoryCam, StyledSpan, StyledTimer, StyledQuizBox } from "../../Story.styled"
 
-const Seq21 = () => {
-  const text: string = '누구일까요?'
+const Repeat2 = () => {
+  const text: string = '불이 났을 땐 어디로 전화해야 할까요?'
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
@@ -32,9 +32,7 @@ const Seq21 = () => {
       <TextComponent text={text} />
       <StyledSpan>
         <StyledQuizBox>
-          <p>소방관</p>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <p>경찰관</p>
         </StyledQuizBox>
       </StyledSpan>
       <StyledStoryCam>
@@ -44,4 +42,4 @@ const Seq21 = () => {
   )
 }
 
-export default Seq21
+export default Repeat2
