@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber'
 import Scene from './scene'
 import Effects from './effects'
-import CharacterScene from '../gifscene';
+import CharacterScene from './gifscene';
 
 const LandingCanvas = () => {
   return (
