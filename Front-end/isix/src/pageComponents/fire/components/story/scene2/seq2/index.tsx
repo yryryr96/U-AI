@@ -1,7 +1,7 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox } from "../../Story.styled"
+import { StyledQuizBox, StyledStoryCam, StyledSpan, StyledTimer } from "../../Story.styled"
 import Image from "next/image"
 
 const Seq2 = () => {
@@ -29,15 +29,19 @@ const Seq2 = () => {
 
 
   return (
-    <div>
+    <>
       <TextComponent text={text} />
-      <StyledQuizBox>
-        <Image src='/resources/fire_icon.png' width={100} height={100} alt="fire_icon"/>
-        {timer > 0 ? timer : ''}
-        <Image src='/resources/water_icon.png' width={100} height={100} alt="water_icon"/>
+      <StyledSpan>
+        <StyledQuizBox>
+          <Image src='/resources/fire_icon.png' width={100} height={100} alt="fire_icon"/>
+          <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
+          <Image src='/resources/water_icon.png' width={100} height={100} alt="water_icon"/>
         </StyledQuizBox>
-      <CamComponent />
-    </div>
+      </StyledSpan>
+      <StyledStoryCam>
+        <CamComponent />
+      </StyledStoryCam>
+    </>
   )
 }
 

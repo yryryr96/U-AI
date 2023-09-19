@@ -67,12 +67,7 @@ const RecordComponent = () => {
 }, []);
 
 return (
-<div>
-RecordComponent
-{start && 
-<h1>녹음 중</h1>
-}
-</div>
+<></>
 )
 }
 

@@ -1,22 +1,23 @@
-import React from 'react'
-import CamComponent from '../camComponent'
-import ImageComponent from '../imageComponent'
-import RecordComponent from '../recordComponent'
-import { StyledStoryShow, StyledStoryDual } from '@/pageComponents/fire/components/story/Story.styled'
+import React from 'react';
+import CamComponent from '../camComponent';
+import Image from 'next/image';
+import { StyledStoryDual } from '@/pageComponents/fire/components/story/Story.styled';
 
-// 듀얼일 때 추후 image, cam 크기 조정해야 함
-const DualComponent = ({imageSrc} : {imageSrc: string}) => {
-  return (
-    <StyledStoryShow>
-      <StyledStoryDual>
-        <ImageComponent src={imageSrc}/>
-      </StyledStoryDual>
-      <StyledStoryDual>
-        <CamComponent/>
-        {/* <RecordComponent/> */}
-      </StyledStoryDual>
-    </StyledStoryShow>
-  )
+interface DualComponentProps {
+  imageSrc: string;
 }
 
-export default DualComponent
+const DualComponent: React.FC<DualComponentProps> = ({ imageSrc }) => {
+  return (
+    <StyledStoryDual>
+      <div style={{ flex: 4, position: 'relative' }}>
+        <Image src={imageSrc} layout='fill' objectFit='fill' alt="" />
+      </div>
+      <div style={{ flex: 6 }}>
+        <CamComponent width="100%" height="100%" />
+      </div>
+    </StyledStoryDual>
+  );
+};
+
+export default DualComponent;
