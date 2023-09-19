@@ -13,18 +13,13 @@ import java.nio.ByteBuffer;
 
 @Component
 public class MyWebSocketHandler extends TextWebSocketHandler {
-    private int set = 0;
-    private Socket socket;
-
-    public MyWebSocketHandler() throws IOException {
-        //socket = new Socket("127.0.0.1",8888);
-    }
-
 
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        if (message.getPayload() instanceof ByteBuffer payloadBuffer) {
+        System.out.println(message.toString());
+        session.sendMessage(message);
+        /*if (message.getPayload() instanceof ByteBuffer payloadBuffer) {
 
             // Convert the ByteBuffer to a byte array
             byte[] payloadBytes = new byte[payloadBuffer.remaining()];
@@ -36,16 +31,16 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
             // Send the ByteBuffer as a WebSocket message
             WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
             session.sendMessage(newMessage);
-            socket.getOutputStream().write(payloadBytes);
 
             //System.out.println("Sent ByteBuffer message to another socket.");
         } else {
             // Handle other types of payloads (e.g., TextMessage)
             String payload = message.toString();
             session.sendMessage(new TextMessage(payload));
+            System.out.println("아");
             System.out.println(message.getPayload().getClass());
             System.out.println(message.getPayload());
-        }
+        }*/
     }
 
     /*@Override
@@ -61,11 +56,15 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         super.afterConnectionEstablished(session);
 
+        System.out.println("아시발시발");
+
         // Set the desired buffer size for the WebSocket session
         int bufferSize = 100000; // Adjust the buffer size as neededq
         session.setTextMessageSizeLimit(bufferSize);
         session.setBinaryMessageSizeLimit(bufferSize);
         System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        session.sendMessage(new TextMessage("rotorrdi"));
+
 
     }
 }
