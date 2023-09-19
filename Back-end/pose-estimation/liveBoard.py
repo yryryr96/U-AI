@@ -7,7 +7,7 @@ cap.set(3, 640)
 cap.set(4, 480)
 
 # model
-model = YOLO("./runs/detect/train4/weights/best.pt")
+model = YOLO("whiteBoard_v8l.pt")
 
 # object classes
 # classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
@@ -26,7 +26,7 @@ classNames = ["whiteboard"]
 
 while True:
     success, img = cap.read()
-    results = model.predict(img, stream=True)
+    results = model.predict(img, stream=True, conf=0.2)
 
     # coordinates
     for r in results:
