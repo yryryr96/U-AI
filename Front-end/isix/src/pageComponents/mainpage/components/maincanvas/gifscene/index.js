@@ -5,7 +5,7 @@ const CharacterScene = ({position, width, height, gifUrl, scaleFactor= 10}) => {
 
   return (
     <Html position={position} scaleFactor={scaleFactor}>
-      <Image width={width} height={height} src={gifUrl} alt="animated-gif" />
+      <Image className='characterImage' width={width} height={height} src={gifUrl} alt="animated-gif" />
     </Html>
   );
 };
