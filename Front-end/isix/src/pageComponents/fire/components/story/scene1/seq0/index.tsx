@@ -1,6 +1,6 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledStoryCam } from "../../Story.styled"
+import { StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
 
 const Seq0 = () => {
   const text: string = `다같이 소방관 판다와 함께
@@ -8,7 +8,8 @@ const Seq0 = () => {
 
   return (
     <>
-      <TextComponent text={text} />
+      <StyledCamText>{text}</StyledCamText>
+      {/* <TextComponent text={text} /> */}
       <StyledStoryCam>
         <CamComponent/>
       </StyledStoryCam>

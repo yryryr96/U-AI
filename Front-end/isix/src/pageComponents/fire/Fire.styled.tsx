@@ -13,7 +13,7 @@ export const StyledContainer = styled.div`
 
 export const StyledPaperContainer = styled.div`
     height : 85vh;
-    width : 80vw ;
+    width : 80vw;
     background: url('./resources/backPaper.jpg') no-repeat center;
     background-size : cover;
     border-radius : 20px;

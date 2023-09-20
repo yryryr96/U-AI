@@ -1,9 +1,9 @@
+import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { StyledCamText, StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
-import CamComponent from "@/commonComponents/story/camComponent"
 
-const Final2 = () => {
-  const text: string = `판다 친구들과 함께 사진 찍어볼까요?`
+const Repeat2Sol = () => {
+  const text: string = '정답은 소방관입니다. { }명이 정답을 맞혔어요!'
 
   return (
     <>
@@ -15,4 +15,4 @@ const Final2 = () => {
   )
 }
 
-export default Final2
+export default Repeat2Sol

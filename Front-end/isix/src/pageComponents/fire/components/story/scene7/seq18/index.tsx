@@ -1,16 +1,20 @@
-import DualComponent from "@/commonComponents/story/dualComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledStoryShow } from "../../Story.styled"
+import { StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
+import CamComponent from "@/commonComponents/story/camComponent"
+import Image from "next/image"
 
 const Seq18 = () => {
-  const text: string = '판다를 따라 몸을 굴러주세요.'
+  const text: string = '판다를 따라 몸을 굴러주세요'
 
   return (
     <>
-      <StyledStoryShow>
-        <DualComponent imageSrc="/resources/clothes_fire.png"/>
-      </StyledStoryShow>
-      <TextComponent text={text}/>
+      <StyledCamText>{text}</StyledCamText>
+      <StyledStoryCam>
+        <CamComponent/>
+        <StyledQuizBox>
+          <Image src='/resources/clothes_fire.png' width={300} height={250} alt="clothes"  style={{ marginTop: '2.5rem' }}/>
+        </StyledQuizBox>
+      {/* <TextComponent text={text}/> */}
+      </StyledStoryCam>
     </>
   )
 }
