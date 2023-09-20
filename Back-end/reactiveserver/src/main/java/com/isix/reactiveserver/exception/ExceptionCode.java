@@ -20,6 +20,8 @@ public enum ExceptionCode {
     FILE_NOT_FOUND(404, "File Not Found"),
     LIKE_NOT_FOUND(404, "Like Not Found"),
 
+    SESSION_NOT_FOUND(404, "Session Not Found"),
+
     FAILED_TO_CONNECT_SOCKET(500,"Failed to Connect GPU WebSocket Server");
 
 
