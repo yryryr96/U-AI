@@ -1,5 +1,5 @@
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
+import { StyledCamText, StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 
 const Final1 = () => {
@@ -7,11 +7,7 @@ const Final1 = () => {
 
   return (
     <>
-      <TextComponent text={text} />
-      <StyledSpan>
-        <StyledQuizBox>
-        </StyledQuizBox>
-      </StyledSpan>
+      <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent />
       </StyledStoryCam>

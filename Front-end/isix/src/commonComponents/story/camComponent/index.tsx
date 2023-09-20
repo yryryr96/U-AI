@@ -1,11 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-interface CamComponentProps {
-  width?: string;
-  height?: string;
-}
 
-const CamComponent: React.FC<CamComponentProps> = ({ width = '1000', height = '400' }) => {
+
+const CamComponent = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -63,7 +60,7 @@ const CamComponent: React.FC<CamComponentProps> = ({ width = '1000', height = '4
 
 return (
 <>
-  <video style={{ objectFit: 'cover' }} ref={videoRef} autoPlay playsInline muted width={width} height={height}/>
+  <video style={{ objectFit: 'cover', width: '100%', height: '100%' }} ref={videoRef} autoPlay playsInline muted />
   <canvas ref={canvasRef} style={{ display: 'none' }}/>
 </>
 )

@@ -15,10 +15,13 @@ const StyledStoryShow = styled(StyledStoryContainer)`
 `
 
 const StyledStoryCam = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 3vh;
+  /* margin-top: 3vh; */
+  height : 85vh;
+  width : 80vw;
 `
 
 const StyledStoryText = styled.div`
@@ -76,22 +79,37 @@ const StyledStoryImage = styled.img`
 `
 
 const StyledQuizBox = styled.div`
+  position: absolute;
+  top: 0;
+  margin-top: 1rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 4rem;
-  margin-top: 1rem;
-  font-size: 3rem;
+  height: auto;
+  z-index: 1;
+  font-size: 2.5rem;
   font-weight: bold;
 `
 
-const StyledTimer = styled.div`
-  font-size: 4rem;
-  font-weight: bold;
-  color: darkblue;
+const StyledCamText = styled.div`
+  position: absolute;
   z-index: 1;
-  position: relative;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: gray;
+  color: white;
+  width: 80vw;
+  height: auto;
+`
+
+const StyledTimer = styled.div`
+  font-size: 10rem;
+  font-weight: bold;
+  color: red;
+  z-index: 1;
+  position: absolute;
   width: 100px;
   text-align: center;
 `
@@ -104,4 +122,4 @@ const StyledSpan = styled.span`
   height: auto;
 `
 
-export { StyledSpan, StyledStoryCam, StyledTimer, StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage, StyledQuizBox }
+export { StyledCamText, StyledSpan, StyledStoryCam, StyledTimer, StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage, StyledQuizBox }

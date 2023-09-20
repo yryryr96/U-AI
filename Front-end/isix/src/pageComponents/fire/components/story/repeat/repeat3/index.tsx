@@ -1,11 +1,11 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox, StyledStoryCam, StyledSpan, StyledTimer } from "../../Story.styled"
-import Image from "next/image"
+import { StyledStoryCam, StyledSpan, StyledTimer, StyledQuizBox, StyledCamText } from "../../Story.styled"
+import OcrComponent from "@/commonComponents/story/ocrComponent"
 
-const Seq2 = () => {
-  // const text: string = '이것은 무엇일까요?'
+const Repeat3 = () => {
+  const text: string = '불을 끄고 사람을 구해주는 분들은 누구일까요?'
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
@@ -30,17 +30,15 @@ const Seq2 = () => {
 
   return (
     <>
-      {/* <TextComponent text={text} /> */}
+      <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
-        <CamComponent />
+        <OcrComponent />
         <StyledQuizBox>
-          <Image src='/resources/fire_icon.png' width={150} height={150} alt="fire_icon"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <Image src='/resources/water_icon.png' width={150} height={150} alt="water_icon"/>
         </StyledQuizBox>
       </StyledStoryCam>
     </>
   )
 }
 
-export default Seq2
+export default Repeat3

@@ -29,16 +29,13 @@ const Seq21 = () => {
 
   return (
     <>
-      <TextComponent text={text} />
-      <StyledSpan>
+      <StyledStoryCam>
+        <CamComponent />
         <StyledQuizBox>
           <p>소방관</p>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
           <p>경찰관</p>
         </StyledQuizBox>
-      </StyledSpan>
-      <StyledStoryCam>
-        <CamComponent />
       </StyledStoryCam>
     </>
   )

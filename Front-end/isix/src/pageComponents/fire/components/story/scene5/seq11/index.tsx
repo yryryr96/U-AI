@@ -30,16 +30,14 @@ const Seq11 = () => {
 
   return (
     <>
-      <TextComponent text={text} />
-      <StyledSpan>
+      {/* <TextComponent text={text} /> */}
+      <StyledStoryCam>
+        <CamComponent />
         <StyledQuizBox>
           <Image src='/resources/stairs_icon.png' width={100} height={100} alt="fire_icon"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
           <Image src='/resources/elevator_icon.png' width={100} height={100} alt="water_icon"/>
         </StyledQuizBox>
-      </StyledSpan>
-      <StyledStoryCam>
-        <CamComponent />
       </StyledStoryCam>
     </>
   )
