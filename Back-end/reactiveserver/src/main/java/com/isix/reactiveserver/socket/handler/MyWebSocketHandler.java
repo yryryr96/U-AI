@@ -1,4 +1,4 @@
-package com.isix.reactiveserver.videostream.handler;
+package com.isix.reactiveserver.socket.handler;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.BinaryMessage;
