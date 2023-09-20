@@ -1,17 +1,13 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
+import { StyledCamText, StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
 
 const Repeat2Sol = () => {
-  const text: string = '정답은 { }입니다. { }명이 정답을 맞혔어요!'
+  const text: string = '정답은 119입니다. { }명이 정답을 맞혔어요!'
 
   return (
     <>
-      <TextComponent text={text} />
-      <StyledSpan>
-        <StyledQuizBox>
-        </StyledQuizBox>
-      </StyledSpan>
+      <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent />
       </StyledStoryCam>

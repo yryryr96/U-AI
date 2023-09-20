@@ -33,9 +33,12 @@ import Seq27 from './scene9/seq27'
 import Repeat1 from './repeat/repeat1'
 import Repeat2 from './repeat/repeat2'
 import Repeat2Sol from './repeat/repeat2Sol'
+import Repeat3 from './repeat/repeat3'
+import Repeat3Sol from './repeat/repeat3Sol'
 
 import Final1 from './final/final1'
 import Final2 from './final/final2'
+import { StyledContainer, StyledPaperContainer } from '../../Fire.styled'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -94,10 +97,11 @@ const Story = () => {
       {state === 28 && <Repeat1 />}
       {state === 29 && <Repeat2 />}
       {state === 30 && <Repeat2Sol />}
-      {/* 추후 인덱스 확인하기! 지금 31이 마무리1 */}
-      {state === 31 && <Final1 />}
-      {state === 32 && <Final2 />}
+      {state === 31 && <Repeat3/>}
+      {state === 32 && <Repeat3Sol />}
 
+      {state === 33 && <Final1 />}
+      {state === 34 && <Final2 />}
     </>
   )
 }

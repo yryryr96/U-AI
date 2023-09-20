@@ -1,7 +1,8 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledStoryCam, StyledSpan, StyledTimer, StyledQuizBox } from "../../Story.styled"
+import { StyledStoryCam, StyledSpan, StyledTimer, StyledQuizBox, StyledCamText } from "../../Story.styled"
+import OcrComponent from "@/commonComponents/story/ocrComponent"
 
 const Repeat2 = () => {
   const text: string = '불이 났을 땐 어디로 전화해야 할까요?'
@@ -29,14 +30,12 @@ const Repeat2 = () => {
 
   return (
     <>
-      <TextComponent text={text} />
-      <StyledSpan>
+      <StyledCamText>{text}</StyledCamText>
+      <StyledStoryCam>
+        <OcrComponent />
         <StyledQuizBox>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
         </StyledQuizBox>
-      </StyledSpan>
-      <StyledStoryCam>
-        <CamComponent />
       </StyledStoryCam>
     </>
   )
