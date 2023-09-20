@@ -1,4 +1,4 @@
-package com.isix.reactiveserver.videostream.handler;
+package com.isix.reactiveserver.socket.handler;
 
 import com.isix.reactiveserver.exception.BusinessLogicException;
 import com.isix.reactiveserver.exception.ExceptionCode;
@@ -102,7 +102,11 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     }
 
     public WebSocketSession getSession(String sessionId){
-        return sessions.get(sessionId);
+        try{
+            return sessions.get(sessionId);
+        }catch (NullPointerException e){
+            throw new BusinessLogicException(ExceptionCode.SESSION_NOT_FOUND);
+        }
     }
 
     public byte[] getByteMessage(String sessionId) {return currentMessage.get(sessionId);}
