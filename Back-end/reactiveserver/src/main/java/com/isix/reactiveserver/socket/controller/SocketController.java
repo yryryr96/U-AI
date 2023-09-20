@@ -1,7 +1,7 @@
 package com.isix.reactiveserver.socket.controller;
 
 import com.isix.reactiveserver.socket.dto.SocketDto;
-import com.isix.reactiveserver.videostream.handler.MultiSocketHandler;
+import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
