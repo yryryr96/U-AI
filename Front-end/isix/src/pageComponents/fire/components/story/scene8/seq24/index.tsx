@@ -1,7 +1,6 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox, StyledSpan, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 
 const Seq24 = () => {
   const text: string = '어디에 전화를 걸어야 할까요?'
@@ -31,6 +30,7 @@ const Seq24 = () => {
     <>
       <StyledStoryCam>
         <CamComponent />
+        <StyledLine />
         <StyledQuizBox>
           <p>부모님</p>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
