@@ -2,7 +2,14 @@ import CamComponent from "@/commonComponents/story/camComponent"
 import { useEffect, useState } from "react"
 import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 
-const Seq21 = () => {
+interface WebcamProps {
+  videoElm: JSX.Element;
+  hiddenCanvasElm: JSX.Element; 
+  startStream: () => void;
+  stopStream: () => void;
+}
+
+const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '누구일까요?'
   const [timer, setTimer] = useState<number>(0);
 
@@ -29,7 +36,7 @@ const Seq21 = () => {
   return (
     <>
       <StyledStoryCam>
-        <CamComponent />
+        <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
           <p>소방관</p>
