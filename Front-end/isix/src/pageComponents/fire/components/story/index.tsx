@@ -48,11 +48,13 @@ const Story = () => {
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
   
+  const totalPage = 60; // 총 페이지 수
+  
   const handleKeyDown = (e: any) => {
     
-    if (e.key === 'ArrowRight') {
+    if (e.key === 'ArrowRight' && state < totalPage) {
       setState((prev) => prev + 1);
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft' && state > 0) {
       setState((prev) => prev - 1)
     }
   };
@@ -65,7 +67,12 @@ const Story = () => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('mousedown', handleMouseClick);
-  }, [])
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mousedown', handleMouseClick);
+    };
+  }, [state])
   
   return (
     <>
