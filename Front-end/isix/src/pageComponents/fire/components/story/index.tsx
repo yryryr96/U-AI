@@ -40,9 +40,13 @@ import Final1 from './final/final1'
 import Final2 from './final/final2'
 import { StyledContainer, StyledPaperContainer } from '../../Fire.styled'
 
+import useWebcam from '@/Hooks/webcam/useWebcamHook';
+
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const [state, setState] = useState<number>(0);
+
+  const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
   
   const handleKeyDown = (e: any) => {
     
@@ -65,9 +69,9 @@ const Story = () => {
   
   return (
     <>
-      {state === 0 && <Seq0 />}
+      {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 1 && <Seq1 />}
-      {state === 2 && <Seq2 />}
+      {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 3 && <Seq3 />}
       {state === 4 && <Seq4 />}
       {state === 5 && <Seq5 />}
@@ -77,31 +81,31 @@ const Story = () => {
       {(state === 8 && !speakResult) && <Seq8Incorrect />}
       {state === 9 && <Seq9 />}
       {state === 10 && <Seq10 />}
-      {state === 11 && <Seq11 />}
+      {state === 11 && <Seq11 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 12 && <Seq12 />}
       {state === 13 && <Seq13 />}
       {state === 14 && <Seq14 />}
-      {state === 15 && <Seq15 />}
+      {state === 15 && <Seq15 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 16 && <Seq16 />}
       {state === 17 && <Seq17 />}
-      {state === 18 && <Seq18 />}
+      {state === 18 && <Seq18 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 19 && <Seq19 />}
       {state === 20 && <Seq20 />}
-      {state === 21 && <Seq21 />}
+      {state === 21 && <Seq21 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 22 && <Seq22 />}
       {state === 23 && <Seq23 />}
-      {state === 24 && <Seq24 />}
+      {state === 24 && <Seq24 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 25 && <Seq25 />}
       {state === 26 && <Seq26 />}
       {state === 27 && <Seq27 />}
       {state === 28 && <Repeat1 />}
       {state === 29 && <Repeat2 />}
-      {state === 30 && <Repeat2Sol />}
+      {state === 30 && <Repeat2Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 31 && <Repeat3/>}
-      {state === 32 && <Repeat3Sol />}
+      {state === 32 && <Repeat3Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
 
-      {state === 33 && <Final1 />}
-      {state === 34 && <Final2 />}
+      {state === 33 && <Final1 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
+      {state === 34 && <Final2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
     </>
   )
 }
