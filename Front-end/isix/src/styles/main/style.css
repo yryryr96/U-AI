@@ -52,11 +52,11 @@ svg {
 canvas {
   opacity: 0;
   touch-action: none;
-  animation: fade-in 2s ease 1s forwards;
+  animation: fade-in 7s ease 1s forwards;
 }
 
 .characterImage {
   opacity: 0;
   touch-action: none;
-  animation: fade-in 5s ease 1s forwards;
+  animation: fade-in 10s ease 1s forwards;
 }
