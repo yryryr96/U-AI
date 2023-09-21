@@ -1,7 +1,6 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox, StyledSpan, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import Image from "next/image"
 
 const Seq11 = () => {
@@ -30,9 +29,9 @@ const Seq11 = () => {
 
   return (
     <>
-      {/* <TextComponent text={text} /> */}
       <StyledStoryCam>
         <CamComponent />
+        <StyledLine />
         <StyledQuizBox>
           <Image src='/resources/stairs_icon.png' width={100} height={100} alt="fire_icon"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
