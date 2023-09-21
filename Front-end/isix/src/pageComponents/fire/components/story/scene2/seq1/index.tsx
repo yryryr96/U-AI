@@ -9,7 +9,7 @@ const Seq1 = () => {
   return (
     <>
       <StyledStoryShow>
-        <ImageComponent src='./resources/fire.png' />
+        <ImageComponent src='./resources/fire_animation.gif' />
       </StyledStoryShow>
       <TextComponent text={text} />
     </>

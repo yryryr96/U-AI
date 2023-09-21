@@ -28,6 +28,7 @@ const StyledStoryText = styled.div`
   width: auto;
   height: auto;
   font-size: 2.3rem;
+  font-weight: bold;
   text-align: center;
   white-space: pre-line;
   margin-top: 5vh;
@@ -95,12 +96,12 @@ const StyledQuizBox = styled.div`
 const StyledCamText = styled.div`
   position: absolute;
   z-index: 1;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: bold;
   text-align: center;
-  background-color: gray;
+  background-color: black;
   color: white;
-  width: 80vw;
+  width : 80vw;
   height: auto;
 `
 
@@ -108,7 +109,7 @@ const StyledTimer = styled.div`
   font-size: 10rem;
   font-weight: bold;
   color: red;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   width: 100px;
   text-align: center;
@@ -122,4 +123,16 @@ const StyledSpan = styled.span`
   height: auto;
 `
 
-export { StyledCamText, StyledSpan, StyledStoryCam, StyledTimer, StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage, StyledQuizBox }
+const StyledLine = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 2vw;
+  height: 85vh;
+  background-image: url('resources/line.png');
+  background-size: cover;
+  z-index: 1;
+`
+
+export { StyledLine, StyledCamText, StyledSpan, StyledStoryCam, StyledTimer, StyledStoryContainer, StyledStoryText, StyledStoryShow, StyledStoryDual, StyledStoryImage, StyledQuizBox }
