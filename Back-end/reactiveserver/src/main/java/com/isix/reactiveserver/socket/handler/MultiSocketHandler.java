@@ -95,6 +95,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         System.out.println(status.getReason());
         sessions.remove(session.getId());
         currentMessage.remove(session.getId());
+        clients.get(session.getId()).disconnect("Client Socket Closed");
+        clients.remove(session.getId());
     }
 
     public Map<String, WebSocketSession> getSessions() {
@@ -118,7 +120,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         try {
             return new WebSocketFactory()
                     .setConnectionTimeout(10000)
-                    .createSocket("ws://127.0.0.1:8888")
+                    .createSocket("ws://127.0.0.1:8000/ws/mark")
                     .addListener(new WebSocketAdapter() {
 
                         // binary message arrived from the server
