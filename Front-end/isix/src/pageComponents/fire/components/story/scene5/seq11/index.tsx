@@ -3,7 +3,14 @@ import { useEffect, useState } from "react"
 import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import Image from "next/image"
 
-const Seq11 = () => {
+interface WebcamProps {
+  videoElm: JSX.Element;
+  hiddenCanvasElm: JSX.Element; 
+  startStream: () => void;
+  stopStream: () => void;
+}
+
+const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '어디로 가야 할까요?'
   const [timer, setTimer] = useState<number>(0);
 
@@ -30,7 +37,7 @@ const Seq11 = () => {
   return (
     <>
       <StyledStoryCam>
-        <CamComponent />
+        <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
           <Image src='/resources/stairs_icon.png' width={100} height={100} alt="fire_icon"/>
