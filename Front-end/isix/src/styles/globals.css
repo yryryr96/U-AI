@@ -39,6 +39,10 @@
   display: none;
 }
 
+body{
+  font-family:  "SDChild";
+}
+
 html,
 body,
 div,
