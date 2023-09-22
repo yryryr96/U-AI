@@ -10,7 +10,6 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
     socketRef.current = new WebSocket(socketUrl);
     socketRef.current.onopen = () => console.log('WebSocket is connected.');
     socketRef.current.onmessage = (event) => {
-      // console.log(event.data)
     }
 
     return () => {
@@ -79,7 +78,7 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
   return {
     startStream,
     stopStream, 
-    videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%' }} ref={videoRef} autoPlay playsInline muted />, 
+    videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%', transform: 'scaleX(-1)' }} ref={videoRef} autoPlay playsInline muted />, 
     hiddenCanvasElm : <canvas ref={canvasRef} style={{ display: 'none' }}/> };
 }
 

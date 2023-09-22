@@ -4,7 +4,7 @@ export const StyledStoryContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 4vh;
   height : 55vh;  
   width : 85vw;
 
@@ -31,7 +31,7 @@ export const StyledCamText = styled.div`
   top: 0;
   left: 0;
   z-index: 1;
-  font-size: 3.5rem;
+  font-size: ${props => props.theme.fontSizes.xxxlarge};
   font-weight: bold;
   text-align: center;
   background-color: black;
@@ -54,7 +54,7 @@ export const StyledCamImg = styled.div`
 export const StyledStoryText = styled.div`
   width: auto;
   height: auto;
-  font-size: 2.3rem;
+  font-size: ${props => props.theme.fontSizes.xxlarge};
   font-weight: bold;
   text-align: center;
   white-space: pre-line;
@@ -90,7 +90,6 @@ export const StyledQuizBox = styled.div`
   font-size: 4rem; 
   color: white; 
   font-weight: bold; 
-  /* background-color: black; */
   padding: 1rem 1rem;
 `
 
@@ -120,7 +119,7 @@ export const StyledLine = styled.div`
   transform: translate(-50%);
   width: 2vw;
   height: 100vh;
-  background-image: url('resources/line.png');
+  background-image: url('resources/line2.png');
   background-size: cover;
-  z-index: 1;
+  z-index: 2;
 `
