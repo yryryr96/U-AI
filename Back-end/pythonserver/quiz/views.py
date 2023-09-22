@@ -3,6 +3,9 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ultralytics import YOLO
+
+import sock.consumer
+
 """
     수정 일시 : 2023/09/12(화)
     개발 메소드 : get_cached_yolo_model
@@ -38,12 +41,12 @@ model.predict(source,classes=[0,1],)
 def ox_quiz(request):
     # 욜로 모델 로드
     # 판단할 이미지 소스 경로
-    source = 'media/jpg/example5.PNG'
+    source = sock.consumer.received_image
     # Run inference on the source
     results = model.predict(source,classes=[0,1],)
 
     # annotated_frame = results[0].plot() # 이부분은 전달된 사진 출력해볼 때 사용
-    image = cv2.imread(source)
+    image = source
     # 화면 중앙 x 좌표
     image_x = image.shape[1] / 2
     persons = []
