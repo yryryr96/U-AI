@@ -35,10 +35,8 @@ import Repeat2 from './repeat/repeat2'
 import Repeat2Sol from './repeat/repeat2Sol'
 import Repeat3 from './repeat/repeat3'
 import Repeat3Sol from './repeat/repeat3Sol'
-
 import Final1 from './final/final1'
 import Final2 from './final/final2'
-import { StyledContainer, StyledPaperContainer } from '../../Fire.styled'
 
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
 
@@ -48,7 +46,7 @@ const Story = () => {
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
   
-  const totalPage = 60; // 총 페이지 수
+  const totalPage = 34; // 총 페이지 수
   
   const handleKeyDown = (e: any) => {
     

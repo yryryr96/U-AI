@@ -1,5 +1,5 @@
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledStoryShow } from "../../Story.styled"
+import { StyledStoryContainer } from "../../Story.styled"
 import ImageComponent from "@/commonComponents/story/imageComponent"
 
 const Repeat1 = () => {
@@ -7,9 +7,9 @@ const Repeat1 = () => {
 
   return (
     <>
-      <StyledStoryShow>
-        <ImageComponent src='./resources/final_tmp.png' />
-      </StyledStoryShow>
+      <StyledStoryContainer>
+        <ImageComponent src='./resources/final.png' />
+      </StyledStoryContainer>
       <TextComponent text={text} />
     </>
   )

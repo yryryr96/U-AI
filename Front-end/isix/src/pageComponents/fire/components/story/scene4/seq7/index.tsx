@@ -1,7 +1,7 @@
 import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import Image from "next/image"
-import { StyledQuizBox, StyledSpan, StyledStoryShow } from "../../Story.styled"
+import { StyledSpan, StyledStoryContainer } from "../../Story.styled"
 import RecordComponent from "@/commonComponents/story/recordComponent"
 
 const Seq7 = () => {
@@ -11,9 +11,9 @@ const Seq7 = () => {
 
   return (
     <>
-      <StyledStoryShow>
+      <StyledStoryContainer>
         <ImageComponent src='./resources/speak_fire.png'/>
-      </StyledStoryShow>
+      </StyledStoryContainer>
       <TextComponent text={text}/>
       <StyledSpan>
         <Image src='/resources/volume_icon.png' width={70} height={60} alt="volume_icon"/>
