@@ -1,33 +1,32 @@
 package com.isix.reactiveserver.interaction.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isix.reactiveserver.exception.BusinessLogicException;
-import com.isix.reactiveserver.exception.ExceptionCode;
 import com.isix.reactiveserver.interaction.dto.InteractionDto;
 import com.isix.reactiveserver.response.MultiOcrResponse;
 import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//@Service
+@Service
 @RequiredArgsConstructor
-public class InteractionServiceImpl1 implements InteractionService {
+public class InteractionServiceImpl3 implements InteractionService {
     private final String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
     private final String secretKey = "aFBtU09YS2JCQ09TVGJlaE1Qa2NLVlVZUGVyd2FxRFc=";
 
@@ -36,7 +35,41 @@ public class InteractionServiceImpl1 implements InteractionService {
 
     @Override
     public InteractionDto.MotionResponse checkMotionOk(String sessionId, String eventName, int numChild, int limit) {
-        return null;
+        //System.out.println(multiSocketHandler.getSession(sessionId));
+
+        InteractionDto.MotionRequest motionRequest = InteractionDto.MotionRequest.builder()
+                .numOfChild(numChild)
+                .limit(limit)
+                .targetPose(eventName)
+                .sessionId(sessionId).build();
+
+
+        //System.out.println(motionRequest);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String jsonBody = objectMapper.writeValueAsString(motionRequest);
+
+            //System.out.println(jsonBody);
+
+            RestTemplate restTemplate =  new RestTemplate();
+
+            // HTTP 헤더 설정
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
+
+            ResponseEntity<String> response =  restTemplate.exchange("http://127.0.0.1:7070/motions/recog/",HttpMethod.POST, entity,String.class);
+
+            InteractionDto.MotionResponse result = objectMapper.readValue(response.getBody(),
+                    InteractionDto.MotionResponse.class);
+
+            return result;
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -91,7 +124,7 @@ public class InteractionServiceImpl1 implements InteractionService {
                 }
             }
             return new MultiOcrResponse(numChild, ocrDtoList);
-        }catch (JsonProcessingException e) {
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
 
@@ -99,15 +132,28 @@ public class InteractionServiceImpl1 implements InteractionService {
 
     @Override
     public InteractionDto.OxResponse checkOx(String sessionId, int numChild) {
+        RestTemplate restTemplate = new RestTemplate();
 
+        HttpHeaders headers = new HttpHeaders();
 
-        return null;
+        headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange("http://127.0.0.1:7070/quiz/api/oxquiz/", HttpMethod.GET, entity, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(response.getBody(), InteractionDto.OxResponse.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    private String ocrApiCall(byte[] temp){
+
+    private String ocrApiCall(byte[] temp) {
         try {
             URL url = new URL(apiURL);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setUseCaches(false);
             con.setDoInput(true);
             con.setDoOutput(true);
