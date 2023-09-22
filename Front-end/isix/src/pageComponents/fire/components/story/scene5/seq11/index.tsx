@@ -40,9 +40,9 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <Image src='/resources/stairs_icon.png' width={150} height={150} alt="fire_icon"/>
+          <Image src='/resources/stair_image.png' width={400} height={140} alt="stair"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <Image src='/resources/elevator_icon.png' width={150} height={150} alt="water_icon"/>
+          <Image src='/resources/elevator_image.png' width={400} height={140} alt="elevator"/>
         </StyledQuizBox>
       </StyledStoryCam>
     </>
