@@ -4,9 +4,9 @@ import numpy as np
 
 import cv2
 
-
+received_image = None
 class CustomConsumer(AsyncWebsocketConsumer):
-    received_image = None
+
 
     async def connect(self):
         await self.accept()
@@ -15,6 +15,7 @@ class CustomConsumer(AsyncWebsocketConsumer):
         pass
 
     async def websocket_receive(self, message):
+        global received_image
         # print(message)
         # Access the received message from text_data
         # if isinstance(text_data, bytes):
