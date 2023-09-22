@@ -1,6 +1,7 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import { useEffect, useState } from "react"
 import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import Image from "next/image";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -39,9 +40,9 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <span>소방관</span>
+          <Image src='/resources/firefighter_text.png' width={400} height={140} alt="firefighter"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <span>경찰관</span>
+          <Image src='/resources/police_text.png' width={400} height={140} alt="police"/>
         </StyledQuizBox>
       </StyledStoryCam>
     </>
