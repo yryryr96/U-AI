@@ -24,10 +24,13 @@ public class InteractionController {
             @RequestBody InteractionDto.Event requestBody
     ){
 
-        int ok = interactionService.checkMotionOk(requestBody.getSessionId(), requestBody.getNumChild());
-
         InteractionDto.MotionResponse response =
-                 new InteractionDto.MotionResponse(ok);
+                interactionService.checkMotionOk(
+                        requestBody.getSessionId(),
+                        requestBody.getEventName(),
+                        requestBody.getNumChild(),
+                        requestBody.getLimit()
+                );
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -37,6 +40,15 @@ public class InteractionController {
             @RequestBody InteractionDto.Event requestBody
     ){
         MultiOcrResponse response = interactionService.recogBoardAndOcr(requestBody.getSessionId(), requestBody.getNumChild());
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @PostMapping("/events/ox")
+    public ResponseEntity<InteractionDto.OxResponse> oxQuiz(
+            @RequestBody InteractionDto.Event requestBody
+    ){
+        InteractionDto.OxResponse response = interactionService.checkOx(requestBody.getSessionId(), requestBody.getNumChild());
 
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
