@@ -31,7 +31,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
 
-    private String djangoEndpoint = "ws://127.0.0.1:7070/ws/mark";
+    private String djangoEndpoint = "ws://70.12.130.121:17070/ws/mark";
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {

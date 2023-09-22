@@ -3,6 +3,8 @@ package com.isix.reactiveserver.interaction.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.isix.reactiveserver.exception.BusinessLogicException;
+import com.isix.reactiveserver.exception.ExceptionCode;
 import com.isix.reactiveserver.interaction.dto.InteractionDto;
 import com.isix.reactiveserver.response.MultiOcrResponse;
 import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
@@ -60,12 +62,16 @@ public class InteractionServiceImpl3 implements InteractionService {
 
             HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
 
-            ResponseEntity<String> response =  restTemplate.exchange("http://127.0.0.1:7070/motions/recog/",HttpMethod.POST, entity,String.class);
+            ResponseEntity<String> response =  restTemplate.exchange("http://70.12.130.121:17070/motions/recog/",HttpMethod.POST, entity,String.class);
 
-            InteractionDto.MotionResponse result = objectMapper.readValue(response.getBody(),
-                    InteractionDto.MotionResponse.class);
+            if(response.getStatusCode() == HttpStatus.OK) {
 
-            return result;
+                InteractionDto.MotionResponse result = objectMapper.readValue(response.getBody(),
+                        InteractionDto.MotionResponse.class);
+                return result;
+            }else{
+                throw new BusinessLogicException(ExceptionCode.FAILED_TO_HANDLE_GPUSERVER);
+            }
         }catch (JsonProcessingException e){
             e.printStackTrace();
             return null;
