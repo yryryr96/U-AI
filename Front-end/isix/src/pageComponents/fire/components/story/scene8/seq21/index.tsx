@@ -39,9 +39,9 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <p>소방관</p>
+          <span>소방관</span>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <p>경찰관</p>
+          <span>경찰관</span>
         </StyledQuizBox>
       </StyledStoryCam>
     </>

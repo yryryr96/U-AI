@@ -1,6 +1,5 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledCamText, StyledQuizBox, StyledSpan, StyledStoryCam } from "../../Story.styled"
+import { StyledCamText, StyledStoryCam } from "../../Story.styled"
 
 interface WebcamProps {
   videoElm: JSX.Element;

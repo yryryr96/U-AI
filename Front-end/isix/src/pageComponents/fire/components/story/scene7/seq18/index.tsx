@@ -1,4 +1,4 @@
-import { StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
+import { StyledCamImg, StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 import Image from "next/image"
 
@@ -17,10 +17,9 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
-        <StyledQuizBox>
-          <Image src='/resources/clothes_fire.png' width={300} height={250} alt="clothes"  style={{ marginTop: '2.5rem' }}/>
-        </StyledQuizBox>
-      {/* <TextComponent text={text}/> */}
+        <StyledCamImg>
+          <Image src='/resources/clothes_fire_animation.gif' width={300} height={250} alt="clothes"  style={{ marginTop: '2.5rem' }}/>
+        </StyledCamImg>
       </StyledStoryCam>
     </>
   )

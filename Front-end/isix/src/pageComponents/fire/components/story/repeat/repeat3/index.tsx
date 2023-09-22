@@ -1,7 +1,5 @@
-import CamComponent from "@/commonComponents/story/camComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
 import { useEffect, useState } from "react"
-import { StyledStoryCam, StyledSpan, StyledTimer, StyledQuizBox, StyledCamText } from "../../Story.styled"
+import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText } from "../../Story.styled"
 import OcrComponent from "@/commonComponents/story/ocrComponent"
 
 const Repeat3 = () => {
