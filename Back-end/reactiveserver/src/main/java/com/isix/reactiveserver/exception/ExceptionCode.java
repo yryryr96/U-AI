@@ -22,7 +22,8 @@ public enum ExceptionCode {
 
     SESSION_NOT_FOUND(404, "Session Not Found"),
 
-    FAILED_TO_CONNECT_SOCKET(500,"Failed to Connect GPU WebSocket Server");
+    FAILED_TO_CONNECT_SOCKET(500,"Failed to Connect GPU WebSocket Server"),
+    FAILED_TO_HANDLE_GPUSERVER(500,"Failed to Handle GPU Server Response");
 
 
 

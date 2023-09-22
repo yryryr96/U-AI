@@ -7,7 +7,7 @@ import numpy as np
 import sock.consumer
 import time
 
-source = 'media/jpg/example5.PNG'
+source = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
 model = YOLO('yolov8n.pt')
 # results = AIModel().predict(source,classes=[0,1],)
 model.predict(source,classes=[0,1],)
