@@ -1,20 +1,17 @@
 package com.isix.reactiveserver.interaction.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isix.reactiveserver.exception.BusinessLogicException;
-import com.isix.reactiveserver.exception.ExceptionCode;
 import com.isix.reactiveserver.interaction.dto.InteractionDto;
 import com.isix.reactiveserver.response.MultiOcrResponse;
 import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -40,14 +37,19 @@ public class InteractionServiceImpl1 implements InteractionService {
 
     @Override
     public MultiOcrResponse recogBoardAndOcr(String sessionId, int numChild) {
-        byte[] temp = multiSocketHandler.getByteMessage(sessionId);
+        //byte[] temp = multiSocketHandler.getByteMessage(sessionId);
 
 //        String response = new String(temp);
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.setContentType(MediaType.IMAGE_JPEG);
+        // RestTemplate 인스턴스 생성
+        RestTemplate restTemplate = new RestTemplate();
+
+// GET 요청 수행
+        ResponseEntity<byte[]> response = restTemplate.getForEntity("http://127.0.0.1:8000/review/api/review/", byte[].class);
 
         try {
-            String resultText = ocrApiCall(temp);
+            String resultText = ocrApiCall(response.getBody());
 
             // JSON 문자열을 파싱하는 ObjectMapper 생성
             ObjectMapper objectMapper = new ObjectMapper();

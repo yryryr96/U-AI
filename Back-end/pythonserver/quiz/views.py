@@ -3,15 +3,9 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ultralytics import YOLO
-
 import sock.consumer
 
-"""
-    수정 일시 : 2023/09/12(화)
-    개발 메소드 : get_cached_yolo_model
-    개발 내용 : 모델을 전역적으로 한번만 호출하기 위해 캐시를 사용해봤음.
-    특이사항 : 굳이 필요 없는 것 같지만 일단 캐시 프레임워크 써본 것
-"""
+
 # def get_cached_yolo_model():
 #     yolo_model = cache.get('yolo_model')
 #     if yolo_model is None:
@@ -19,16 +13,6 @@ import sock.consumer
 #         # 모델을 캐시에 저장, None은 캐시가 만료되지 않음을 의미
 #         cache.set('yolo_model', yolo_model, None)
 #     return yolo_model
-"""
-    개발 일시 : 2023/09/12(화)
-    개발 메소드 : ox_quiz
-    개발 내용 : 화면 정중앙을 기준으로 왼쪽, 오른쪽 사람 객채 수에 따른 Reponse 개발 완료 
-    특이사항 : x
-    
-    수정 일시 : 2023/09/13(수)
-    수정 내용 : Response 내용 정형화
-"""
-#
 
 source = 'media/jpg/example5.PNG'
 model = YOLO('yolov8n.pt')
