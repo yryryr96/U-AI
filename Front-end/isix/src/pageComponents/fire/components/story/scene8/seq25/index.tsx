@@ -1,6 +1,6 @@
 import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledStoryShow } from "../../Story.styled"
+import { StyledStoryContainer } from "../../Story.styled"
 
 const Seq25 = () => {
   const text: string = `불이 났을 때는 119에 전화를 해야 해요.
@@ -8,9 +8,9 @@ const Seq25 = () => {
 
   return (
     <>
-      <StyledStoryShow>
+      <StyledStoryContainer>
         <ImageComponent src='./resources/call119.png'/>
-      </StyledStoryShow>
+      </StyledStoryContainer>
       <TextComponent text={text}/>
     </>
   )

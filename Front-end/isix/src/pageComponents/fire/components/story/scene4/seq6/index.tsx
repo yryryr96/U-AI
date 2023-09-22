@@ -1,6 +1,6 @@
 import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledStoryShow } from "../../Story.styled"
+import { StyledStoryContainer } from "../../Story.styled"
 
 const Seq6 = () => {
   const text: string = `아기 판다가 혼자 있다가 불이 난 것을 발견했어요.
@@ -8,9 +8,9 @@ const Seq6 = () => {
 
   return (
     <>
-      <StyledStoryShow>
-        <ImageComponent src='./resources/find_fire_tmp.png'/>
-      </StyledStoryShow>
+      <StyledStoryContainer>
+        <ImageComponent src='./resources/call.png'/>
+      </StyledStoryContainer>
       <TextComponent text={text}/>
     </>
   )
