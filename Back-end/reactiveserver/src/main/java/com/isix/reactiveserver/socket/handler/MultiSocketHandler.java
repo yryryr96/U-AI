@@ -16,6 +16,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
+
+    private String djangoEndpoint = "ws://127.0.0.1:7070/ws/mark";
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -120,7 +123,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         try {
             return new WebSocketFactory()
                     .setConnectionTimeout(10000)
-                    .createSocket("ws://127.0.0.1:8000/ws/mark")
+                    .createSocket(djangoEndpoint)
                     .addListener(new WebSocketAdapter() {
 
                         // binary message arrived from the server

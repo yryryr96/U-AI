@@ -13,6 +13,7 @@ public class InteractionDto {
         private String eventName;
         private String sessionId;
         private int numChild;
+        private int limit;
     }
 
     @Getter
@@ -20,8 +21,10 @@ public class InteractionDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class MotionResponse{
-        private int numOk;
+    public static class OxResponse{
+        private int result;
+        private int left;
+        private int right;
     }
 
     @Getter
@@ -33,5 +36,28 @@ public class InteractionDto {
         private String inferText;
         private double[] x;
         private double[] y;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class MotionRequest{
+        private String sessionId;
+        private String targetPose;
+        private int numOfChild;
+        private int limit;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MotionResponse{
+        private String target;
+        private int result;
     }
 }

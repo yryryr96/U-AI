@@ -22,6 +22,6 @@ class CustomConsumer(AsyncWebsocketConsumer):
         if "text" not in message:
             image_array = np.frombuffer(message['bytes'], dtype=np.uint8)
             received_image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
-            if received_image is not None:
-                cv2.imshow("show", received_image)
-            cv2.waitKey(1)
+            # if received_image is not None:
+            #     cv2.imshow("show", received_image)
+            # cv2.waitKey(1)
