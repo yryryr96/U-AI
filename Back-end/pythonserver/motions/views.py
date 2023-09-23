@@ -43,7 +43,17 @@ def recognize_motion(request):
 
     while True:
         # print('?????')
-        source = sock.consumer.received_image
+        session_id = request.headers['Session-Id']
+
+        if session_id not in sock.consumer.received_images:
+            response = {
+                'result': -1
+            }
+
+            return JsonResponse(response)
+
+        source = sock.consumer.received_images[session_id]
+        #source = sock.consumer.received_image
         if source is not None:
             # print('??')
             res = {}

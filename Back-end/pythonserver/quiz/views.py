@@ -25,7 +25,18 @@ model.predict(source,classes=[0,1],)
 def ox_quiz(request):
     # 욜로 모델 로드
     # 판단할 이미지 소스 경로
-    source = sock.consumer.received_image
+    session_id = request.headers['Session-Id']
+
+    if session_id not in sock.consumer.received_images:
+        response = {
+            'result': -1,
+            'left': 0,
+            'right': 0,
+        }
+
+        return JsonResponse(response)
+
+    source = sock.consumer.received_images[session_id]
     # Run inference on the source
     results = model.predict(source,classes=[0,1],)
 
@@ -34,7 +45,7 @@ def ox_quiz(request):
     # 화면 중앙 x 좌표
     image_x = image.shape[1] / 2
     persons = []
-    print(results)
+    # print(results)
     for result in results:
         for i in range(results[0].boxes.xyxy.shape[0]):
             x = int((result.boxes.xyxy[i][0].item() + result.boxes.xyxy[i][2].item()) / 2)
