@@ -45,7 +45,7 @@ const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const [state, setState] = useState<number>(-1);
 
-  const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
+  const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   
   const totalPage = 34; // 총 페이지 수
   
