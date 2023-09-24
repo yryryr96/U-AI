@@ -7,6 +7,11 @@ import numpy as np
 import sock.consumer
 import time
 
+import os
+
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"]="6,7"
+
 source = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
 model = YOLO('yolov8n.pt')
 # results = AIModel().predict(source,classes=[0,1],)
@@ -22,7 +27,7 @@ def review(request):
     # input_image = cv2.imdecode(np.frombuffer(image_data, np.uint8), -1)  # 바이너리 이미지 데이터를 읽습니다.
     # classes=[63, 67]
     # Run inference on the source
-    results = model.predict(image_data)# list of Results objects
+    results = model.predict(image_data,device=6)# list of Results objects
 
     annotated_frame = results[0].plot()
 
