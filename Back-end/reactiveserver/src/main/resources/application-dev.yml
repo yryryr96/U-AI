@@ -1,0 +1,12 @@
+server:
+  port: 7070
+#  ssl:
+#    key-store: classpath:ssl/keystore.p12
+#    key-store-type: PKCS12
+#    key-store-password: cjswo1!
+
+
+django:
+  endpoint:
+    gpu-server-1: ws://localhost:7070/ws/mark
+    gpu-server-2: ws://localhost:7071/ws/mark

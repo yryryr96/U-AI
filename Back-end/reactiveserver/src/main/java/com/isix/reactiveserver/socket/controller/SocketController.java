@@ -1,5 +1,6 @@
 package com.isix.reactiveserver.socket.controller;
 
+import com.isix.reactiveserver.config.GpuServerConfig;
 import com.isix.reactiveserver.socket.dto.SocketDto;
 import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.socket.TextMessage;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class SocketController {
     private final MultiSocketHandler multiSocketHandler;
+    private final GpuServerConfig gpuServerConfig;
 
 
     @PostMapping("/session/make")
@@ -26,7 +29,7 @@ public class SocketController {
         if(multiSocketHandler.getSession(socketId).isOpen()) {
             multiSocketHandler.getSession(socketId).sendMessage(new TextMessage("HTTP"));
         }
-        return new ResponseEntity("hi", HttpStatus.CREATED);
+        return new ResponseEntity("OK", HttpStatus.CREATED);
     }
 
     @GetMapping("/session/check")
@@ -40,4 +43,11 @@ public class SocketController {
         return new ResponseEntity(temp,headers,HttpStatus.OK);
     }
 
+    @GetMapping("/session/servers")
+    public ResponseEntity<Map<String,Object>> getServer(){
+        for(Object str :  gpuServerConfig.getEndpoint().values()){
+            System.out.println((String)str);
+        }
+        return new ResponseEntity<>(gpuServerConfig.getEndpoint(),HttpStatus.OK);
+    }
 }
