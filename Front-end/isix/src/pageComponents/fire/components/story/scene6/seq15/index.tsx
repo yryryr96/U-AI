@@ -1,3 +1,4 @@
+import AudioPlayer from "@/commonComponents/story/audioComponent";
 import { StyledCamImg, StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 import Image from "next/image"
@@ -12,7 +13,7 @@ interface WebcamProps {
 
 const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '판다를 따라 입을 막고 몸을 숙여주세요'
-
+  const audioUrl: string = '/resources/audioFile/seq15.mp3'
   return (
     <>
       <StyledCamText>{text}</StyledCamText>
@@ -23,6 +24,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         </StyledCamImg>
       {/* <TextComponent text={text}/> */}
       </StyledStoryCam>
+      <AudioPlayer file={audioUrl} />
     </>
   )
 }
