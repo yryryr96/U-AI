@@ -29,10 +29,8 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       }, 1000);
 
       return () => clearInterval(intervalId);
-    }
-    
+    }    
   }, [timer]);
-
 
   return (
     <>

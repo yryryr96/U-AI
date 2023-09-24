@@ -1,5 +1,6 @@
-import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
-import CamComponent from "@/commonComponents/story/camComponent"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled";
+import CamComponent from "@/commonComponents/story/camComponent";
+import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
 
 interface WebcamProps {
@@ -11,7 +12,7 @@ interface WebcamProps {
 
 const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '판다를 따라 몸을 굴러주세요'
-
+  const audioUrl: string = '/resources/audioFile/seq18.mp3'
   return (
     <>
       <StyledBorders>
@@ -30,6 +31,7 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
           <Image src='/resources/clothes_fire_animation.gif' width={300} height={250} alt="clothes"  style={{ marginTop: '4rem' }}/>
         </StyledCamImg>
       </StyledStoryCam>
+      <AudioPlayer file={audioUrl} />
     </>
   )
 }

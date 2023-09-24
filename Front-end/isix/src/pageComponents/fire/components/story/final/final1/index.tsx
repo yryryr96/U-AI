@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
+import AudioPlayer from "@/commonComponents/story/audioComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -10,7 +11,8 @@ interface WebcamProps {
 }
 
 const Final1: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
-  const text: string = `너무 잘했어요! 이제 판다 친구들과 함께 사진 찍어볼까요?`
+  const text: string = `너무 잘했어요!`
+  const audioUrl: string = '/resources/audioFile/final1.mp3'
 
   return (
     <>
@@ -27,10 +29,7 @@ const Final1: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>
-      <StyledCamImg>
-        <Image src='/resources/firefighterpanda.svg' width={400} height={450} alt="firefighter"  style={{ marginTop: '14rem' }}/>
-        <Image src='/resources/teacherpanda.svg' width={400} height={450} alt="teacher"  style={{ marginTop: '12rem' }}/>
-      </StyledCamImg>
+      <AudioPlayer file={audioUrl} />
     </>
   )
 }

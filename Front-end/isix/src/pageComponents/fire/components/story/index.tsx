@@ -40,6 +40,7 @@ import Final1 from './final/final1'
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
 import Cover from '@/commonComponents/cover'
 import Ending from '@/pageComponents/ending'
+import Final2 from './final/final2'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -47,7 +48,7 @@ const Story = () => {
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
   
-  const totalPage = 34; // 총 페이지 수
+  const totalPage = 35; // 총 페이지 수
   
   const handleKeyDown = (e: any) => {
     
@@ -112,7 +113,8 @@ const Story = () => {
       {state === 32 && <Repeat3Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
 
       {state === 33 && <Final1 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {/* {state === 34 && <Ending/>} */}
+      {state === 34 && <Final2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
+      {/* {state === 35 && <Ending/>} */}
     </>
   )
 }

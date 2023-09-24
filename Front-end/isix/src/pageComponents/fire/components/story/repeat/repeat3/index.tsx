@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent";
+import AudioPlayer from "@/commonComponents/story/audioComponent"
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -11,12 +12,14 @@ interface WebcamProps {
 
 const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '불을 끄고 사람을 구해주는 분들은 누구일까요?'
+  const audioUrl: string = '/resources/audioFile/repeat3.mp3'
+  
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setTimer(3);
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -51,6 +54,7 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
         </StyledQuizBox>
       </StyledStoryCam>
+      <AudioPlayer file={audioUrl} />
     </>
   )
 }
