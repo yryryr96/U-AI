@@ -1,6 +1,6 @@
-import AudioPlayer from "@/commonComponents/story/audioComponent";
-import { StyledCamImg, StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
+import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
 
 
@@ -16,13 +16,21 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   const audioUrl: string = '/resources/audioFile/seq15.mp3'
   return (
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledCamImg>
-          <Image src='/resources/avoid_smoke_panda.png' width={300} height={250} alt="smoke"  style={{ marginTop: '3.7rem' }}/>
+          <Image src='/resources/avoid_panda.png' width={300} height={250} alt="smoke"  style={{ marginTop: '4rem' }}/>
         </StyledCamImg>
-      {/* <TextComponent text={text}/> */}
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
     </>

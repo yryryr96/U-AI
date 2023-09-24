@@ -8,7 +8,6 @@ import AudioPlayer from "@/commonComponents/story/audioComponent"
 const Seq7 = () => {
   const text: string = '판다를 따라 다 같이 외쳐주세요!'
   const audioUrl: string = '/resources/audioFile/seq7.mp3'
-  
 
   return (
     <>
