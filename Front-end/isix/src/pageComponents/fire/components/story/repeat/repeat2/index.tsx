@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import { customAxios } from "@/api/api";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -13,8 +14,24 @@ interface WebcamProps {
 const Repeat2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '불이 났을 땐 어디로 전화해야 할까요?'
   const audioUrl: string = '/resources/audioFile/repeat2.mp3'
-  
   const [timer, setTimer] = useState<number>(0);
+
+  // OCR
+  const oxEvent = async () => {
+    const url = "api/events/multiocr";
+    const sessionId = localStorage.getItem('socketId')
+    const data = {
+      sessionId: sessionId,
+      numChild: 1, // 처음에 입력받은 값 넣기
+    };
+
+    try {
+      const response = await customAxios.post(url, data);
+      console.log(response.data); 
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
