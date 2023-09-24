@@ -1,5 +1,5 @@
 import AudioPlayer from "@/commonComponents/story/audioComponent";
-import { StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 import Image from "next/image";
 
@@ -15,6 +15,15 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
   const audioUrl: string = '/resources/audioFile/final2.mp3'
   return (  
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
