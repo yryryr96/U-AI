@@ -8,7 +8,6 @@ const Seq5 = () => {
 
   return (
     <>
-      {/* 불이 커지는 gif 넣기 */}
       <StyledStoryContainer>
         <ImageComponent src='./resources/fire_animation.gif'/>
       </StyledStoryContainer>

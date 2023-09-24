@@ -41,6 +41,8 @@
 
 body{
   font-family:  "SDChild";
+  position: relative;
+  z-index: -9;
 }
 
 html,

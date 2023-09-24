@@ -74,7 +74,7 @@ const StyledStartFormButton = styled.div`
   margin: 20px 0px;
   border-radius: 20px;
   font-size: 24px;
-  font-weight: bo;
+  font-weight: bold;
 `
 
 export { TagContainer, StyledStartFormContainer, StyledServiceName, StyledStartFormName, StyledStartForm, StyledStartFormInput, StyledStartFormButton };

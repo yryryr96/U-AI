@@ -2,15 +2,16 @@
 import styled, { css } from "styled-components";
 
 export const StyledContainer = styled.div`
-    position: relative;
-    display : flex;
-    background: url('./resources/backGround2.jpg') no-repeat center;
-    background-size : cover;
-    align-items : center;
-    justify-content: center;
-    height : 100vh;
-    width : 100vw ;
-    z-index: -2;
+  position: relative;
+  display : flex;
+  background: url('./resources/backGround2.jpg') no-repeat center;
+  background-size : cover;
+  align-items : center;
+  justify-content: center;
+  height : 100vh;
+  width : 100vw ;
+  z-index: -2;
+
 `
 
 export const StyledPaperContainer = styled.div`
@@ -34,4 +35,3 @@ export const StyledPaperContainer = styled.div`
     z-index: -1; // 원하는 투명도로 조정하세요.
 }
 `;
-

@@ -3,12 +3,11 @@
 import React from 'react'
 import { StyledEndingContainer, StyledEnding, StyledEndingPhotos } from './Ending.Styled'
 import Photos from './components/photos'
-import TextComponent from '@/commonComponents/story/textComponent'
 
 const Ending = () => {
+
   return (
-    <div>
-      Ending
+    <>
       <StyledEndingContainer>
       <StyledEnding>
         <StyledEndingPhotos>
@@ -27,9 +26,7 @@ const Ending = () => {
         </StyledEndingPhotos>
       </StyledEnding>
       </StyledEndingContainer>
-      <TextComponent/>
-
-    </div>
+    </>
   )
 }
 

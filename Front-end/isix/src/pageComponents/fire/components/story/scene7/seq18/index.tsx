@@ -1,4 +1,4 @@
-import { StyledCamImg, StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 import Image from "next/image"
 
@@ -14,11 +14,20 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
 
   return (
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledCamImg>
-          <Image src='/resources/clothes_fire_animation.gif' width={300} height={250} alt="clothes"  style={{ marginTop: '2.5rem' }}/>
+          <Image src='/resources/clothes_fire_animation.gif' width={300} height={250} alt="clothes"  style={{ marginTop: '4rem' }}/>
         </StyledCamImg>
       </StyledStoryCam>
     </>

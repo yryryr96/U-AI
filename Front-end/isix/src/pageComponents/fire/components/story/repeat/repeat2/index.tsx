@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
-import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText } from "../../Story.styled"
-import OcrComponent from "@/commonComponents/story/ocrComponent"
+import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
+import CamComponent from "@/commonComponents/story/camComponent";
 
-const Repeat2 = () => {
+interface WebcamProps {
+  videoElm: JSX.Element;
+  hiddenCanvasElm: JSX.Element; 
+  startStream: () => void;
+  stopStream: () => void;
+}
+
+const Repeat2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '불이 났을 땐 어디로 전화해야 할까요?'
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setTimer(3);
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -28,9 +35,18 @@ const Repeat2 = () => {
 
   return (
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
-        <OcrComponent />
+        <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledQuizBox>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
         </StyledQuizBox>

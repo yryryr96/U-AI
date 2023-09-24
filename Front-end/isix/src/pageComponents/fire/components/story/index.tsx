@@ -36,13 +36,14 @@ import Repeat2Sol from './repeat/repeat2Sol'
 import Repeat3 from './repeat/repeat3'
 import Repeat3Sol from './repeat/repeat3Sol'
 import Final1 from './final/final1'
-import Final2 from './final/final2'
 
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
+import Cover from '@/commonComponents/cover'
+import Ending from '@/pageComponents/ending'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
-  const [state, setState] = useState<number>(0);
+  const [state, setState] = useState<number>(-1);
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://192.168.30.161:8080/ws/chat',100);
   
@@ -52,7 +53,7 @@ const Story = () => {
     
     if (e.key === 'ArrowRight' && state < totalPage) {
       setState((prev) => prev + 1);
-    } else if (e.key === 'ArrowLeft' && state > 0) {
+    } else if (e.key === 'ArrowLeft' && state >= 0) {
       setState((prev) => prev - 1)
     }
   };
@@ -74,6 +75,7 @@ const Story = () => {
   
   return (
     <>
+      {state === -1 && <Cover/>}
       {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
@@ -104,13 +106,13 @@ const Story = () => {
       {state === 26 && <Seq26 />}
       {state === 27 && <Seq27 />}
       {state === 28 && <Repeat1 />}
-      {state === 29 && <Repeat2 />}
+      {state === 29 && <Repeat2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
       {state === 30 && <Repeat2Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {state === 31 && <Repeat3/>}
+      {state === 31 && <Repeat3 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
       {state === 32 && <Repeat3Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
 
       {state === 33 && <Final1 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {state === 34 && <Final2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
+      {/* {state === 34 && <Ending/>} */}
     </>
   )
 }

@@ -8,7 +8,7 @@ const Seq4 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/fire.png'/>
+        <ImageComponent src='./resources/fire_animation.gif'/>
       </StyledStoryContainer>
       <TextComponent text={text}/>
     </>

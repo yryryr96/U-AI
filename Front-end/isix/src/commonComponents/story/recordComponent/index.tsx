@@ -39,22 +39,23 @@ const RecordComponent = () => {
           setStart(true);
         }, 1000)
 
-	setTimeout(() => {
-	  if(mediaRecorder.state === 'recording'){
-	    mediaRecorder.stop();
-      console.log('end');
+        setTimeout(() => {
+          if(mediaRecorder.state === 'recording'){
+            mediaRecorder.stop();
+            console.log('end');
 
-      axios.post<AxiosResponse>('http://127.0.0.1:8000/voice/api/voicerecognition/', formData)
-      .then(res => {
-        console.log('res: ', res.data);
-      })
-      .catch(err => {
-      	console.error(err)
-      })
-	  }
-	}, 4000); 
+            axios.post<AxiosResponse>('http://127.0.0.1:8000/voice/api/voicerecognition/', formData)
+            .then(res => {
+              // res 결과에 따라 분기처리
+
+            })
+            .catch(err => {
+              console.error(err)
+            })
+          }
+        }, 4000); 
       
-    }).catch((err) => console.error(err));
+      }).catch((err) => console.error(err));
 
     return () => {
 
@@ -64,11 +65,11 @@ const RecordComponent = () => {
       
     };
   
-}, []);
+  }, []);
 
-return (
-<></>
-)
+  return (
+  <></>
+  )
 }
 
 export default RecordComponent;

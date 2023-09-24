@@ -21,16 +21,13 @@ const OcrComponent = () => {
           context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
           canvasRef.current.toBlob(async (blob: Blob | null) => {
 
-            // Create a new FormData instance
             const formData = new FormData();
 
-            // Create a file object from the blob
+            // 이미지파일 생성
             let file = new File([blob!], "capture.jpg", { type: "image/jpeg" });
-
-            // Add the file to the form data
             formData.append("file", file);
             
-            // Use Axios to send the POST request
+            // Axios
             // try{
             //     let res = await axios.post("http://127.0.0.1:8000/voice/api/voicerecognition/", formData);
             //     console.log(res.data);    

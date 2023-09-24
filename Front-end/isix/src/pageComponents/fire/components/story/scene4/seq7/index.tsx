@@ -7,8 +7,6 @@ import RecordComponent from "@/commonComponents/story/recordComponent"
 const Seq7 = () => {
   const text: string = '판다를 따라 다 같이 외쳐주세요!'
 
-  
-
   return (
     <>
       <StyledStoryContainer>
