@@ -1,15 +1,19 @@
 "use client"
 
 import React from 'react'
-import { StyledCoverContainer } from './Cover.styled'
+import { StyledCoverBox, StyledCoverContainer } from './Cover.styled'
 import CoverImageComponent from './components/coverImage'
 import CoverContenstComponent from './components/coverContents'
 
 const Cover = () => {
   return (
     <StyledCoverContainer>
-      <CoverImageComponent/>
-      <CoverContenstComponent/>
+      <StyledCoverBox>
+        <CoverImageComponent/>
+      </StyledCoverBox>
+      <StyledCoverBox>
+        <CoverContenstComponent/>
+      </StyledCoverBox>
     </StyledCoverContainer>
   )
 }

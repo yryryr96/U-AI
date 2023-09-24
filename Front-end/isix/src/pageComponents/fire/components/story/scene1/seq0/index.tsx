@@ -1,6 +1,5 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import TextComponent from "@/commonComponents/story/textComponent"
-import { StyledCamText, StyledQuizBox, StyledStoryCam } from "../../Story.styled"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 
 interface WebcamProps {
@@ -17,8 +16,16 @@ const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
 
   return (
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledCamText>{text}</StyledCamText>
-      {/* <TextComponent text={text} /> */}
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>

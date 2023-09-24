@@ -3,7 +3,7 @@ import { StyledCoverImage } from '../../Cover.styled';
 
 const CoverImageComponent = () => {
   return (
-    <StyledCoverImage src='./resources/panda.png'/>
+    <StyledCoverImage src='./resources/fireTheme1.svg'/>
   )
 }
 

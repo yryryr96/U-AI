@@ -9,7 +9,6 @@ const Seq5 = () => {
   const audioUrl: string = '/resources/audioFile/seq5.mp3'
   return (
     <>
-      {/* 불이 커지는 gif 넣기 */}
       <StyledStoryContainer>
         <ImageComponent src='./resources/fire_animation.gif'/>
       </StyledStoryContainer>
