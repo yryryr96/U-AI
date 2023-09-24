@@ -2,6 +2,7 @@ import CamComponent from "@/commonComponents/story/camComponent"
 import { useEffect, useState } from "react"
 import { BorderHeight, BorderWidth, StyledBorders, StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import Image from "next/image";
+import { customAxios } from "@/api/api";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -13,6 +14,23 @@ interface WebcamProps {
 const Seq24: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '어디에 전화를 걸어야 할까요?'
   const [timer, setTimer] = useState<number>(0);
+
+  // OX
+  const oxEvent = async () => {
+    const url = "api/events/ox";
+    const sessionId = localStorage.getItem('socketId')
+    const data = {
+      sessionId: sessionId,
+      numChild: 1, // 처음에 입력받은 값 넣기
+    };
+
+    try {
+      const response = await customAxios.post(url, data);
+      console.log(response.data); 
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
