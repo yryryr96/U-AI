@@ -1,6 +1,6 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import { useEffect, useState } from "react"
-import { StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import { useEffect, useState, useRef } from "react"
+import { BorderHeight, BorderWidth, StyledBorders, StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import Image from "next/image"
 
 interface WebcamProps {
@@ -13,11 +13,12 @@ interface WebcamProps {
 const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '어디로 가야 할까요?'
   const [timer, setTimer] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setTimer(3);
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -33,16 +34,24 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
     
   }, [timer]);
 
-
   return (
     <>
+      <StyledBorders>
+        <BorderHeight />
+        <BorderHeight />
+      </StyledBorders>
+      <StyledBorders>
+        <BorderWidth />
+        <BorderWidth />
+      </StyledBorders>
+
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <Image src='/resources/stair_image.png' width={400} height={140} alt="stair"/>
+          <Image src='/resources/text_stair2.png' width={400} height={150} alt="stair"/>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
-          <Image src='/resources/elevator_image.png' width={400} height={140} alt="elevator"/>
+          <Image src='/resources/text_elevator2.png' width={400} height={150} alt="elevator"/>
         </StyledQuizBox>
       </StyledStoryCam>
     </>
