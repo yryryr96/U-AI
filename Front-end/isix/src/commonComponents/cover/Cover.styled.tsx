@@ -1,40 +1,45 @@
 import styled, { css } from "styled-components";
 
-const StyledCoverContainer = styled.div`
+export const StyledCoverContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
-const StyledCoverImage = styled.img`
-  width: 300px;
-  height: 300px;
-  border: solid 1px;
+export const StyledCoverBox = styled(StyledCoverContainer)`
+  height: 85vh;
+  width: 42.5vw;
 `
 
-const StyledCoverContents = styled.div`
-  border: solid 1px;
+export const StyledCoverImage = styled.img`
+  width: 80%;
+  height: 80%;
+`
+
+export const StyledCoverContents = styled.div`
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 300px;
+  width: 90%;
+  height: auto;
 `
 
-const StyledCoverTitle = styled.div`
-  border: solid 1px;
+export const StyledCoverTitle = styled.div`
+  font-size: ${props => props.theme.fontSizes.xxlarge};
+  text-align: center;
+  margin: 10px 3px 40px;
+`
+
+export const StyledCoverText = styled.div`
   text-align: center;
   margin: 10px 3px 10px;
-`
+  line-height:1.3;
 
-const StyledCoverText = styled.div`
-  border: solid 1px;
-  text-align: center;
-  margin: 10px 3px 10px;
-`
+  h2 {
+    font-size: ${props => props.theme.fontSizes.xxxlarge};
+  }
 
-const StyledCoverButton = styled.div`
-  border: solid 1px;
-  display: flex;
-  justify-content: center;
-  margin: 10px 3px 10px;
-`
+  p {
+    font-size: ${props => props.theme.fontSizes.xxlarge};
+  }
 
-export { StyledCoverContainer, StyledCoverImage, StyledCoverContents, StyledCoverTitle, StyledCoverText, StyledCoverButton };
+`

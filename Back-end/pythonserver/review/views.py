@@ -1,4 +1,4 @@
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from ultralytics import YOLO
@@ -20,9 +20,16 @@ model.predict(source,classes=[0,1],)
 @api_view(['GET'])
 @csrf_exempt
 def review(request):
-    image_data = sock.consumer.received_image
-    #Load a pretrained YOLOv8n model
-    model = YOLO('yolov8n.pt')
+    session_id = request.headers['Session-Id']
+
+    if session_id not in sock.consumer.received_images:
+
+        return HttpResponse(status=500)
+
+    image_data = sock.consumer.received_images[session_id]
+
+    #image_data = sock.consumer.received_image
+
 
     # input_image = cv2.imdecode(np.frombuffer(image_data, np.uint8), -1)  # 바이너리 이미지 데이터를 읽습니다.
     # classes=[63, 67]

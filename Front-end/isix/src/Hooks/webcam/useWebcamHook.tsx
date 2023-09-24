@@ -10,6 +10,9 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
     socketRef.current = new WebSocket(socketUrl);
     socketRef.current.onopen = () => console.log('WebSocket is connected.');
     socketRef.current.onmessage = (event) => {
+      const sessionId = event.data;
+      localStorage.setItem('socketId', sessionId)
+      console.log(`세션 ID: ${sessionId}`);
     }
 
     return () => {

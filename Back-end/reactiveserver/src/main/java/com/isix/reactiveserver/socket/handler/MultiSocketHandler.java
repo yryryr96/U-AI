@@ -31,7 +31,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
 
-    private String djangoEndpoint = "ws://70.12.130.121:17070/ws/mark";
+    private String djangoEndpoint = "ws://localhost:7070/ws/mark";
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -51,8 +51,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             // Send the ByteBuffer as a WebSocket message
             WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
             session.sendMessage(newMessage);
-
-            clients.get(session.getId()).sendBinary(payloadBytes);
+            WebSocket client = clients.get(session.getId());
+            client.sendBinary(payloadBytes);
 
             //System.out.println("Sent ByteBuffer message to another socket.");
         } else {
@@ -79,9 +79,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         System.out.println(session.getId());
         session.sendMessage(new TextMessage(session.getId()));
         try {
-            WebSocket ws = connect();
+            WebSocket ws = connect(session.getId());
             clients.put(session.getId(), ws);
-
             ws.sendText("HI");
         }catch(BusinessLogicException e){
             e.printStackTrace();
@@ -117,11 +116,11 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     public byte[] getByteMessage(String sessionId) {return currentMessage.get(sessionId);}
 
 
-    private WebSocket connect() throws IOException
+    private WebSocket connect(String sessionId) throws IOException
     {
         System.out.println("Start");
         try {
-            return new WebSocketFactory()
+            WebSocket webSocket = new WebSocketFactory()
                     .setConnectionTimeout(10000)
                     .createSocket(djangoEndpoint)
                     .addListener(new WebSocketAdapter() {
@@ -136,9 +135,12 @@ public class MultiSocketHandler extends TextWebSocketHandler {
                         public void onTextMessage(WebSocket websocket, String message) {
                             System.out.println(message);
                         }
-                    })
+                    });
+
+            webSocket.addHeader("session-id",sessionId);
+            return
+                    webSocket.connect();
                     //.addExtension(WebSocketExtension.PERMESSAGE_DEFLATE)
-                    .connect();
         }catch (WebSocketException e){
             e.printStackTrace();
         }

@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class InteractionServiceImpl3 implements InteractionService {
     private final String apiURL = "https://pn1cviln5o.apigw.ntruss.com/custom/v1/25019/43cb75334f4b833fbad3ade5fea79ae61eb36111a883f491554027d696426ec9/general";
@@ -59,10 +59,11 @@ public class InteractionServiceImpl3 implements InteractionService {
             // HTTP 헤더 설정
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("session-id",sessionId);
 
             HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
 
-            ResponseEntity<String> response =  restTemplate.exchange("http://70.12.130.121:17070/motions/recog/",HttpMethod.POST, entity,String.class);
+            ResponseEntity<String> response =  restTemplate.exchange("http://localhost:7070/motions/recog/",HttpMethod.POST, entity,String.class);
 
             if(response.getStatusCode() == HttpStatus.OK) {
 
@@ -144,6 +145,7 @@ public class InteractionServiceImpl3 implements InteractionService {
 
         headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.add("session-id",sessionId);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange("http://127.0.0.1:7070/quiz/api/oxquiz/", HttpMethod.GET, entity, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
