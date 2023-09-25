@@ -75,6 +75,16 @@ const Story = () => {
       window.removeEventListener('mousedown', handleMouseClick);
     };
   }, [state])
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [isLoading])
   
   return (
     <>
