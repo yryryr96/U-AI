@@ -64,7 +64,7 @@ public class SocketService {
         }
 
         if(queue.isEmpty()) throw new BusinessLogicException(ExceptionCode.FAILED_TO_HANDLE_GPUSERVER);
-        return urlProtocol+queue.poll().endpointUrl+"/ws/mark";
+        return urlProtocol+queue.poll().endpointUrl;
     }
 
     @Data
