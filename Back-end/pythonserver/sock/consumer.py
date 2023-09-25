@@ -26,7 +26,7 @@ class CustomConsumer(AsyncWebsocketConsumer):
         # Headers are in byte format, so they need to be decoded.
         session_id = headers[b'session-id'].decode('utf-8') if b'session-id' in headers else None
         sessions.remove(session_id)
-        received_images[session_id] = None
+        del received_images[session_id]
         print(sessions)
 
         pass
