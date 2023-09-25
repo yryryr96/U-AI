@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,12 +25,12 @@ SECRET_KEY = 'django-insecure-l&f#=sk0kiy-%g(!y+1v0ll==@!1d!wve)dpiv0@2^@qgodd7q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['70.12.130.121', '127.0.0.1', 'localhost:7070', 'localhost:7071']
+ALLOWED_HOSTS = ['70.12.130.121', '127.0.0.1', 'localhost:7070', 'localhost:7071', '192.168.0.14']
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'cache'), # 루트디렉토리의 하위 디렉토리로 cache를 만든다.
+        'LOCATION': os.path.join(BASE_DIR, 'cache'),  # 루트디렉토리의 하위 디렉토리로 cache를 만든다.
     }
 }
 # Application definition
@@ -99,7 +99,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -118,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -129,7 +127,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
