@@ -83,7 +83,11 @@ const Story = () => {
       {state === 4 && <Seq4 />}
       {state === 5 && <Seq5 />}
       {state === 6 && <Seq6 />}
-      {state === 7 && <Seq7 />}
+      {state === 7 && <Seq7 onResult={(result: number) => {
+        if (result === 1) {
+          setState((prev) => prev + 1);
+        }
+      }}/>}
       {(state === 8 && speakResult) && <Seq8Correct />}
       {(state === 8 && !speakResult) && <Seq8Incorrect />}
       {state === 9 && <Seq9 />}

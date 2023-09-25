@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import axios, { AxiosResponse } from "axios";
 
-const RecordComponent = () => {
+interface RecordComponentProps {
+  onResult: (result: number) => void;
+}
+
+const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [start, setStart] = useState(false);
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     const startRecording = async () => {
@@ -29,45 +33,37 @@ const RecordComponent = () => {
             type: "audio/mp3"
           });
 
-          function download() {
-            const a = document.createElement('a');
-            a.href= url;
-            a.download= mp3File.name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          }
-
-          // Download the file
-          download();
-
-           console.log('mp3:', typeof(mp3File))
 
            // FormData creation and append data
-           const formData= new FormData();
-           formData.append("mp3File", mp3File);
-           formData.append("textData", "fire");
+          const formData= new FormData();
+          formData.append("mp3File", mp3File);
+          formData.append("textData", "fire");
 
-           try{
-             const res : AxiosResponse= await axios.post('http://127.0.0.1:8000/voice/api/voicerecognition/', formData); 
-             console.log('res:', res.data); 
-           } catch(err){
-             console.error(err)
-           }
+          try{
+            const res : AxiosResponse= await axios.post('http://127.0.0.1:8000/voice/api/voicerecognition/', formData); 
+            console.log('res:', res.data); 
+
+            if (res.data.result === -1) {
+              setRetryKey(prev => prev + 1);
+            } else {
+              onResult(res.data.result);
+            }
+          } catch(err){
+            console.error(err)
+          }
          }
 
-         setTimeout(() => {
-             mediaRecorder.start();
-             console.log('start');
-             setStart(true);
-         }, 2000);
+        setTimeout(() => {
+          mediaRecorder.start();
+          console.log('start');
+        }, 2000);
 
-         setTimeout(() => {
+        setTimeout(() => {
           if(mediaRecorder.state === 'recording'){
             mediaRecorder.stop();
             console.log('end');
           }
-         }, 7000); 
+        }, 7000); 
 
       } catch (err) {
       	console.error(err)
@@ -84,7 +80,7 @@ const RecordComponent = () => {
       
     };
   
-}, []);
+}, [retryKey]);
 
 return (
 <></>
