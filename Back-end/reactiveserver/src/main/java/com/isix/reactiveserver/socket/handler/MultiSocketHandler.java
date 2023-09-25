@@ -1,5 +1,6 @@
 package com.isix.reactiveserver.socket.handler;
 
+import com.isix.reactiveserver.config.GpuServerConfig;
 import com.isix.reactiveserver.exception.BusinessLogicException;
 import com.isix.reactiveserver.exception.ExceptionCode;
 import com.isix.reactiveserver.socket.service.SocketService;
@@ -7,6 +8,7 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,11 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
+    @Getter
+    private final Map<String, String> endpoints = new ConcurrentHashMap<>();
+
+    private final GpuServerConfig gpuServerConfig;
+
 
     private final SocketService socketService;
 
@@ -115,13 +122,22 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         }
     }
 
+    public String getGpuServerEndpoint(String sessionId){
+        return getEndpoints().get(sessionId);
+    }
+
     public byte[] getByteMessage(String sessionId) {return currentMessage.get(sessionId);}
 
 
     private WebSocket connect(String sessionId) throws IOException
     {
         log.info(sessionId+" : "+"connecting");
-        String pickEnd = socketService.getLowestUsageServer();
+        String urlProtocol;
+        if(gpuServerConfig.getProtocol().equals("http")) urlProtocol = "http://";
+        else urlProtocol = "https://";
+
+        String endOrigin = socketService.getLowestUsageServer();
+        String pickEnd = "ws://"+endOrigin+"/ws/mark";
         try {
             WebSocket webSocket = new WebSocketFactory()
                     .setConnectionTimeout(10000)
@@ -139,7 +155,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
                             System.out.println(message);
                         }
                     });
-
+            endpoints.put(sessionId,urlProtocol+endOrigin);
             webSocket.addHeader("session-id",sessionId);
             return
                     webSocket.connect();
