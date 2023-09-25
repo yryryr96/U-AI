@@ -7,6 +7,7 @@ import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
@@ -25,6 +26,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class MultiSocketHandler extends TextWebSocketHandler {
 
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
@@ -71,12 +73,14 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         int bufferSize = 1000000; // Adjust the buffer size as neededq
         session.setTextMessageSizeLimit(bufferSize);
         session.setBinaryMessageSizeLimit(bufferSize);
-        System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        //System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        log.info("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        printSessions();
 
         sessions.put(session.getId(),session);
         byte[] bytes = new byte[1000000];
         currentMessage.put(session.getId(),bytes);
-        System.out.println(session.getId());
+        //System.out.println(session.getId());
         session.sendMessage(new TextMessage(session.getId()));
         try {
             WebSocket ws = connect(session.getId());
@@ -93,12 +97,14 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println(status.getCode());
-        System.out.println(status.getReason());
+//        System.out.println(status.getCode());
+//        System.out.println(status.getReason());
+        log.info("Session Closed on"+ session.getRemoteAddress() + " : "+ session.getId());
         sessions.remove(session.getId());
         currentMessage.remove(session.getId());
         clients.get(session.getId()).disconnect("Client Socket Closed");
         clients.remove(session.getId());
+        printSessions();
     }
 
     public Map<String, WebSocketSession> getSessions() {
@@ -118,7 +124,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     private WebSocket connect(String sessionId) throws IOException
     {
-        System.out.println("Start");
+        log.info(sessionId+" : "+"connecting");
         try {
             WebSocket webSocket = new WebSocketFactory()
                     .setConnectionTimeout(10000)
@@ -145,5 +151,13 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             e.printStackTrace();
         }
         throw new BusinessLogicException(ExceptionCode.FAILED_TO_CONNECT_SOCKET);
+    }
+
+    private void printSessions(){
+        System.out.printf("[");
+        for(WebSocketSession session : sessions.values()){
+            System.out.printf(session.getId()+", ");
+        }
+        System.out.println("]");
     }
 }

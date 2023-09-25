@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Comparator;
@@ -42,9 +43,13 @@ public class SocketService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> entity = new HttpEntity<>(headers);
-
-            ResponseEntity<SessionDto.Info> response = restTemplate.exchange(urlBuilder.toString(), HttpMethod.GET,entity, SessionDto.Info.class);
-
+            ResponseEntity<SessionDto.Info> response= null;
+            try {
+                response= restTemplate.exchange(urlBuilder.toString(), HttpMethod.GET, entity, SessionDto.Info.class);
+            }catch(HttpClientErrorException e){
+                e.printStackTrace();
+                continue;
+            }
             System.out.println(urlBuilder);
 
             SessionDto.Info dto = response.getBody();
