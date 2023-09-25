@@ -53,7 +53,7 @@ const Story = () => {
     
     if (e.key === 'ArrowRight' && state < totalPage) {
       setState((prev) => prev + 1);
-    } else if (e.key === 'ArrowLeft' && state > 0) {
+    } else if (e.key === 'ArrowLeft' && state >= 0) {
       setState((prev) => prev - 1)
     }
   };

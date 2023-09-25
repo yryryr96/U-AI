@@ -3,58 +3,78 @@ import axios, { AxiosResponse } from "axios";
 
 const RecordComponent = () => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const formData = new FormData();
   const [start, setStart] = useState(false);
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then((stream) => {
-        // MediaRecorder 생성
+    const startRecording = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const mediaRecorder: MediaRecorder = new MediaRecorder(stream);
         mediaRecorderRef.current = mediaRecorder;
 
-        // dataavailable 이벤트 리스너 설정
         let chunks: Blob[] = [];
+        
+        // dataavailable event listener
         mediaRecorder.ondataavailable = (e) => {
-          chunks.push(e.data);
-
-          if (mediaRecorder.state === 'inactive') {
-            let blob = new Blob(chunks, { type: 'audio/mp3' });
-            const url = window.URL.createObjectURL(blob);
-            const mp3File = new File([blob], "recorded-audio.mp3", {
-              type: "audio/mp3"
-            });
-
-            // FormData에 추가
-            const textData:string="fire";
-            formData.append("mp3File", mp3File);
-            formData.append("textData", textData);
-
+          if (e.data) {
+            chunks.push(e.data);
           }
         };
 
-        setTimeout(() => {
-          mediaRecorder.start();
-          console.log('start');
-          setStart(true);
-        }, 1000)
+        // onstop event listener
+        mediaRecorder.onstop = async () => {
+          let blob = new Blob(chunks, { type: 'audio/mp3' });
+          const url = window.URL.createObjectURL(blob);
+          const mp3File = new File([blob], "recorded-audio.mp3", {
+            type: "audio/mp3"
+          });
 
-	setTimeout(() => {
-	  if(mediaRecorder.state === 'recording'){
-	    mediaRecorder.stop();
-      console.log('end');
+          function download() {
+            const a = document.createElement('a');
+            a.href= url;
+            a.download= mp3File.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
 
-      axios.post<AxiosResponse>('http://127.0.0.1:8000/voice/api/voicerecognition/', formData)
-      .then(res => {
-        console.log('res: ', res.data);
-      })
-      .catch(err => {
+          // Download the file
+          download();
+
+           console.log('mp3:', typeof(mp3File))
+
+           // FormData creation and append data
+           const formData= new FormData();
+           formData.append("mp3File", mp3File);
+           formData.append("textData", "fire");
+
+           try{
+             const res : AxiosResponse= await axios.post('http://127.0.0.1:8000/voice/api/voicerecognition/', formData); 
+             console.log('res:', res.data); 
+           } catch(err){
+             console.error(err)
+           }
+         }
+
+         setTimeout(() => {
+             mediaRecorder.start();
+             console.log('start');
+             setStart(true);
+         }, 2000);
+
+         setTimeout(() => {
+          if(mediaRecorder.state === 'recording'){
+            mediaRecorder.stop();
+            console.log('end');
+          }
+         }, 7000); 
+
+      } catch (err) {
       	console.error(err)
-      })
-	  }
-	}, 4000); 
-      
-    }).catch((err) => console.error(err));
+      }
+    };
+
+    startRecording();
 
     return () => {
 
