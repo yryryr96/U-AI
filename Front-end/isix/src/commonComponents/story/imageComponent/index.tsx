@@ -3,10 +3,16 @@
 import React from 'react'
 import { StyledStoryImage } from '@/pageComponents/fire/components/story/Story.styled';
 
-const ImageComponent = ({src} : {src: string}) => {
-  return (
-    <StyledStoryImage src={src}/>
-  )
+interface ImageComponentProps {
+  src: string;
+  width?: number; 
+  height?: number; 
 }
+
+const ImageComponent = ({ src, width, height }: ImageComponentProps) => {
+  return (
+    <StyledStoryImage src={src} width={width} height={height} />
+  );
+};
 
 export default ImageComponent;

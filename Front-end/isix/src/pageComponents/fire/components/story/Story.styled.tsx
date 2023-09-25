@@ -64,22 +64,25 @@ export const StyledStoryText = styled.div`
   margin-top: 1.2rem;
 `
 
-export const StyledStoryImage = styled.img`
-  height : 100%;  
-  width : auto;
-  /* max-width : 800px;
-  max-height : 400px;
+export const StyledStoryImage = styled.img.attrs(props => ({
+  style: {
+    height: props.height || '100%',
+    width: props.width || 'auto',
+    /* max-width : 800px;
+    max-height : 400px;
 
-  @media (max-width: 1200px) {
-    max-width: 600px;
-    max-height: 300px;
-  }
+    @media (max-width: 1200px) {
+      max-width: 600px;
+      max-height: 300px;
+    }
 
-  @media (max-width: 800px) {
-    max-width: 400px;
-    max-height: 200px;
-   } */
-`
+    @media (max-width: 800px) {
+      max-width: 400px;
+      max-height: 200px;
+    } */
+  },
+}))`
+`;
 
 export const StyledQuizBox = styled.div`
   position: absolute;
