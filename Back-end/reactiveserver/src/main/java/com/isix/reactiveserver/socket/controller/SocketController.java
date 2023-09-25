@@ -47,11 +47,11 @@ public class SocketController {
 
     @GetMapping("/session/servers")
     public ResponseEntity<Map<String,String>> getServer(){
-        for(String str :  gpuServerConfig.getEndpoint().values()){
-            System.out.println(str);
-        }
-        System.out.println(gpuServerConfig.getProtocol());
-        socketService.getGpuFreeResources();
+//        for(String str :  gpuServerConfig.getEndpoint().values()){
+//            System.out.println(str);
+//        }
+//        System.out.println(gpuServerConfig.getProtocol());
+        socketService.getLowestUsageServer();
         return new ResponseEntity<>(gpuServerConfig.getEndpoint(),HttpStatus.OK);
     }
 }

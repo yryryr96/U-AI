@@ -14,7 +14,6 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    //private final MyWebSocketHandler myWebSocketHandler;
     private final MultiSocketHandler multiSocketHandler;
 
     @Override

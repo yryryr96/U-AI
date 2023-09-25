@@ -1,6 +1,8 @@
 package com.isix.reactiveserver.socket.service;
 
 import com.isix.reactiveserver.config.GpuServerConfig;
+import com.isix.reactiveserver.exception.BusinessLogicException;
+import com.isix.reactiveserver.exception.ExceptionCode;
 import com.isix.reactiveserver.socket.dto.SessionDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +22,7 @@ public class SocketService {
 
     private final GpuServerConfig gpuServerConfig;
 
-    public void getGpuFreeResources(){
+    public String getLowestUsageServer(){
         String urlProtocol;
         if(gpuServerConfig.getProtocol().equals("http")) urlProtocol = "http://";
         else urlProtocol = "https://";
@@ -50,7 +52,7 @@ public class SocketService {
                 e.printStackTrace();
                 continue;
             }
-            System.out.println(urlBuilder);
+            //System.out.println(urlBuilder);
 
             SessionDto.Info dto = response.getBody();
 
@@ -61,11 +63,8 @@ public class SocketService {
             queue.offer(new SessionInfo(endPoint,rate,dto.getUsage(),dto.getTotal()));
         }
 
-        while(!queue.isEmpty()){
-            SessionInfo temp = queue.poll();
-            System.out.println(temp.toString());
-        }
-
+        if(queue.isEmpty()) throw new BusinessLogicException(ExceptionCode.FAILED_TO_HANDLE_GPUSERVER);
+        return queue.poll().endpointUrl;
     }
 
     @Data
