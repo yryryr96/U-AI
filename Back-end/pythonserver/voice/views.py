@@ -30,8 +30,8 @@ def voice_recognition(request):
     model = whisper.load_model("base")
     result = model.transcribe("media/mp3/" + mp3_file.name, fp16=False, language='ko')
     recognition_text = result["text"]
-    print(recognition_text)
 
+    print(recognition_text)
     # text_data가 fire인 경우 list 설정
     # 다른 경우에도 설정해줄 수 있음
     answer_list = []
@@ -44,11 +44,14 @@ def voice_recognition(request):
     for answer in answer_list:
         for recognition in recognition_text_list:
             print("answer = ", answer, " recognition = ", recognition)
+            if recognition not in answer_list:
+                answer_list.append(recognition)
             if answer == recognition:
                check = True
                break
         if check:
             break
+    print(answer_list)
 
     if check:
         return JsonResponse({'result': 1, 'message': '인식 성공'})
