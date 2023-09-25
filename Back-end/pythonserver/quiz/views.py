@@ -73,7 +73,7 @@ def ox_quiz(request):
 
     response = {
         'result' : 1,
-        'left' : left_side_person_cnt,
-        'right' : right_side_person_cnt,
+        'left' : right_side_person_cnt,
+        'right' : left_side_person_cnt,
     }
     return JsonResponse(response)
