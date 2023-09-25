@@ -31,7 +31,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
 
-    private String djangoEndpoint = "ws://localhost:7070/ws/mark";
+    private String djangoEndpoint = "ws://70.12.130.121:17070/ws/mark";
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -49,8 +49,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             ByteBuffer newPayloadBuffer = ByteBuffer.wrap(payloadBytes);
 
             // Send the ByteBuffer as a WebSocket message
-            WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
-            session.sendMessage(newMessage);
+            /*WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
+            session.sendMessage(newMessage);*/
             WebSocket client = clients.get(session.getId());
             client.sendBinary(payloadBytes);
 
@@ -68,13 +68,13 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        int bufferSize = 100000; // Adjust the buffer size as neededq
+        int bufferSize = 1000000; // Adjust the buffer size as neededq
         session.setTextMessageSizeLimit(bufferSize);
         session.setBinaryMessageSizeLimit(bufferSize);
         System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
 
         sessions.put(session.getId(),session);
-        byte[] bytes = new byte[100000];
+        byte[] bytes = new byte[1000000];
         currentMessage.put(session.getId(),bytes);
         System.out.println(session.getId());
         session.sendMessage(new TextMessage(session.getId()));

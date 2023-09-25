@@ -31,7 +31,7 @@ public class InteractionServiceImpl2 implements InteractionService {
 
     private final MultiSocketHandler multiSocketHandler;
 
-    private final String EndPoint = "http://localhost:7070";
+    private final String EndPoint = "http://70.12.130.121:17070";
 
 
     @Override
@@ -55,7 +55,7 @@ public class InteractionServiceImpl2 implements InteractionService {
 
             HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
 
-            ResponseEntity<String> response =  restTemplate.exchange("http://localhost:7070/motions/recog/",HttpMethod.POST, entity,String.class);
+            ResponseEntity<String> response =  restTemplate.exchange(EndPoint+"/motions/recog/",HttpMethod.POST, entity,String.class);
 
             if(response.getStatusCode() == HttpStatus.OK) {
 
@@ -78,7 +78,7 @@ public class InteractionServiceImpl2 implements InteractionService {
         headers.add("session-id",sessionId);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<byte[]> response = restTemplate.exchange("http://127.0.0.1:7070/review/api/review/",HttpMethod.GET, entity,byte[].class);
+        ResponseEntity<byte[]> response = restTemplate.exchange(EndPoint+"/review/api/review/",HttpMethod.GET, entity,byte[].class);
 
         try {
             String resultText = ocrApiCall(response.getBody());
@@ -132,7 +132,7 @@ public class InteractionServiceImpl2 implements InteractionService {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.add("session-id",sessionId);
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.exchange("http://127.0.0.1:7070/quiz/api/oxquiz/", HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(EndPoint+"/quiz/api/oxquiz/", HttpMethod.GET, entity, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(response.getBody(), InteractionDto.OxResponse.class);
