@@ -24,7 +24,8 @@ export const StyledCoverContents = styled.div`
 `
 
 export const StyledCoverTitle = styled.div`
-  font-size: ${props => props.theme.fontSizes.xxlarge};
+  /* font-size: ${props => props.theme.fontSizes.xxlarge}; */
+  font-size: 2.5rem;
   text-align: center;
   margin: 10px 3px 40px;
 `
@@ -35,11 +36,13 @@ export const StyledCoverText = styled.div`
   line-height:1.3;
 
   h2 {
-    font-size: ${props => props.theme.fontSizes.xxxlarge};
+    /* font-size: ${props => props.theme.fontSizes.xxxlarge}; */
+    font-size: 3.2rem;
   }
 
   p {
-    font-size: ${props => props.theme.fontSizes.xxlarge};
+    /* font-size: ${props => props.theme.fontSizes.xxlarge}; */
+    font-size: 2.5rem;
   }
 
 `
