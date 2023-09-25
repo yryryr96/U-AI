@@ -2,27 +2,21 @@ package com.isix.reactiveserver.socket.handler;
 
 import com.isix.reactiveserver.exception.BusinessLogicException;
 import com.isix.reactiveserver.exception.ExceptionCode;
+import com.isix.reactiveserver.socket.service.SocketService;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
-import org.springframework.web.socket.client.WebSocketClient;
-import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.net.Socket;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 @RequiredArgsConstructor
@@ -32,6 +26,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
+
+    private final SocketService socketService;
 
     private String djangoEndpoint = "ws://70.12.130.121:17070/ws/mark";
 
@@ -125,10 +121,11 @@ public class MultiSocketHandler extends TextWebSocketHandler {
     private WebSocket connect(String sessionId) throws IOException
     {
         log.info(sessionId+" : "+"connecting");
+        String pickEnd = socketService.getLowestUsageServer();
         try {
             WebSocket webSocket = new WebSocketFactory()
                     .setConnectionTimeout(10000)
-                    .createSocket(djangoEndpoint)
+                    .createSocket(pickEnd)
                     .addListener(new WebSocketAdapter() {
 
                         // binary message arrived from the server
