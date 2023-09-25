@@ -3,6 +3,7 @@ import CamComponent from "@/commonComponents/story/camComponent"
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
 import { customAxios } from "@/api/api";
+import { useEffect, useState } from "react"
 
 
 interface WebcamProps {
@@ -10,30 +11,41 @@ interface WebcamProps {
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
+  setState: (arg0: any) => void;
 }
 
-const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
+const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, setState }) => {
   const text: string = '판다를 따라 입을 막고 몸을 숙여주세요'
   const audioUrl: string = '/resources/audioFile/seq15.mp3'
-
+  const [audioUrl2, setAudioUrl2] = useState<string>('')
   // motion
+   // motion
   const motionEvent = async () => {
     const url = "api/events/motion";
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
       eventName: 'evacuatefire',
-      numChild: 1, // 처음에 입력받은 값 넣기
+      numChild: 4, // 처음에 입력받은 값 넣기
       limit: 10 // 시간 초
     };
 
     try {
       const response = await customAxios.post(url, data);
-      console.log(response.data); 
+      if (response.data.result === 1) {
+        setState((prev:number) => prev + 1)
+      } else {
+        setAudioUrl2('/resources/audioFile/incorrect.mp3');
+        motionEvent();
+      }
     } catch (error) {
       console.error('error', error);
     }
   };
+
+  useEffect(() => {
+    motionEvent();
+  }, [])
 
   return (
     <>
@@ -54,6 +66,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      {audioUrl2 && <AudioPlayer style={{visible: 'none'}} file={audioUrl2} />}
     </>
   )
 }
