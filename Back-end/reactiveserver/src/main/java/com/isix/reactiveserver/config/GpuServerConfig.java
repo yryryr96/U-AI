@@ -12,5 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 @ConfigurationProperties(prefix = "django")
 public class GpuServerConfig {
-    private Map<String, Object> endpoint = new ConcurrentHashMap<>();
+    private Map<String, String> endpoint = new ConcurrentHashMap<>();
+    private String protocol;
 }

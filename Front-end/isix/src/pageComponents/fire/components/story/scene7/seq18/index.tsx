@@ -2,6 +2,8 @@ import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, 
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
+import crawlPanda from "../../../../../../../public/resources/crawl_panda.json"
+import Lottie from "react-lottie-player";
 import { customAxios } from "@/api/api";
 
 interface WebcamProps {
@@ -49,7 +51,7 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledCamImg>
-          <Image src='/resources/clothes_fire_animation.gif' width={300} height={250} alt="clothes"  style={{ marginTop: '4rem' }}/>
+          <Lottie style={{width: 400, height: 400}} loop animationData={crawlPanda} play />
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
