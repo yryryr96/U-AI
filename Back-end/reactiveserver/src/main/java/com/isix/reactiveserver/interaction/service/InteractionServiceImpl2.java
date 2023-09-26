@@ -11,14 +11,20 @@ import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -222,6 +228,45 @@ public class InteractionServiceImpl2 implements InteractionService {
             out.write(("--" + boundary + "--\r\n").getBytes(StandardCharsets.UTF_8));
         }
         out.flush();
+    }
+
+    public InteractionDto.SttResponse recognizeVoice(MultipartFile mp3File, String sessionId, String type){
+        System.out.println("------------------- stt service 요청 들어옴 ----------------------");
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+
+            System.out.println(mp3File.getOriginalFilename());
+            System.out.println(mp3File.getContentType());
+
+            body.add("mp3File", mp3File.getResource());
+            body.add("session-id", sessionId);
+            body.add("type", type);
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+            String serverUrl = "http://127.0.0.1:8000/voice/api/voicerecognition/";
+            System.out.println("STT 요청 보냄");
+            ResponseEntity<String> response = restTemplate.exchange(serverUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            try{
+                return objectMapper.readValue(response.getBody(), InteractionDto.SttResponse.class);
+            }catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return new InteractionDto.SttResponse(-1, "object mapper 동작 실패");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new InteractionDto.SttResponse(-1, "장고 서버 요청 실패");
+        }
     }
 
 }

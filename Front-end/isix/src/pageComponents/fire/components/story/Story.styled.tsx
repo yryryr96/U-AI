@@ -110,18 +110,6 @@ export const StyledTimer = styled.div`
   text-align: center;
 `
 
-export const StyledLeft = styled.div`
-  font-size: 13rem;
-  font-weight: bold;
-  color: lightgreen;
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  top : -0.5vw;
-  right : 8vw;
-  text-align: center;
-`
-
 export const StyledRight = styled.div`
   font-size: 13rem;
   font-weight: bold;
@@ -131,6 +119,18 @@ export const StyledRight = styled.div`
   width: 100%;
   top : -0.5vw;
   left : 8vw;
+  text-align: center;
+`
+
+export const StyledLeft = styled.div`
+  font-size: 13rem;
+  font-weight: bold;
+  color: lightgreen;
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  top : -0.5vw;
+  right : 8vw;
   text-align: center;
 `
 

@@ -12,9 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -155,6 +154,11 @@ public class InteractionServiceImpl3 implements InteractionService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public InteractionDto.SttResponse recognizeVoice(MultipartFile mp3File, String sessionId, String type) {
+        return null;
     }
 
 

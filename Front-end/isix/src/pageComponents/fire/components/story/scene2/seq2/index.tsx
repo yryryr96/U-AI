@@ -5,21 +5,20 @@ import Image from "next/image"
 import { customAxios } from "@/api/api"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
 import html2canvas from "html2canvas"
+import useFireState from "@/stores/fire/useFireState"
 
 interface WebcamProps {
   videoElm: JSX.Element;
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
-  setState: (arg0: any) => void;
 }
 
-const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, setState }) => {
+const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const [timer, setTimer] = useState<number>(-1);
   const [audioUrl, setAudioUrl] = useState<string>('')
   const [left, setLeft] = useState<number>(0);
   const [right, setRight] = useState<number>(0);
-
 
   // 화면 캡쳐 후 url 로컬에 저장
   const captureRef = useRef<HTMLDivElement | null>(null);
@@ -51,6 +50,9 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
   }, []);
 
 
+  // zustand
+  const { state, setState } = useFireState();
+
   // OX
   const oxEvent = async () => {
     const url = "api/events/ox";
@@ -67,7 +69,7 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
         setRight(response.data.right)
         if (timer === 0) {
           if (response.data.left > response.data.right) {
-            setState((prev:number) => prev + 1)
+            setState(state + 1)
           } else {
             setAudioUrl('/resources/audioFile/incorrect.mp3');
             setTimer(10)
