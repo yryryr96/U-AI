@@ -64,22 +64,25 @@ export const StyledStoryText = styled.div`
   margin-top: 1.2rem;
 `
 
-export const StyledStoryImage = styled.img`
-  height : 100%;  
-  width : auto;
-  /* max-width : 800px;
-  max-height : 400px;
+export const StyledStoryImage = styled.img.attrs(props => ({
+  style: {
+    height: props.height || '100%',
+    width: props.width || 'auto',
+    /* max-width : 800px;
+    max-height : 400px;
 
-  @media (max-width: 1200px) {
-    max-width: 600px;
-    max-height: 300px;
-  }
+    @media (max-width: 1200px) {
+      max-width: 600px;
+      max-height: 300px;
+    }
 
-  @media (max-width: 800px) {
-    max-width: 400px;
-    max-height: 200px;
-   } */
-`
+    @media (max-width: 800px) {
+      max-width: 400px;
+      max-height: 200px;
+    } */
+  },
+}))`
+`;
 
 export const StyledQuizBox = styled.div`
   position: absolute;
@@ -103,7 +106,31 @@ export const StyledTimer = styled.div`
   z-index: 3;
   position: absolute;
   width: 100%;
-  top: 10vh;
+  top: 30vh;
+  text-align: center;
+`
+
+export const StyledRight = styled.div`
+  font-size: 13rem;
+  font-weight: bold;
+  color: lightgreen;
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  top : -0.5vw;
+  left : 8vw;
+  text-align: center;
+`
+
+export const StyledLeft = styled.div`
+  font-size: 13rem;
+  font-weight: bold;
+  color: lightgreen;
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  top : -0.5vw;
+  right : 8vw;
   text-align: center;
 `
 

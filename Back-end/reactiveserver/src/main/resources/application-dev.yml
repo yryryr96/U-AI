@@ -1,5 +1,5 @@
 server:
-  port: 7070
+  port: 8080
 #  ssl:
 #    key-store: classpath:ssl/keystore.p12
 #    key-store-type: PKCS12
@@ -8,5 +8,6 @@ server:
 
 django:
   endpoint:
-    gpu-server-1: ws://localhost:7070/ws/mark
-    gpu-server-2: ws://localhost:7071/ws/mark
+    gpu-server-1: 192.168.0.14:7070
+    gpu-server-2: 70.12.130.121:17070
+  protocol: http

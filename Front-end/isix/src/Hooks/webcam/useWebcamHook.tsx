@@ -2,17 +2,24 @@ import { useEffect, useRef, useState } from 'react';
 
 const useWebcam = (socketUrl: string, sendInterval: number) => {
   const [isStreaming, setIsStreaming] = useState(false);
+  const [isFirstConnection, setIsFirstConnection] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   
   useEffect(() => {
     socketRef.current = new WebSocket(socketUrl);
-    socketRef.current.onopen = () => console.log('WebSocket is connected.');
+    socketRef.current.onopen = () => {
+      console.log('WebSocket is connected.')
+      setIsFirstConnection(true);
+    };
     socketRef.current.onmessage = (event) => {
-      const sessionId = event.data;
-      localStorage.setItem('socketId', sessionId)
-      console.log(`세션 ID: ${sessionId}`);
+      if (isFirstConnection) {
+        const sessionId = event.data;
+        localStorage.setItem('socketId', sessionId)
+        console.log(`세션 ID: ${sessionId}`);
+        setIsFirstConnection(false);
+      }
     }
 
     return () => {

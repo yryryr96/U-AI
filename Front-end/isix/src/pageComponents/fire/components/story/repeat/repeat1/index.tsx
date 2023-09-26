@@ -9,7 +9,7 @@ const Repeat1 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/final.png' />
+        <ImageComponent src='./resources/start_review.svg' />
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

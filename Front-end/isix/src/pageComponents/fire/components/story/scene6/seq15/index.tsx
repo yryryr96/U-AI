@@ -3,6 +3,8 @@ import CamComponent from "@/commonComponents/story/camComponent"
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
 import { customAxios } from "@/api/api";
+import { useEffect, useState } from "react"
+import useFireState from "@/stores/fire/useFireState";
 
 
 interface WebcamProps {
@@ -15,25 +17,36 @@ interface WebcamProps {
 const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '판다를 따라 입을 막고 몸을 숙여주세요'
   const audioUrl: string = '/resources/audioFile/seq15.mp3'
-
+  const [audioUrl2, setAudioUrl2] = useState<string>('')
+  // zustand
+  const { state, setState } = useFireState();
   // motion
-  const motionEvent = async () => {
-    const url = "api/events/motion";
-    const sessionId = localStorage.getItem('socketId')
-    const data = {
-      sessionId: sessionId,
-      eventName: 'evacuatefire',
-      numChild: 1, // 처음에 입력받은 값 넣기
-      limit: 10 // 시간 초
-    };
+  // const motionEvent = async () => {
+  //   const url = "api/events/motion";
+  //   const sessionId = localStorage.getItem('socketId')
+  //   const data = {
+  //     sessionId: sessionId,
+  //     eventName: 'evacuatefire',
+  //     numChild: 4, // 처음에 입력받은 값 넣기
+  //     limit: 10 // 시간 초
+  //   };
 
-    try {
-      const response = await customAxios.post(url, data);
-      console.log(response.data); 
-    } catch (error) {
-      console.error('error', error);
-    }
-  };
+  //   try {
+  //     const response = await customAxios.post(url, data);
+  //     if (response.data.result === 1) {
+  //       setState(state + 1)
+  //     } else {
+  //       setAudioUrl2('/resources/audioFile/incorrect.mp3');
+  //       motionEvent();
+  //     }
+  //   } catch (error) {
+  //     console.error('error', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   motionEvent();
+  // }, [])
 
   return (
     <>
@@ -50,10 +63,11 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledCamImg>
-          <Image src='/resources/avoid_panda.png' width={300} height={250} alt="smoke"  style={{ marginTop: '4rem' }}/>
+          <Image src='/resources/foldPanda.gif' width={400} height={300} alt="smoke"/>
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      {audioUrl2 && <AudioPlayer style={{visible: 'none'}} file={audioUrl2} />}
     </>
   )
 }

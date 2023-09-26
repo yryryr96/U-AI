@@ -1,37 +1,42 @@
 package com.isix.reactiveserver.socket.handler;
 
+import com.isix.reactiveserver.config.GpuServerConfig;
 import com.isix.reactiveserver.exception.BusinessLogicException;
 import com.isix.reactiveserver.exception.ExceptionCode;
+import com.isix.reactiveserver.socket.service.SocketService;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.NonNullApi;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
-import org.springframework.web.socket.client.WebSocketClient;
-import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
-import java.net.Socket;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class MultiSocketHandler extends TextWebSocketHandler {
 
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final Map<String, byte[]> currentMessage = new ConcurrentHashMap<>();
     private final Map<String, WebSocket> clients = new ConcurrentHashMap<>();
+    @Getter
+    private final Map<String, String> endpoints = new ConcurrentHashMap<>();
 
-    private String djangoEndpoint = "ws://localhost:7070/ws/mark";
+    private final GpuServerConfig gpuServerConfig;
+
+
+    private final SocketService socketService;
+
+    private String djangoEndpoint = "ws://70.12.130.121:17070/ws/mark";
 
     @Override
     public void handleMessage( WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -49,8 +54,8 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             ByteBuffer newPayloadBuffer = ByteBuffer.wrap(payloadBytes);
 
             // Send the ByteBuffer as a WebSocket message
-            WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
-            session.sendMessage(newMessage);
+            /*WebSocketMessage<ByteBuffer> newMessage = new BinaryMessage(newPayloadBuffer);
+            session.sendMessage(newMessage);*/
             WebSocket client = clients.get(session.getId());
             client.sendBinary(payloadBytes);
 
@@ -68,15 +73,17 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        int bufferSize = 100000; // Adjust the buffer size as neededq
+        int bufferSize = 1000000; // Adjust the buffer size as neededq
         session.setTextMessageSizeLimit(bufferSize);
         session.setBinaryMessageSizeLimit(bufferSize);
-        System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        //System.out.println("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        log.info("Session Started on"+ session.getRemoteAddress() + " : "+ session.getId());
+        printSessions();
 
         sessions.put(session.getId(),session);
-        byte[] bytes = new byte[100000];
+        byte[] bytes = new byte[1000000];
         currentMessage.put(session.getId(),bytes);
-        System.out.println(session.getId());
+        //System.out.println(session.getId());
         session.sendMessage(new TextMessage(session.getId()));
         try {
             WebSocket ws = connect(session.getId());
@@ -93,12 +100,14 @@ public class MultiSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println(status.getCode());
-        System.out.println(status.getReason());
+//        System.out.println(status.getCode());
+//        System.out.println(status.getReason());
+        log.info("Session Closed on"+ session.getRemoteAddress() + " : "+ session.getId());
         sessions.remove(session.getId());
         currentMessage.remove(session.getId());
         clients.get(session.getId()).disconnect("Client Socket Closed");
         clients.remove(session.getId());
+        printSessions();
     }
 
     public Map<String, WebSocketSession> getSessions() {
@@ -113,16 +122,26 @@ public class MultiSocketHandler extends TextWebSocketHandler {
         }
     }
 
+    public String getGpuServerEndpoint(String sessionId){
+        return getEndpoints().get(sessionId);
+    }
+
     public byte[] getByteMessage(String sessionId) {return currentMessage.get(sessionId);}
 
 
     private WebSocket connect(String sessionId) throws IOException
     {
-        System.out.println("Start");
+        log.info(sessionId+" : "+"connecting");
+        String urlProtocol;
+        if(gpuServerConfig.getProtocol().equals("http")) urlProtocol = "http://";
+        else urlProtocol = "https://";
+
+        String endOrigin = socketService.getLowestUsageServer();
+        String pickEnd = "ws://"+endOrigin+"/ws/mark";
         try {
             WebSocket webSocket = new WebSocketFactory()
                     .setConnectionTimeout(10000)
-                    .createSocket(djangoEndpoint)
+                    .createSocket(pickEnd)
                     .addListener(new WebSocketAdapter() {
 
                         // binary message arrived from the server
@@ -136,7 +155,7 @@ public class MultiSocketHandler extends TextWebSocketHandler {
                             System.out.println(message);
                         }
                     });
-
+            endpoints.put(sessionId,urlProtocol+endOrigin);
             webSocket.addHeader("session-id",sessionId);
             return
                     webSocket.connect();
@@ -145,5 +164,13 @@ public class MultiSocketHandler extends TextWebSocketHandler {
             e.printStackTrace();
         }
         throw new BusinessLogicException(ExceptionCode.FAILED_TO_CONNECT_SOCKET);
+    }
+
+    private void printSessions(){
+        System.out.printf("[");
+        for(WebSocketSession session : sessions.values()){
+            System.out.printf(session.getId()+", ");
+        }
+        System.out.println("]");
     }
 }

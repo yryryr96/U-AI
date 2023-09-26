@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Seq0 from './scene1/seq0'
 import Seq1 from './scene2/seq1'
 import Seq2 from './scene2/seq2'
@@ -40,28 +40,32 @@ import Final2 from './final/final2'
 
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
 import Cover from '@/commonComponents/cover'
+import Loading from '@/commonComponents/loading'
+import useFireState from '@/stores/fire/useFireState'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
-  const [state, setState] = useState<number>(-1);
+  const { state, setState } = useFireState();
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   
   const totalPage = 34; // 총 페이지 수
   
   const handleKeyDown = (e: any) => {
-    
     if (e.key === 'ArrowRight' && state < totalPage) {
-      setState((prev) => prev + 1);
-    } else if (e.key === 'ArrowLeft' && state > 0) {
-      setState((prev) => prev - 1)
+      setState(state + 1);
+    } else if (e.key === 'ArrowLeft' && state >= 0) {
+      setState(state - 1)
     }
   };
 
   const handleMouseClick = (e: any) => {
     e.preventDefault();
-    if (e.button === 2) { setState((prev) => prev + 1)}
-  }
+    if (e.button === 2) { 
+      setState(state + 1);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -72,6 +76,16 @@ const Story = () => {
       window.removeEventListener('mousedown', handleMouseClick);
     };
   }, [state])
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [isLoading])
   
   return (
     <>
@@ -83,7 +97,11 @@ const Story = () => {
       {state === 4 && <Seq4 />}
       {state === 5 && <Seq5 />}
       {state === 6 && <Seq6 />}
-      {state === 7 && <Seq7 />}
+      {state === 7 && <Seq7 onResult={(result: number) => {
+        if (result === 1) {
+          setState(state + 1);
+        }
+      }}/>}
       {(state === 8 && speakResult) && <Seq8Correct />}
       {(state === 8 && !speakResult) && <Seq8Incorrect />}
       {state === 9 && <Seq9 />}
@@ -106,13 +124,72 @@ const Story = () => {
       {state === 26 && <Seq26 />}
       {state === 27 && <Seq27 />}
       {state === 28 && <Repeat1 />}
-      {state === 29 && <Repeat2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
-      {state === 30 && <Repeat2Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {state === 31 && <Repeat3 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
-      {state === 32 && <Repeat3Sol videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-
-      {state === 33 && <Final1 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {state === 34 && <Final2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream}/>}
+      {state === 29 &&
+        <>
+          {isLoading ?
+            <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
+              <Loading />
+            </div>
+            :
+            <Repeat2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
+      { state === 30 &&
+        <>
+          {isLoading ?
+            <div style={{position:'fixed', top: '0', left: '0',width: "100vw", height: "100vh", backgroundColor: 'gray'}}>
+              <Loading />
+            </div>
+            :
+            <Repeat2Sol videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
+      {state === 31 &&
+        <>
+          {isLoading ?
+            <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
+              <Loading />
+            </div>
+            :
+            <Repeat3 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
+      {state === 32 &&
+        <>
+          {isLoading ?
+            <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
+              <Loading />
+            </div>
+            :
+            <Repeat3Sol videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
+      {state === 33 &&
+        <>
+          {isLoading ?
+            <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
+              <Loading />
+            </div>
+            :
+            <Final1 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
+      {state === 34 &&
+        <>
+          {isLoading ?
+            <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
+              <Loading />
+            </div>
+            :
+            <Final2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+          }
+        </>
+      }
     </>
   )
 }

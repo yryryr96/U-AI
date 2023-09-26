@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const AudioPlayer = ({ file } : any ) => {
-  const [audio] = useState(new Audio(file));
+  const [audio, setAudio] = useState(new Audio(file));
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setPlaying(true);
-    }, 500);
+    }, 100);
 
     return () => {
       audio.pause();
@@ -62,8 +62,8 @@ const AudioPlayer = ({ file } : any ) => {
           <Image src={'/resources/soundbutton.png'} layout='fill' objectFit='cover' alt="" /> 
         </div>
         :
-        <div>
-          Play/Replay
+        <div style={{width:'100%', height:'100%'}}>
+          <Image src={'/resources/reloadbutton.png'} layout='fill' objectFit='cover' alt="" /> 
         </div>}
     </button>
   )

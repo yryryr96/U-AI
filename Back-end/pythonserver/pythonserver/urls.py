@@ -22,5 +22,6 @@ urlpatterns = [
     path('voice/', include('voice.urls')),
     path('quiz/', include('quiz.urls')),
     path('review/', include('review.urls')),
-    path('motions/',include('motions.urls'))
+    path('motions/', include('motions.urls')),
+    path('sockets/', include('sock.urls')),
 ]
