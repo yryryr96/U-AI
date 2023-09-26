@@ -106,30 +106,32 @@ export const StyledTimer = styled.div`
   z-index: 3;
   position: absolute;
   width: 100%;
-  top: 10vh;
+  top: 30vh;
   text-align: center;
 `
 
 export const StyledLeft = styled.div`
-  font-size: 20rem;
+  font-size: 13rem;
   font-weight: bold;
-  color: red;
+  color: lightgreen;
   z-index: 3;
   position: absolute;
   width: 100%;
-  top: 10vh;
-  text-align: left;
+  top : -0.5vw;
+  right : 8vw;
+  text-align: center;
 `
 
 export const StyledRight = styled.div`
-  font-size: 20rem;
+  font-size: 13rem;
   font-weight: bold;
-  color: red;
+  color: lightgreen;
   z-index: 3;
   position: absolute;
   width: 100%;
-  top: 10vh;
-  text-align: right;
+  top : -0.5vw;
+  left : 8vw;
+  text-align: center;
 `
 
 export const StyledSpan = styled.span`
