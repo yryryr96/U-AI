@@ -4,21 +4,23 @@ import { StyledLeft, StyledRight, BorderHeight, BorderWidth, StyledBorders, Styl
 import Image from "next/image";
 import { customAxios } from "@/api/api";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
+import useFireState from "@/stores/fire/useFireState";
 
 interface WebcamProps {
   videoElm: JSX.Element;
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
-  setState: (arg0: any) => void;
 }
 
-const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, setState }) => {
+const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '누구일까요?'
   const [timer, setTimer] = useState<number>(-1);
   const [audioUrl, setAudioUrl] = useState<string>('')
   const [left, setLeft] = useState<number>(0);
   const [right, setRight] = useState<number>(0);
+  // zustand
+  const { state, setState } = useFireState();
   // OX
   const oxEvent = async () => {
     const url = "api/events/ox";
@@ -35,7 +37,7 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         setRight(response.data.right)
         if (timer === 0) {
           if (response.data.left > response.data.right) {
-            setState((prev:number) => prev + 1)
+            setState(state + 1)
           } else {
             setAudioUrl('/resources/audioFile/incorrect.mp3');
             setTimer(10)
