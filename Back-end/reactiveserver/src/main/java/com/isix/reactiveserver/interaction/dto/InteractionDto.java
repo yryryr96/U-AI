@@ -68,7 +68,7 @@ public class InteractionDto {
     @AllArgsConstructor
     @Builder
     public static class SttRequest{
-        private MultipartFile mp3File;
+        //private MultipartFile mp3File;
         private String sessionId;
         private String type;
     }
