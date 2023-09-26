@@ -134,28 +134,6 @@ export const StyledRight = styled.div`
   text-align: center;
 `
 
-export const StyledLeft = styled.div`
-  font-size: 20rem;
-  font-weight: bold;
-  color: red;
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  top: 10vh;
-  text-align: left;
-`
-
-export const StyledRight = styled.div`
-  font-size: 20rem;
-  font-weight: bold;
-  color: red;
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  top: 10vh;
-  text-align: right;
-`
-
 export const StyledSpan = styled.span`
   display: flex;
   justify-content: center;
