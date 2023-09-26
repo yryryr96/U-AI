@@ -67,23 +67,6 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
     }
   }, [timer]);
 
-  useEffect(() => {
-    if (0 < timer) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-
-      return () => clearInterval(intervalId);
-    }
-    
-  }, [timer]);
-
-  useEffect(() => {
-    if (timer === 0) {
-      oxEvent();
-    }
-  }, [timer]);
-
   return (
     <>
       <StyledBorders>
