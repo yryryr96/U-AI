@@ -1,6 +1,7 @@
 package com.isix.reactiveserver.interaction.dto;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class InteractionDto {
 
@@ -59,5 +60,25 @@ public class InteractionDto {
     public static class MotionResponse{
         private String target;
         private int result;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class SttRequest{
+        //private MultipartFile mp3File;
+        private String sessionId;
+        private String type;
+    }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class SttResponse{
+        private int result;
+        private String message;
     }
 }
