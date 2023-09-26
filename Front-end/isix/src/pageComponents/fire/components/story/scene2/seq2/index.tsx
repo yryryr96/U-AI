@@ -1,9 +1,10 @@
 import CamComponent from "@/commonComponents/story/camComponent"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { StyledRight, StyledLeft, StyledQuizBox, StyledStoryCam, StyledTimer, StyledLine, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import Image from "next/image"
 import { customAxios } from "@/api/api"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import html2canvas from "html2canvas"
 import useFireState from "@/stores/fire/useFireState"
 
 interface WebcamProps {
@@ -18,8 +19,40 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
   const [audioUrl, setAudioUrl] = useState<string>('')
   const [left, setLeft] = useState<number>(0);
   const [right, setRight] = useState<number>(0);
+
+  // 화면 캡쳐 후 url 로컬에 저장
+  const captureRef = useRef<HTMLDivElement | null>(null);
+
+  const handleCapture = async () => {
+    if (captureRef.current) {
+      const canvas = await html2canvas(captureRef.current);
+      const imageUrl = canvas.toDataURL('image/png');
+  
+      // screenshots 배열 가져오기. 없으면 빈 배열로 초기화
+      let screenshots = JSON.parse(localStorage.getItem('screenshots') || '[]');
+  
+      // 새 imageUrl 추가
+      screenshots.push(imageUrl);
+  
+      // localStorage에 저장
+      localStorage.setItem('screenshots', JSON.stringify(screenshots));
+  
+      console.log('캡쳐 완료');
+    }
+  };
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleCapture();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   // zustand
   const { state, setState } = useFireState();
+
   // OX
   const oxEvent = async () => {
     const url = "api/events/ox";
@@ -56,6 +89,7 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
     return () => clearTimeout(timeoutId);
   }, []);
 
+  
   useEffect(() => {
     if (0 <= timer) {
       const intervalId = setInterval(async() => {
@@ -69,7 +103,7 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
 
 
   return (
-    <>
+    <div className="cap" ref={captureRef} style={{ position: 'fixed', left: 0, top: 0, height: '100%', width: '100%', overflow: 'hidden'}}>
       <StyledBorders>
           <BorderHeight />
           <BorderHeight />
@@ -91,7 +125,7 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
         </StyledQuizBox>
       </StyledStoryCam>
       {audioUrl && <AudioPlayer file={audioUrl} />}
-    </>
+    </div>
   )
 }
 
