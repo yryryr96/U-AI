@@ -25,7 +25,7 @@ export const StyledCoverContents = styled.div`
 
 export const StyledCoverTitle = styled.div`
   /* font-size: ${props => props.theme.fontSizes.xxlarge}; */
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   text-align: center;
   margin: 10px 3px 40px;
 `

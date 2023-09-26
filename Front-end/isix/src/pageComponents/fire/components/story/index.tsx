@@ -41,6 +41,7 @@ import Final2 from './final/final2'
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
 import Cover from '@/commonComponents/cover'
 import Loading from '@/commonComponents/loading'
+import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
 
 const Story = () => {
@@ -50,7 +51,7 @@ const Story = () => {
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   
-  const totalPage = 34; // 총 페이지 수
+  const totalPage = 35; // 총 페이지 수
   
   const handleKeyDown = (e: any) => {
     if (e.key === 'ArrowRight' && state < totalPage) {
@@ -89,7 +90,7 @@ const Story = () => {
   
   return (
     <>
-      {state === -1 && <Cover/>}
+      {state === -1 && <Cover setState={setState} />}
       {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
@@ -190,6 +191,7 @@ const Story = () => {
           }
         </>
       }
+      {state === 35 && <Ending/>}
     </>
   )
 }

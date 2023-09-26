@@ -4,6 +4,7 @@ import { StyledLeft, StyledRight, BorderHeight, BorderWidth, StyledBorders, Styl
 import Image from "next/image"
 import { customAxios } from "@/api/api";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
+import html2canvas from "html2canvas";
 import useFireState from "@/stores/fire/useFireState";
 
 interface WebcamProps {
@@ -20,8 +21,11 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   const [audioUrl, setAudioUrl] = useState<string>('')
   const [left, setLeft] = useState<number>(0);
   const [right, setRight] = useState<number>(0);
+
+
   // zustand
   const { state, setState } = useFireState();
+  
   // OX
   const oxEvent = async () => {
     const url = "api/events/ox";
