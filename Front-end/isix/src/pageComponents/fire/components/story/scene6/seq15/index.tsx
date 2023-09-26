@@ -4,6 +4,7 @@ import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
 import { customAxios } from "@/api/api";
 import { useEffect, useState } from "react"
+import useFireState from "@/stores/fire/useFireState";
 
 
 interface WebcamProps {
@@ -11,13 +12,14 @@ interface WebcamProps {
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
-  setState: (arg0: any) => void;
 }
 
-const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, setState }) => {
+const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = '판다를 따라 입을 막고 몸을 숙여주세요'
   const audioUrl: string = '/resources/audioFile/seq15.mp3'
   const [audioUrl2, setAudioUrl2] = useState<string>('')
+  // zustand
+  const { state, setState } = useFireState();
   // motion
   // const motionEvent = async () => {
   //   const url = "api/events/motion";
@@ -32,7 +34,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   //   try {
   //     const response = await customAxios.post(url, data);
   //     if (response.data.result === 1) {
-  //       setState((prev:number) => prev + 1)
+  //       setState(state + 1)
   //     } else {
   //       setAudioUrl2('/resources/audioFile/incorrect.mp3');
   //       motionEvent();

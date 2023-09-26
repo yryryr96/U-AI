@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Seq0 from './scene1/seq0'
 import Seq1 from './scene2/seq1'
 import Seq2 from './scene2/seq2'
@@ -41,10 +41,11 @@ import Final2 from './final/final2'
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
 import Cover from '@/commonComponents/cover'
 import Loading from '@/commonComponents/loading'
+import useFireState from '@/stores/fire/useFireState'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
-  const [state, setState] = useState<number>(-1);
+  const { state, setState } = useFireState();
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
@@ -52,19 +53,19 @@ const Story = () => {
   const totalPage = 34; // 총 페이지 수
   
   const handleKeyDown = (e: any) => {
-    
     if (e.key === 'ArrowRight' && state < totalPage) {
-      setState((prev) => prev + 1);
+      setState(state + 1);
     } else if (e.key === 'ArrowLeft' && state >= 0) {
-      setState((prev) => prev - 1)
+      setState(state - 1)
     }
-    setIsLoading(true)
   };
 
   const handleMouseClick = (e: any) => {
     e.preventDefault();
-    if (e.button === 2) { setState((prev) => prev + 1)}
-  }
+    if (e.button === 2) { 
+      setState(state + 1);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -91,34 +92,34 @@ const Story = () => {
       {state === -1 && <Cover/>}
       {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 1 && <Seq1 />}
-      {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} setState={setState} />}
+      {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 3 && <Seq3 />}
       {state === 4 && <Seq4 />}
       {state === 5 && <Seq5 />}
       {state === 6 && <Seq6 />}
       {state === 7 && <Seq7 onResult={(result: number) => {
         if (result === 1) {
-          setState((prev) => prev + 1);
+          setState(state + 1);
         }
       }}/>}
       {(state === 8 && speakResult) && <Seq8Correct />}
       {(state === 8 && !speakResult) && <Seq8Incorrect />}
       {state === 9 && <Seq9 />}
       {state === 10 && <Seq10 />}
-      {state === 11 && <Seq11 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} setState={setState} />}
+      {state === 11 && <Seq11 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 12 && <Seq12 />}
       {state === 13 && <Seq13 />}
       {state === 14 && <Seq14 />}
-      {state === 15 && <Seq15 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} setState={setState} />}
+      {state === 15 && <Seq15 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 16 && <Seq16 />}
       {state === 17 && <Seq17 />}
       {state === 18 && <Seq18 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 19 && <Seq19 />}
       {state === 20 && <Seq20 />}
-      {state === 21 && <Seq21 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} setState={setState} />}
+      {state === 21 && <Seq21 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 22 && <Seq22 />}
       {state === 23 && <Seq23 />}
-      {state === 24 && <Seq24 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} setState={setState} />}
+      {state === 24 && <Seq24 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 25 && <Seq25 />}
       {state === 26 && <Seq26 />}
       {state === 27 && <Seq27 />}
