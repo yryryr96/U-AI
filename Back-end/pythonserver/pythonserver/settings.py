@@ -146,3 +146,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'BACKEND': 'channels.layers.InMemoryChannelLayer',
 #     },
 # }
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.MultiPartParser',
+    ],
+    'MULTIPART_CONTENT_TYPES': ('multipart/form-data', 'multipart/mixed', 'your-custom-mimetype'),
+}

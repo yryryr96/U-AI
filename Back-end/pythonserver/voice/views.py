@@ -14,44 +14,48 @@ fire_answer = ['불이야', '부리야', '부리아', '후리아']
 @csrf_exempt
 @api_view(['POST'])
 def voice_recognition(request):
-    mp3_file = request.FILES.get('mp3File')
+    print(request)
+    mp3_file = request.POST.get('mp3File')
+    sessionId = request.POST.get('session-id')
     type = request.POST.get('type')
     print("--------------- 음성 인식 api 호출 -----------------")
-    print(mp3_file, type)
+    print(mp3_file, sessionId, type)
+
 
     #MP3 파일 저장
     file_path = os.path.join('media', 'mp3', mp3_file.name)
     with open(file_path, 'wb') as destination:
         for chunk in mp3_file.chunks():
             destination.write(chunk)
-    print("----------------- ai 처리중 -------------------")
-        # MP3 파일 AI 로 처리하여 인식된 텍스트 출력
-        # model은 whisper중 base 모델 사용
-    model = whisper.load_model("base")
-    result = model.transcribe("media/mp3/" + mp3_file.name, fp16=False, language='ko')
-    recognition_text = result["text"]
 
-    print(recognition_text)
-    # text_data가 fire인 경우 list 설정
-    # 다른 경우에도 설정해줄 수 있음
-    answer_list = []
-    if type == 'fire':
-        answer_list = fire_answer
-    recognition_text_list = recognition_text.split(' ')
-    print("recognition_text_list = ", recognition_text_list)
-    print("answer_list = ", answer_list)
+    # print("----------------- ai 처리중 -------------------")
+    #     # MP3 파일 AI 로 처리하여 인식된 텍스트 출력
+    #     # model은 whisper중 base 모델 사용
+    # model = whisper.load_model("base")
+    # result = model.transcribe("media/mp3/" + mp3_file.name, fp16=False, language='ko')
+    # recognition_text = result["text"]
+    #
+    # print(recognition_text)
+    # # text_data가 fire인 경우 list 설정
+    # # 다른 경우에도 설정해줄 수 있음
+    # answer_list = []
+    # if type == 'fire':
+    #     answer_list = fire_answer
+    # recognition_text_list = recognition_text.split(' ')
+    # print("recognition_text_list = ", recognition_text_list)
+    # print("answer_list = ", answer_list)
     check = False
-    for answer in answer_list:
-        for recognition in recognition_text_list:
-            print("answer = ", answer, " recognition = ", recognition)
-            if recognition not in answer_list:
-                answer_list.append(recognition)
-            if answer == recognition:
-               check = True
-               break
-        if check:
-            break
-    print(answer_list)
+    # for answer in answer_list:
+    #     for recognition in recognition_text_list:
+    #         print("answer = ", answer, " recognition = ", recognition)
+    #         if recognition not in answer_list:
+    #             answer_list.append(recognition)
+    #         if answer == recognition:
+    #            check = True
+    #            break
+    #     if check:
+    #         break
+    # print(answer_list)
 
     if check:
         return JsonResponse({'result': 1, 'message': '인식 성공'})
