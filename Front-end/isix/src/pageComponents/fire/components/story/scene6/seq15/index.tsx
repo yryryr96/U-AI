@@ -19,33 +19,32 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   const audioUrl: string = '/resources/audioFile/seq15.mp3'
   const [audioUrl2, setAudioUrl2] = useState<string>('')
   // motion
-   // motion
-  const motionEvent = async () => {
-    const url = "api/events/motion";
-    const sessionId = localStorage.getItem('socketId')
-    const data = {
-      sessionId: sessionId,
-      eventName: 'evacuatefire',
-      numChild: 4, // 처음에 입력받은 값 넣기
-      limit: 10 // 시간 초
-    };
+  // const motionEvent = async () => {
+  //   const url = "api/events/motion";
+  //   const sessionId = localStorage.getItem('socketId')
+  //   const data = {
+  //     sessionId: sessionId,
+  //     eventName: 'evacuatefire',
+  //     numChild: 4, // 처음에 입력받은 값 넣기
+  //     limit: 10 // 시간 초
+  //   };
 
-    try {
-      const response = await customAxios.post(url, data);
-      if (response.data.result === 1) {
-        setState((prev:number) => prev + 1)
-      } else {
-        setAudioUrl2('/resources/audioFile/incorrect.mp3');
-        motionEvent();
-      }
-    } catch (error) {
-      console.error('error', error);
-    }
-  };
+  //   try {
+  //     const response = await customAxios.post(url, data);
+  //     if (response.data.result === 1) {
+  //       setState((prev:number) => prev + 1)
+  //     } else {
+  //       setAudioUrl2('/resources/audioFile/incorrect.mp3');
+  //       motionEvent();
+  //     }
+  //   } catch (error) {
+  //     console.error('error', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    motionEvent();
-  }, [])
+  // useEffect(() => {
+  //   motionEvent();
+  // }, [])
 
   return (
     <>
