@@ -8,8 +8,10 @@ interface RecordComponentProps {
 const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [retryKey, setRetryKey] = useState(0);
+  const sessionId = localStorage.getItem('socketId') || '';
 
   useEffect(() => {
+    console.log('id: ', sessionId)
     const startRecording = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -36,11 +38,13 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
 
            // FormData creation and append data
           const formData= new FormData();
+
           formData.append("mp3File", mp3File);
-          formData.append("textData", "fire");
+          formData.append("sessionId", sessionId);
+          formData.append("type", "fire");
 
           try{
-            const res : AxiosResponse= await axios.post('http://127.0.0.1:8000/voice/api/voicerecognition/', formData); 
+            const res : AxiosResponse= await axios.post('http://localhost:8080/api/events/stt', formData); 
             console.log('res:', res.data); 
 
             if (res.data.result === -1) {

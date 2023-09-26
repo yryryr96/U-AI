@@ -3,6 +3,7 @@ package com.isix.reactiveserver.socket.controller;
 import com.isix.reactiveserver.config.GpuServerConfig;
 import com.isix.reactiveserver.socket.dto.SocketDto;
 import com.isix.reactiveserver.socket.handler.MultiSocketHandler;
+import com.isix.reactiveserver.socket.service.SocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class SocketController {
     private final MultiSocketHandler multiSocketHandler;
     private final GpuServerConfig gpuServerConfig;
+    private final SocketService socketService;
 
 
     @PostMapping("/session/make")
@@ -44,10 +46,12 @@ public class SocketController {
     }
 
     @GetMapping("/session/servers")
-    public ResponseEntity<Map<String,Object>> getServer(){
-        for(Object str :  gpuServerConfig.getEndpoint().values()){
-            System.out.println((String)str);
-        }
+    public ResponseEntity<Map<String,String>> getServer(){
+//        for(String str :  gpuServerConfig.getEndpoint().values()){
+//            System.out.println(str);
+//        }
+//        System.out.println(gpuServerConfig.getProtocol());
+        socketService.getLowestUsageServer();
         return new ResponseEntity<>(gpuServerConfig.getEndpoint(),HttpStatus.OK);
     }
 }
