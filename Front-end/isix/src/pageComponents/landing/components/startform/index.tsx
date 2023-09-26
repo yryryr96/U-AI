@@ -1,13 +1,16 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
+import useUserInfoStore from '@/stores/mypage/useUserInfoStore';
 import Link from 'next/link';
 import { TagContainer, StyledStartFormButton, StyledStartFormInput, StyledStartFormContainer, StyledServiceName, StyledStartFormName, StyledStartForm } from '../../Landing.styled';
 
 export default function StartForm() {
-  const [kindergarten, setKindergarten] = useState('');
-  const [className, setClassName] = useState('');
-  const [people, setPeople] = useState(3);
+  const {
+    kindergarten, setKindergarten,
+    className, setClassName,
+    people, setPeople
+  } = useUserInfoStore();
 
   const saveKinder = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKindergarten(e.target.value);
