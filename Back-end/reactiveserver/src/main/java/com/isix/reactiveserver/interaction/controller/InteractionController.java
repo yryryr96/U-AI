@@ -61,9 +61,10 @@ public class InteractionController {
     }*/
 
     @PostMapping("/events/stt")
-    public ResponseEntity<InteractionDto.SttResponse> recognizeVoice(InteractionDto.SttRequest requestBody){
+    public ResponseEntity<InteractionDto.SttResponse> recognizeVoice(InteractionDto.SttRequest requestBody,
+                                                                      @RequestPart(value = "mp3File") MultipartFile multipartFile){
         System.out.println("------------------- stt controller 요청 들어옴 ----------------------");
-        InteractionDto.SttResponse response = interactionService.recognizeVoice(requestBody.getMp3File(), sessionId, type);
+        InteractionDto.SttResponse response = interactionService.recognizeVoice(multipartFile, requestBody.getSessionId(), requestBody.getType());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

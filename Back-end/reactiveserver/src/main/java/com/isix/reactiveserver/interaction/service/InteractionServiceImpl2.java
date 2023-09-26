@@ -233,20 +233,23 @@ public class InteractionServiceImpl2 implements InteractionService {
         System.out.println("------------------- stt service 요청 들어옴 ----------------------");
         try {
             RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+//            restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
-            body.add("mp3File", new ByteArrayResource(mp3File.getBytes()));
+            System.out.println(mp3File.getOriginalFilename());
+            System.out.println(mp3File.getContentType());
+
+            body.add("mp3File", mp3File.getResource());
             body.add("session-id", sessionId);
             body.add("type", type);
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            String serverUrl = "http://127.0.0.1:8000/voice/api/voicerecognition/";
+            String serverUrl = "http://127.0.0.1:7070/voice/api/voicerecognition/";
             System.out.println("STT 요청 보냄");
             ResponseEntity<String> response = restTemplate.exchange(serverUrl,
                     HttpMethod.POST,
