@@ -110,18 +110,6 @@ export const StyledTimer = styled.div`
   text-align: center;
 `
 
-export const StyledLeft = styled.div`
-  font-size: 13rem;
-  font-weight: bold;
-  color: lightgreen;
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  top : -0.5vw;
-  right : 8vw;
-  text-align: center;
-`
-
 export const StyledRight = styled.div`
   font-size: 13rem;
   font-weight: bold;
@@ -135,25 +123,15 @@ export const StyledRight = styled.div`
 `
 
 export const StyledLeft = styled.div`
-  font-size: 20rem;
+  font-size: 13rem;
   font-weight: bold;
-  color: red;
+  color: lightgreen;
   z-index: 3;
   position: absolute;
   width: 100%;
-  top: 10vh;
-  text-align: left;
-`
-
-export const StyledRight = styled.div`
-  font-size: 20rem;
-  font-weight: bold;
-  color: red;
-  z-index: 3;
-  position: absolute;
-  width: 100%;
-  top: 10vh;
-  text-align: right;
+  top : -0.5vw;
+  right : 8vw;
+  text-align: center;
 `
 
 export const StyledSpan = styled.span`
