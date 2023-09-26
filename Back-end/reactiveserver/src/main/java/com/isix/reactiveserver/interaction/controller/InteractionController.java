@@ -15,6 +15,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@CrossOrigin("*")
 public class InteractionController {
 
     private final InteractionService interactionService;

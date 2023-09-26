@@ -233,7 +233,6 @@ public class InteractionServiceImpl2 implements InteractionService {
         System.out.println("------------------- stt service 요청 들어옴 ----------------------");
         try {
             RestTemplate restTemplate = new RestTemplate();
-//            restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -249,19 +248,24 @@ public class InteractionServiceImpl2 implements InteractionService {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            String serverUrl = "http://127.0.0.1:7070/voice/api/voicerecognition/";
+            String serverUrl = "http://127.0.0.1:8000/voice/api/voicerecognition/";
             System.out.println("STT 요청 보냄");
             ResponseEntity<String> response = restTemplate.exchange(serverUrl,
                     HttpMethod.POST,
                     requestEntity,
                     String.class);
-            System.out.println("STT 요청 끝");
-            System.out.println("stt 결과 response = " + response);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            try{
+                return objectMapper.readValue(response.getBody(), InteractionDto.SttResponse.class);
+            }catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return new InteractionDto.SttResponse(-1, "object mapper 동작 실패");
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return new InteractionDto.SttResponse(-1, "장고 서버 요청 실패");
         }
-
-        return new InteractionDto.SttResponse(1, "안녕");
     }
 
 }
