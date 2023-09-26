@@ -1,6 +1,6 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import { useEffect, useState } from "react"
-import { StyledQuizBox, StyledStoryCam, StyledTimer, StyledLine, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
+import { StyledRight, StyledLeft, StyledQuizBox, StyledStoryCam, StyledTimer, StyledLine, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import Image from "next/image"
 import { customAxios } from "@/api/api"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
@@ -16,9 +16,10 @@ interface WebcamProps {
 const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, setState }) => {
   const [timer, setTimer] = useState<number>(-1);
   const [audioUrl, setAudioUrl] = useState<string>('')
+  const [left, setLeft] = useState<number>(0);
+  const [right, setRight] = useState<number>(0);
   // OX
   const oxEvent = async () => {
-    console.log('실행')
     const url = "api/events/ox";
     const sessionId = localStorage.getItem('socketId')
     const data = {
@@ -28,13 +29,16 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
 
     try {
       const response = await customAxios.post(url, data);
-      console.log(response.data)
       if (response.data.result === 1) {
-        if (response.data.left > response.data.right) {
-          setState((prev:number) => prev + 1)
-        } else {
-          setAudioUrl('/resources/audioFile/incorrect.mp3');
-          setTimer(10)
+        setLeft(response.data.left)
+        setRight(response.data.right)
+        if (timer === 0) {
+          if (response.data.left > response.data.right) {
+            setState((prev:number) => prev + 1)
+          } else {
+            setAudioUrl('/resources/audioFile/incorrect.mp3');
+            setTimer(10)
+          }
         }
       }
     } catch (error) {
@@ -51,18 +55,13 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
   }, []);
 
   useEffect(() => {
-    if (0 < timer) {
-      const intervalId = setInterval(() => {
+    if (0 <= timer) {
+      const intervalId = setInterval(async() => {
         setTimer((prevTimer) => prevTimer - 1);
+        await oxEvent();
       }, 1000);
 
       return () => clearInterval(intervalId);
-    }
-  }, [timer]);
-
-  useEffect(() => {
-    if (timer === 0) {
-      oxEvent();
     }
   }, [timer]);
 
@@ -82,8 +81,10 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <Image src='/resources/text_fire2.png' width={400} height={150} alt="fire"/>
+          <Image src='/resources/text_fire2.png' width={400} height={150} alt="fire" />
+          <StyledLeft>{left}</StyledLeft>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
+          <StyledRight>{right}</StyledRight>
           <Image src='/resources/text_water2.png' width={400} height={150} alt="water"/>
         </StyledQuizBox>
       </StyledStoryCam>
