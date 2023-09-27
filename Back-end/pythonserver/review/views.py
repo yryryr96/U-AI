@@ -41,6 +41,8 @@ def review(request):
     # rectangles = []
 
     height, width, _ = image_data.shape
+
+    print(height,width)
     output_image = np.ones_like(image_data) * 255
     for xys in results[0].boxes.xyxy:
         print(xys)
