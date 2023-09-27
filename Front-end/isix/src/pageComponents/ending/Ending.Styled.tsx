@@ -1,25 +1,30 @@
 import styled, { css } from "styled-components";
 
-const StyledEndingContainer = styled.div`
-  width: 1000px;
-  border: solid 1px;
-  margin-bottom: 10px;
-`
+// 그리드 스타일
+export const ImageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 10px;
+  position: relative;
+  /* top: 3vh;
+  left: 3vw; */
+  width: 100%;
+  /* height: 100%; */
+  height: 85%;
+`;
 
-const StyledEnding = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+export const ImageWrapper = styled.div`
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+`;
 
-const StyledEndingPhotos = styled.div`
-  display: flex;
-  background-color: gray;
-  width: 400px;
-  height: 250px;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
+export const EndingText = styled.p`
+  width: auto;
+  height: 10%;
+  font-size: ${props => props.theme.fontSizes.xxlarge};
+  font-weight: bold;
+  text-align: center;
+  white-space: pre-line;
+  margin-top: 2%;
 `
-
-export { StyledEndingContainer, StyledEnding, StyledEndingPhotos };
