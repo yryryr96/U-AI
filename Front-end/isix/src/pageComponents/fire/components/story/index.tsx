@@ -43,11 +43,13 @@ import Cover from '@/commonComponents/cover'
 import Loading from '@/commonComponents/loading'
 import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
+import { useRouter } from 'next/navigation'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const { state, setState } = useFireState();
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter()
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   
@@ -56,9 +58,16 @@ const Story = () => {
   const handleKeyDown = (e: any) => {
     if (e.key === 'ArrowRight' && state < totalPage) {
       setState(state + 1);
+    } else if (e.key === 'ArrowRight' && state === totalPage) {
+      // main으로 이동
+      if (window.confirm('메인 페이지로 이동하시겠습니까?')) {
+        setState(-1)
+        router.push('/main')
+      }
     } else if (e.key === 'ArrowLeft' && state >= 0) {
       setState(state - 1)
     }
+    setIsLoading(true)
   };
 
   const handleMouseClick = (e: any) => {
