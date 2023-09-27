@@ -64,26 +64,6 @@ export const StyledStoryText = styled.div`
   margin-top: 1.2rem;
 `
 
-export const StyledStoryImage = styled.img.attrs(props => ({
-  style: {
-    height: props.height || '100%',
-    width: props.width || 'auto',
-    /* max-width : 800px;
-    max-height : 400px;
-
-    @media (max-width: 1200px) {
-      max-width: 600px;
-      max-height: 300px;
-    }
-
-    @media (max-width: 800px) {
-      max-width: 400px;
-      max-height: 200px;
-    } */
-  },
-}))`
-`;
-
 export const StyledQuizBox = styled.div`
   position: absolute;
   top: 0;
@@ -199,3 +179,32 @@ export const BorderWidth = styled.div`
  }
 
 `
+
+export const StyledCaptureBox = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden;
+`
+
+export const StyledStoryImage = styled.img.attrs(props => ({
+  style: {
+    height: props.height || '100%',
+    width: props.width || 'auto',
+    /* max-width : 800px;
+    max-height : 400px;
+
+    @media (max-width: 1200px) {
+      max-width: 600px;
+      max-height: 300px;
+    }
+
+    @media (max-width: 800px) {
+      max-width: 400px;
+      max-height: 200px;
+    } */
+  },
+}))`
+`;
