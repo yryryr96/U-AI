@@ -13,7 +13,7 @@ os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"]="6,7"
 
 source = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
-model = YOLO('yolov8n.pt')
+model = YOLO('models/whiteboard_v8l.pt')
 # results = AIModel().predict(source,classes=[0,1],)
 model.predict(source,classes=[0,1],)
 
