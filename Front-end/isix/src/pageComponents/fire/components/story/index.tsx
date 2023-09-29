@@ -44,6 +44,7 @@ import Loading from '@/commonComponents/loading'
 import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
 import { useRouter } from 'next/navigation'
+import useImageUrlState from '@/stores/capture/useImageUrlState'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -52,6 +53,7 @@ const Story = () => {
   const router = useRouter()
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
+  const { resetImageUrls } = useImageUrlState();
   
   const totalPage = 35; // 총 페이지 수
   
@@ -96,6 +98,11 @@ const Story = () => {
       return () => clearTimeout(timer); 
     }
   }, [isLoading])
+
+  useEffect(() => {
+    // imageUrls 초기화
+    resetImageUrls();
+  }, []);
   
   return (
     <>
