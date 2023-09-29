@@ -19,14 +19,15 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
 
   // 화면 캡쳐 후 url 저장
   const captureRef = useRef<HTMLDivElement | null>(null);
-  const { addImageUrl } = useImageUrlState();
+  const { updateImageUrl, imageUrls } = useImageUrlState();
 
   const handleCapture = async () => {
     if (captureRef.current) {
       const canvas = await html2canvas(captureRef.current);
       const imageUrl = canvas.toDataURL('image/png');
   
-      addImageUrl(imageUrl);
+      const action = imageUrls.length < 4 ? 'add' : 'update';
+      updateImageUrl(imageUrl, action);
       console.log('캡쳐 완료');
     }
   };
@@ -34,7 +35,7 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
   useEffect(() => {
     const timer = setTimeout(() => {
       handleCapture();
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
