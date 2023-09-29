@@ -19,14 +19,16 @@ const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
 
   // 화면 캡쳐 후 url 저장
   const captureRef = useRef<HTMLDivElement | null>(null);
-  const { addImageUrl } = useImageUrlState();
+  const { updateImageUrl, imageUrls } = useImageUrlState();
 
   const handleCapture = async () => {
     if (captureRef.current) {
       const canvas = await html2canvas(captureRef.current);
       const imageUrl = canvas.toDataURL('image/png');
   
-      addImageUrl(imageUrl);
+      // 배열 비어있으면 추가, 한 개 있으면 마지막 값 변경
+      const action = imageUrls.length == 0 ? 'add' : 'update';
+      updateImageUrl(imageUrl, action);
       console.log('캡쳐 완료');
     }
   };
