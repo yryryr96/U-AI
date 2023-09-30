@@ -33,7 +33,7 @@ def review(request):
     # input_image = cv2.imdecode(np.frombuffer(image_data, np.uint8), -1)  # 바이너리 이미지 데이터를 읽습니다.
     # classes=[63, 67]
     # Run inference on the source
-    results = model.predict(image_data, device=6, conf=0.15, imgsz=[1280, 768])  # list of Results objects
+    results = model.predict(image_data, device=6, conf=0.15, imgsz=[768, 1280])  # list of Results objects
 
     annotated_frame = results[0].plot()
 
