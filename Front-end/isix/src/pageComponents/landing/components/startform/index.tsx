@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
 import useUserInfoStore from '@/stores/mypage/useUserInfoStore';
 import Link from 'next/link';
 import { TagContainer, StyledStartFormButton, StyledStartFormInput, StyledStartFormContainer, StyledServiceName, StyledStartFormName, StyledStartForm } from '../../Landing.styled';
@@ -8,7 +7,6 @@ import { TagContainer, StyledStartFormButton, StyledStartFormInput, StyledStartF
 export default function StartForm() {
   const {
     kindergarten, setKindergarten,
-    className, setClassName,
     people, setPeople
   } = useUserInfoStore();
 
@@ -16,9 +14,9 @@ export default function StartForm() {
     setKindergarten(e.target.value);
   }
 
-  const saveClass = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setClassName(e.target.value);
-  }
+  // const saveClass = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setClassName(e.target.value);
+  // }
   
   const savePeople = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -32,7 +30,7 @@ export default function StartForm() {
   }
 
   const checkLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (kindergarten === '' || className === '') {
+    if (kindergarten === '') {
       e.preventDefault();
       alert('항목을 모두 입력해주세요')
     }
@@ -41,28 +39,26 @@ export default function StartForm() {
   return (
     <TagContainer>
       <StyledStartFormContainer>
-        <div>
         <StyledServiceName>아이와 함께, U-AI</StyledServiceName>
 
         <StyledStartForm>
-          <StyledStartFormName>유치원</StyledStartFormName>
+          <StyledStartFormName>단체명</StyledStartFormName>
           <StyledStartFormInput onChange={saveKinder}/>
         </StyledStartForm>
-        <StyledStartForm>
+        {/* <StyledStartForm>
           <StyledStartFormName>반</StyledStartFormName>
           <StyledStartFormInput onChange={saveClass}/>
-        </StyledStartForm>
+        </StyledStartForm> */}
         <StyledStartForm>
           <StyledStartFormName>인원 수</StyledStartFormName>
           <StyledStartFormInput value={people} type='number' max={6} min={1} step={1} onPaste={(e) => e.preventDefault()} onChange={savePeople}/>
         </StyledStartForm>
 
-        <StyledStartFormButton>
-          <Link href='/main' prefetch={true} passHref onClick={checkLink}> 
+        <Link href='/main' prefetch={true} passHref onClick={checkLink}> 
+          <StyledStartFormButton>
             시작하기
-          </Link> 
-        </StyledStartFormButton>
-        </div>
+          </StyledStartFormButton>
+        </Link>     
       </StyledStartFormContainer>
     </TagContainer>
   );
