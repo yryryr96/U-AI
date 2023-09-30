@@ -26,10 +26,24 @@ export const StyledContainer = styled.div`
     z-index: -2;
 `
 
+export const StyledTitleContainer = styled.div`
+    display : flex;
+    position : fixed;
+    align-items : center;
+    justify-content : center;
+    background-image: url('resources/treeboard.png'); 
+    background-size: 100% 100%;
+    height : 10vh;
+    width : 20vw ;
+    margin-top : -85vh;
+    
+`
+
 export const StyledPaperContainer = styled.div`
   position: relative;
   height : 80vh;
   width : 75vw;
+  margin-top : 10vh;
 
   &::before {
     content: "";
@@ -59,3 +73,26 @@ export const StyledLine = styled.div`
   background-size: cover;
   z-index: -1;
 `
+
+export const StyledTextContainer = styled.div.attrs<{getLeft?: string}>(props => ({
+  style: {
+    left: props.getLeft || '50vw',
+  },
+}))`
+  display : flex;
+  align-items : center;
+  justify-content : center;
+  position: fixed;
+  width: 10vw;
+  background-image: url('resources/treeboard.png'); 
+  background-size: 100% 100%;
+
+  height: 8.5vh;
+  z-index: 2;
+`;
+
+export const StyledText = styled.label`
+  font-size : 3.5rem;
+  font-weight : bold;
+
+`;
