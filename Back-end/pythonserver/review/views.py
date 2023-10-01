@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 import sock.consumer
 import time
+from sock.image_process import process_image
 
 import os
 
@@ -27,6 +28,8 @@ def review(request):
         return HttpResponse(status=500)
 
     image_data = sock.consumer.received_images[session_id]
+
+    process_image(session_id,image_data)
 
     # image_data = sock.consumer.received_image
 

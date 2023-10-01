@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ultralytics import YOLO
 import sock.consumer
+from sock.image_process import process_image
 
 
 # def get_cached_yolo_model():
@@ -37,6 +38,9 @@ def ox_quiz(request):
         return JsonResponse(response)
 
     source = sock.consumer.received_images[session_id]
+
+    process_image(session_id,source)
+
     # Run inference on the source
     results = model.predict(source,classes=[0,1],)
 

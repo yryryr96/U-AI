@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ultralytics import YOLO
+from sock.image_process import process_image
 
 import cv2
 
@@ -122,6 +123,9 @@ def recognize_motion(request):
                     current_time = time.time()  # 현재 시간 갱신
                     elapsed_time = current_time - start_time  # 경과한 시간 계산
                     print(elapsed_time)
+
+                    process_image(session_id,source)
+
                     return JsonResponse(response)
             cv2.waitKey(10)
 
