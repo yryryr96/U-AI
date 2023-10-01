@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyledStoryText } from '@/pageComponents/fire/components/story/Story.styled'
 
-const TextComponent = ({text}: {text: string}) => {
+const TextComponent = ({ text, style }: { text: string; style?: React.CSSProperties }) => {
   return (
-    <StyledStoryText>
+    <StyledStoryText style={style}>
       {text}
     </StyledStoryText>
   )
