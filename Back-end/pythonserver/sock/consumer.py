@@ -1,14 +1,37 @@
+import asyncio
+import glob
 import json
+import os
+
 from channels.generic.websocket import AsyncWebsocketConsumer
 import numpy as np
 
 import cv2
+import configparser
 
 received_image = None
 received_images = {}
 sessions = []
-class CustomConsumer(AsyncWebsocketConsumer):
 
+config = configparser.ConfigParser()
+config.read('config.ini', encoding='UTF8')
+
+folder_root = config.get('SERVER_CONFIG', 'image_folder_root')
+
+
+async def delete_all_files_in_folder(folder_path):
+    # folder_path 내의 모든 파일에 대해
+    if not os.path.isdir(folder_path):
+        return
+    for filename in glob.glob(os.path.join(folder_path, '*')):
+        # 파일인 경우 삭제
+        if os.path.isfile(filename):
+            await asyncio.get_event_loop().run_in_executor(None, os.remove, filename)
+
+    os.rmdir(folder_path)
+
+
+class CustomConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
         headers = dict(self.scope['headers'])  # Get the headers.
@@ -28,6 +51,9 @@ class CustomConsumer(AsyncWebsocketConsumer):
         sessions.remove(session_id)
         del received_images[session_id]
         print(sessions)
+        # print(os.getcwd())
+        # print(os.path.join(folder_root, session_id))
+        await delete_all_files_in_folder(os.path.join(folder_root, session_id))
 
         pass
 
