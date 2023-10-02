@@ -9,21 +9,22 @@ const OX = () => {
   // const audioUrl: string = '/resources/audioFile/seq1.mp3'
   return (
     <>
-        <StyledTextContainer getLeft="26vw">
-          <StyledText>
+        <StyledTextContainer getLeft="20vw">
+          <StyledText marginTop="14vh">
             왼쪽
           </StyledText>
         </StyledTextContainer>
-        <StyledTextContainer getLeft="64vw">
-          <StyledText>
+        <StyledTextContainer getLeft="63.4vw">
+          <StyledText marginTop="14vh">
             오른쪽
           </StyledText>
         </StyledTextContainer>
 
         <StyledLine />
         <StyledTutorialContainer>
-        <ImageComponent src='./resources/moving_panda3.png' style={{marginRight : "22vh"}} />
+        <ImageComponent src='./resources/moving_panda4.png' style={{marginRight : "14vw", marginTop : "12vh"}} />
         </StyledTutorialContainer>
+
         <TextComponent text={text} style={{marginTop : '10vh', fontSize: '3.5rem' }} />
         {/* <AudioPlayer file={audioUrl} /> */}
     </>

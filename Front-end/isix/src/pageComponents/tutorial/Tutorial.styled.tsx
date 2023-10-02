@@ -31,11 +31,11 @@ export const StyledTitleContainer = styled.div`
     position : fixed;
     align-items : center;
     justify-content : center;
-    background-image: url('resources/treeboard.png'); 
+    background-image: url('resources/panda_sign1.png'); 
     background-size: 100% 100%;
-    height : 10vh;
+    height : 40vh;
     width : 20vw ;
-    margin-top : -85vh;
+    margin-top : -70vh;
     
 `
 
@@ -68,7 +68,7 @@ export const StyledLine = styled.div`
   left: 50%;
   transform: translate(-50%);
   width: 1vw;
-  height: 60vh;
+  height: 65vh;
   background-image: url('resources/line2.png');
   background-size: cover;
   z-index: -1;
@@ -80,19 +80,38 @@ export const StyledTextContainer = styled.div.attrs<{getLeft?: string}>(props =>
   },
 }))`
   display : flex;
-  align-items : center;
+  align-items : flex-start;
   justify-content : center;
   position: fixed;
-  width: 10vw;
-  background-image: url('resources/treeboard.png'); 
+  background-image: url('resources/panda_sign2.png'); 
   background-size: 100% 100%;
-
-  height: 8.5vh;
-  z-index: 2;
+  width: 17vw;
+  height: 25vh;
+  margin-top : -13vh;
+  
+  z-index: 1;
 `;
 
-export const StyledText = styled.label`
-  font-size : 3.5rem;
-  font-weight : bold;
+export const StyledText = styled.label<{ marginTop?: string }>`
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-top: ${(props) => props.marginTop || '15.5vh'};
+`;
+
+export const StyledButtonContainer = styled.div.attrs<{ getLeft?: string, src?: string }>(props => ({
+  style: {
+    left: props.getLeft || '50vw',
+  },
+}))`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top : 6vh;
+  position: fixed;
+  width: 8vw;
+  background-size: 100% 100%;
+  background-image: url(${props => props.src}); 
+  height: 16vh;
+  z-index : 2;
 
 `;
