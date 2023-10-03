@@ -48,7 +48,7 @@ const AudioPlayer = ({ file } : any ) => {
         {
           position: 'fixed',
           right: '30px',
-          top: '20px',
+          top: '30px',
           width: '100px',
           height: '100px',
           background: 'none',
