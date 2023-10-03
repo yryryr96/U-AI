@@ -1,6 +1,7 @@
 import CamComponent from "@/commonComponents/story/camComponent"
 import { BorderHeight, BorderWidth, StyledBorders, StyledCamText, StyledStoryCam } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -29,6 +30,7 @@ const Repeat2Sol: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, 
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }

@@ -3,6 +3,7 @@ import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorder
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent"
 import { customAxios } from "@/api/api";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -72,6 +73,7 @@ const Repeat2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
         </StyledQuizBox>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }
