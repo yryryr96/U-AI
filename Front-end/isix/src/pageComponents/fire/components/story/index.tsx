@@ -45,6 +45,7 @@ import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
 import { useRouter } from 'next/navigation'
 import useImageUrlState from '@/stores/capture/useImageUrlState'
+import { customAxios } from '@/api/api'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -56,6 +57,23 @@ const Story = () => {
   const { resetImageUrls } = useImageUrlState();
   
   const totalPage = 35; // 총 페이지 수
+
+  // OCR
+  const ocrEvent = async () => {
+    const url = "api/events/multiocr";
+    const sessionId = localStorage.getItem('socketId')
+    const data = {
+      sessionId: sessionId,
+      numChild: 1, // 처음에 입력받은 값 넣기
+    };
+
+    try {
+      const response = await customAxios.post(url, data);
+      console.log(response.data); 
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
   
   const handleKeyDown = (e: any) => {
     if (e.key === 'ArrowRight' && state < totalPage) {
@@ -147,7 +165,7 @@ const Story = () => {
               <Loading />
             </div>
             :
-            <Repeat2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+            <Repeat2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} ocrEvent={ocrEvent}/>
           }
         </>
       }
@@ -169,7 +187,7 @@ const Story = () => {
               <Loading />
             </div>
             :
-            <Repeat3 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} />
+            <Repeat3 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} ocrEvent={ocrEvent}/>
           }
         </>
       }
