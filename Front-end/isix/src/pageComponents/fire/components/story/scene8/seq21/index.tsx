@@ -5,6 +5,7 @@ import Image from "next/image";
 import { customAxios } from "@/api/api";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import useFireState from "@/stores/fire/useFireState";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -91,6 +92,7 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         </StyledQuizBox>
       </StyledStoryCam>
       {audioUrl && <AudioPlayer file={audioUrl} />}
+      <HomeButton />
     </>
   )
 }

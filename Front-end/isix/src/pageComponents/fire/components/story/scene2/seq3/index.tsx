@@ -2,6 +2,7 @@ import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { StyledStoryContainer } from "../../Story.styled";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 const Seq3 = () => {
   const text: string = '맞아요. 이것은 불입니다!';
@@ -13,6 +14,7 @@ const Seq3 = () => {
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
+      <HomeButton/>
     </>
   )
 }

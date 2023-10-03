@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -60,6 +61,7 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
         <Image src='/resources/teacherpanda.svg' width={400} height={450} alt="teacher"  style={{ marginTop: '12rem' }}/>
       </StyledCamImg>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </StyledCaptureBox>
   )
 }

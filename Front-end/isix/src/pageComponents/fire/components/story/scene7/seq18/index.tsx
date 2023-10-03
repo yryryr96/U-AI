@@ -5,6 +5,7 @@ import Image from "next/image"
 import crawlPanda from "../../../../../../../public/resources/crawl_panda.json"
 import Lottie from "react-lottie-player";
 import { customAxios } from "@/api/api";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -55,6 +56,7 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }
