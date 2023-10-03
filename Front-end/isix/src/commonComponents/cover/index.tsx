@@ -5,11 +5,7 @@ import CoverImageComponent from './components/coverImage'
 import CoverContenstComponent from './components/coverContents'
 import HomeButton from '../story/homeButtonComponent';
 
-interface CoverProps {
-  setState: (arg0: any) => void;
-}
-
-const Cover: React.FC<CoverProps> = ({ setState }) => {
+const Cover = () => {
 
   return (
     <StyledCoverContainer>

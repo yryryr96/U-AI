@@ -11,7 +11,7 @@ const Seq17 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/clothes_fire_animation.gif'/>
+        <ImageComponent src='/resources/clothes_fire_animation.gif'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

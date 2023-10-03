@@ -22,7 +22,7 @@ const OX = () => {
 
         <StyledLine />
         <StyledTutorialContainer>
-        <ImageComponent src='./resources/moving_panda3.png' style={{marginRight : "22vh"}} />
+        <ImageComponent src='/resources/moving_panda3.png' style={{marginRight : "22vh"}} />
         </StyledTutorialContainer>
         <TextComponent text={text} style={{marginTop : '10vh', fontSize: '3.5rem' }} />
         {/* <AudioPlayer file={audioUrl} /> */}

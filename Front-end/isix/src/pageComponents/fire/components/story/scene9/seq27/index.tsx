@@ -12,7 +12,7 @@ const Seq27 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/final.png'/>
+        <ImageComponent src='/resources/final.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

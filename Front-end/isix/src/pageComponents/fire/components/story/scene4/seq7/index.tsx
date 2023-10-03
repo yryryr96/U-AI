@@ -17,7 +17,7 @@ const Seq7 = ({ onResult }: Seq7Props ) => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/speak_fire.png'/>
+        <ImageComponent src='/resources/speak_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text}/>
       <StyledSpan>

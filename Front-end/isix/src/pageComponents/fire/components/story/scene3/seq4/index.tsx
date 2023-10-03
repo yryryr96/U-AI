@@ -10,7 +10,7 @@ const Seq4 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/fire_animation.gif'/>
+        <ImageComponent src='/resources/fire_animation.gif'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

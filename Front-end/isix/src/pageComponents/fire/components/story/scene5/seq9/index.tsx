@@ -10,7 +10,7 @@ const Seq9 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/wonder_stair.png'/>
+        <ImageComponent src='/resources/wonder_stair.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
