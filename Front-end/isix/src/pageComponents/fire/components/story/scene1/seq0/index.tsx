@@ -4,6 +4,7 @@ import AudioPlayer from "@/commonComponents/story/audioComponent";
 import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -58,6 +59,7 @@ useEffect(() => {
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      <HomeButton/>
     </StyledCaptureBox>
   )
 }

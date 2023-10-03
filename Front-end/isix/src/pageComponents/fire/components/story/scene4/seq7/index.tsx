@@ -4,6 +4,7 @@ import Image from "next/image"
 import { StyledSpan, StyledStoryContainer } from "../../Story.styled"
 import RecordComponent from "@/commonComponents/story/recordComponent"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import HomeButton from "@/commonComponents/story/homeButtonComponent"
 
 interface Seq7Props {
   onResult: (result: number) => void;
@@ -25,6 +26,7 @@ const Seq7 = ({ onResult }: Seq7Props ) => {
       {/* recordComponent에서 시간 axios 보내는 시간 조정하기 */}
       <RecordComponent onResult = { onResult }/>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }
