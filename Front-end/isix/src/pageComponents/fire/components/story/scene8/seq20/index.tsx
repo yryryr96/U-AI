@@ -12,7 +12,7 @@ const Seq20 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/firefighterpanda.svg'/>
+        <ImageComponent src='/resources/firefighterpanda.svg'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

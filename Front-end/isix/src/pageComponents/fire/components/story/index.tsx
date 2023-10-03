@@ -81,10 +81,10 @@ const Story = () => {
     } else if (e.key === 'ArrowRight' && state === totalPage) {
       // main으로 이동
       if (window.confirm('메인 페이지로 이동하시겠습니까?')) {
-        setState(-1)
+        setState(0)
         router.push('/main')
       }
-    } else if (e.key === 'ArrowLeft' && state >= 0) {
+    } else if (e.key === 'ArrowLeft' && state > 0) {
       setState(state - 1)
     }
     setIsLoading(true)
@@ -124,7 +124,6 @@ const Story = () => {
   
   return (
     <>
-      {state === -1 && <Cover setState={setState} />}
       {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}

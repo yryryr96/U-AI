@@ -20,7 +20,7 @@ const Scene = () => {
   const [temp] = useState(() => new THREE.Vector3())
   const layers = [
     { texture: textures[0], z: 28, scale: scaleW },
-    { texture: textures[1], factor: 0.02, scaleFactor: 1.05, z: 44, wiggle: 0.5, scale: scaleW },
+    { texture: textures[1], factor: 0.02, scaleFactor: 1.02, z: 44, wiggle: 0.2, scale: scaleW },
     { texture: textures[2], factor: 0.04, scaleFactor: 1.07, z: 40, wiggle: 0.4, scale: scaleW },
     { texture: textures[3], factor: 0.05, scaleFactor: 0.98, z: 42, wiggle: 0.6, scale: scaleW },
     { texture: textures[4], factor: 0.05, scaleFactor: 0.95, z: 41, wiggle: 0.6, scale: scaleW },
@@ -38,8 +38,8 @@ const Scene = () => {
   return (
     <group ref={group}>
       <FliesEffect count={100} radius={80} colors={['white']} />
-      {layers.map(({ onClick = null,scale, texture, ref, factor = 0, scaleFactor = 1, wiggle = 0, z }, i) => (
-        <Plane onClick={onClick} scale={scale} args={[1, 1, wiggle ? 10 : 1, wiggle ? 10 : 1]} position={[0 , 0, z]} key={i} ref={ref}>
+      {layers.map(({ onClick = null,scale, texture, ref, factor = 0, scaleFactor = 1, wiggle = 0, x= 0,z }, i) => (
+        <Plane onClick={onClick} scale={scale} args={[1, 1, wiggle ? 10 : 1, wiggle ? 10 : 1]} position={[x , 0, z]} key={i} ref={ref}>
           <layerMaterial movement={movement} textr={texture} factor={factor} ref={(el) => (layersRef.current[i] = el)} wiggle={wiggle} scale={scaleFactor} />
         </Plane>
       ))}

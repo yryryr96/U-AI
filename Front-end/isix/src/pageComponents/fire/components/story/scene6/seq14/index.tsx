@@ -12,7 +12,7 @@ const Seq14 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/smoke.png'/>
+        <ImageComponent src='/resources/smoke.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
