@@ -11,7 +11,7 @@ const Seq16 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/avoid_smoke_panda.png'/>
+        <ImageComponent src='/resources/avoid_smoke_panda.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

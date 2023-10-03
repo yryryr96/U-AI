@@ -11,7 +11,7 @@ const Seq6 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/call.png'/>
+        <ImageComponent src='/resources/call.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

@@ -11,7 +11,7 @@ const Seq8Incorrect = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/speak_fire.png'/>
+        <ImageComponent src='/resources/speak_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text}/>
       <StyledQuizBox>

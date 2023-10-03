@@ -27,11 +27,11 @@ const Frame = ({ id, name, bg, width = 3, height = 4.85410196625, children, ...p
   return (
     <group {...props}>
       <mesh>
-        <roundedPlaneGeometry args={[width + .2, height + .2, 1.5]} />
+        <roundedPlaneGeometry args={[width + .2, height + .2, .2]} />
         <meshBasicMaterial color={'white'} />
       </mesh>
       <mesh  name={id} onClick={(e) => (e.stopPropagation(), hover(false),setLocation('/theme/' + e.object.name))} onPointerOver={(e) => (setTime(0),hover(true))} onPointerOut={() => hover(false)}>
-        <roundedPlaneGeometry args={[width, height, 1.5]} />
+        <roundedPlaneGeometry args={[width, height, .2]} />
         {hovered ?
           <shaderMaterial ref={shaderRef} attach="material" args={[portalShader(time)]} /> :
           <MeshPortalMaterial ref={portal} events={params?.id === id} side={THREE.DoubleSide}>
