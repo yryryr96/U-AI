@@ -16,7 +16,7 @@ const TagContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-image: url('/resources/pandaform2.png');
+  background-image: url('/resources/assets/pandaform.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position:center;

@@ -12,7 +12,7 @@ const Seq23 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='/resources/call119.png'/>
+        <ImageComponent src='/resources/images/call119.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

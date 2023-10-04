@@ -9,10 +9,10 @@ import CharacterScene from '../gifscene'
 const Scene = () => {
   const bgUrl = '/resources/background/sky1.png'
   const sunUrl = '/resources/background/sun.png'
-  const backUrl = '/resources/background/back2.png'
-  const cloud2Url = '/resources/background/cloud4.png'
-  const cloud3Url = '/resources/background/cloud5.png'
-  const cloud4Url = '/resources/background/cloud6.png'
+  const backUrl = '/resources/background/back.png'
+  const cloud2Url = '/resources/background/cloud1.png'
+  const cloud3Url = '/resources/background/cloud2.png'
+  const cloud4Url = '/resources/background/cloud3.png'
   const scaleW = useAspect(2000, 1100, 1.03)
   const textures = useTexture([bgUrl, backUrl, cloud2Url, cloud3Url, cloud4Url, sunUrl])
   const group = useRef()
@@ -44,8 +44,8 @@ const Scene = () => {
           <layerMaterial movement={movement} textr={texture} factor={factor} ref={(el) => (layersRef.current[i] = el)} wiggle={wiggle} scale={scaleFactor} />
         </Plane>
       ))}
-      <CharacterScene position={[-100, -37, 0]} width={240} height={240} gifUrl='/resources/teacherpanda2.gif' />
-      <CharacterScene position={[60, -40, 0]} width={200} height={200} gifUrl='/resources/policepanda3.gif' />
+      <CharacterScene position={[-100, -37, 0]} width={240} height={240} gifUrl='/resources/images/teacherpanda2.gif' />
+      <CharacterScene position={[60, -40, 0]} width={200} height={200} gifUrl='/resources/images/policepanda3.gif' />
     </group>
   )
 };

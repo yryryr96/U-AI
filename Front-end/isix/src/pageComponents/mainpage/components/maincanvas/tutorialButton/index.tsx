@@ -23,7 +23,7 @@ const TutorialButton = () => {
             cursor : 'pointer'
         }}>
             <div style={{width:'100%', height:'100%'}}>
-                <Image src={'/resources/questionbutton.png'} layout='fill' objectFit='cover' alt="" /> 
+                <Image src={'/resources/storyButton/questionbutton.png'} layout='fill' objectFit='cover' alt="" /> 
             </div>
         </button>
     )
