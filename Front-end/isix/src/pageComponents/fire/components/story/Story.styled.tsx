@@ -45,7 +45,7 @@ export const StyledCamText = styled.div`
 
 export const StyledCamImg = styled.div`
   position: absolute;
-  top: 3.5rem;
+  top: 6rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -91,7 +91,7 @@ export const StyledTimer = styled.div`
 `
 
 export const StyledRight = styled.div`
-  font-size: 13rem;
+  font-size: 12rem;
   font-weight: bold;
   color: lightgreen;
   z-index: 3;
@@ -103,7 +103,7 @@ export const StyledRight = styled.div`
 `
 
 export const StyledLeft = styled.div`
-  font-size: 13rem;
+  font-size: 12rem;
   font-weight: bold;
   color: lightgreen;
   z-index: 3;
