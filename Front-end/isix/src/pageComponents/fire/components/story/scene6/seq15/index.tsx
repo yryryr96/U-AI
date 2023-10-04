@@ -2,12 +2,13 @@ import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, 
 import CamComponent from "@/commonComponents/story/camComponent"
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import Image from "next/image"
-import { customAxios } from "@/api/api";
+import { socketAxios } from "@/api/api";
 import { useEffect, useRef, useState } from "react"
 import html2canvas from "html2canvas";
 import useFireState from "@/stores/fire/useFireState";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
+import { MOTION_URL } from "@/config";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -49,32 +50,33 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   // zustand
   const { state, setState } = useFireState();
   // motion
-  // const motionEvent = async () => {
-  //   const url = "api/events/motion";
-  //   const sessionId = localStorage.getItem('socketId')
-  //   const data = {
-  //     sessionId: sessionId,
-  //     eventName: 'evacuatefire',
-  //     numChild: 4, // 처음에 입력받은 값 넣기
-  //     limit: 10 // 시간 초
-  //   };
+  const motionEvent = async () => {
+    const sessionId = localStorage.getItem('socketId')
+    const data = {
+      sessionId: sessionId,
+      eventName: 'evacuatefire',
+      numChild: 4, // 처음에 입력받은 값 넣기
+      limit: 10 // 시간 초
+    };
 
-  //   try {
-  //     const response = await customAxios.post(url, data);
-  //     if (response.data.result === 1) {
-  //       setState(state + 1)
-  //     } else {
-  //       setAudioUrl2('/resources/audioFile/incorrect.mp3');
-  //       motionEvent();
-  //     }
-  //   } catch (error) {
-  //     console.error('error', error);
-  //   }
-  // };
+    try {
+      if (MOTION_URL) {
+        const response = await socketAxios.post(MOTION_URL, data);
+        if (response.data.result === 1) {
+          setState(state + 1)
+        } else {
+          setAudioUrl2('/resources/audioFile/incorrect.mp3');
+          motionEvent();
+        }
+      }
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   motionEvent();
-  // }, [])
+  useEffect(() => {
+    motionEvent();
+  }, [])
 
   return (
     <StyledCaptureBox className="cap" ref={captureRef}>
