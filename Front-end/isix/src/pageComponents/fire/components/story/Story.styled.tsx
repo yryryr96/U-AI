@@ -91,7 +91,7 @@ export const StyledTimer = styled.div`
 `
 
 export const StyledRight = styled.div`
-  font-size: 13rem;
+  font-size: 12rem;
   font-weight: bold;
   color: lightgreen;
   z-index: 3;
@@ -103,7 +103,7 @@ export const StyledRight = styled.div`
 `
 
 export const StyledLeft = styled.div`
-  font-size: 13rem;
+  font-size: 12rem;
   font-weight: bold;
   color: lightgreen;
   z-index: 3;
