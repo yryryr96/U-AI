@@ -8,7 +8,7 @@ export interface FireState {
 
 const useFireState = create<FireState>()(
   persist((set) => ({
-    state: -1,
+    state: 0,
     setState: (value) => set({ state: value }),
   }), {
     name: 'fireState', // 스토어 이름

@@ -4,6 +4,7 @@ import { StyledStoryContainer } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
 import crawlPanda from "../../../../../../../public/resources/crawl_panda.json"
 import Lottie from "react-lottie-player";
+import HomeButton from "@/commonComponents/story/homeButtonComponent"
 
 const Seq19 = () => {
   const text: string = `옷에 불이 붙었을 때는 불이 더 커지기 전에
@@ -16,6 +17,7 @@ const Seq19 = () => {
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }

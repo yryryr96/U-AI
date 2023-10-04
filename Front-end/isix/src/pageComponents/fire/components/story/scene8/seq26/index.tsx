@@ -2,6 +2,7 @@ import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { StyledStoryContainer } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import HomeButton from "@/commonComponents/story/homeButtonComponent"
 
 const Seq26 = () => {
   const text: string = `소방관 님들은 불이 난 곳에 바로 출동할 수 있도록
@@ -11,10 +12,11 @@ const Seq26 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/call119.png'/>
+        <ImageComponent src='/resources/call119.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }

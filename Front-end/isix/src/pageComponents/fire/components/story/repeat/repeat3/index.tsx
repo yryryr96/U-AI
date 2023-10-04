@@ -2,15 +2,17 @@ import { useEffect, useState } from "react"
 import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
+  ocrEvent: () => void;
 }
 
-const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
+const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, ocrEvent}) => {
   const text: string = '불을 끄고 사람을 구해주는 분들은 누구일까요?'
   const audioUrl: string = '/resources/audioFile/repeat3.mp3'
   
@@ -18,8 +20,12 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setTimer(3);
-    }, 5000);
+      setTimer(10);
+    }, 3000);
+    
+    setTimeout(() => {
+      ocrEvent();
+    },7000)
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -55,6 +61,7 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
         </StyledQuizBox>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }

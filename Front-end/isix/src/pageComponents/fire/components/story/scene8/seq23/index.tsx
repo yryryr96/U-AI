@@ -2,6 +2,7 @@ import ImageComponent from "@/commonComponents/story/imageComponent"
 import TextComponent from "@/commonComponents/story/textComponent"
 import { StyledStoryContainer } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
+import HomeButton from "@/commonComponents/story/homeButtonComponent"
 
 const Seq23 = () => {
   const text: string = `집에서 놀고 있다가 불이 붙은 것을 발견했어요.
@@ -11,10 +12,11 @@ const Seq23 = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='./resources/find_fire.png'/>
+        <ImageComponent src='/resources/find_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />
+      <HomeButton />
     </>
   )
 }

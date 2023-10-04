@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react"
 import html2canvas from "html2canvas";
 import useFireState from "@/stores/fire/useFireState";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
+import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -95,6 +96,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
       {audioUrl2 && <AudioPlayer style={{visible: 'none'}} file={audioUrl2} />}
+      <HomeButton />
     </StyledCaptureBox>
   )
 }
