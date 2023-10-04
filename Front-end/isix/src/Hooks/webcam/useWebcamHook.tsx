@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import Webcam from 'react-webcam';
 
 const useWebcam = (socketUrl: string, sendInterval: number) => {
   
@@ -111,7 +110,7 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
   return {
     startStream,
     stopStream, 
-    videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%' }} ref={videoRef}  autoPlay playsInline muted />, 
+    videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%', transform: 'scaleX(-1)' }} ref={videoRef}  autoPlay playsInline muted />, 
     hiddenCanvasElm : <canvas ref={canvasRef} style={{ display: 'none' }}/> };
 }
 

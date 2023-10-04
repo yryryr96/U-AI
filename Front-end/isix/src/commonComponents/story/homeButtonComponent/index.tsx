@@ -13,10 +13,10 @@ const HomeButton = () => {
         
         style = {{
             position: 'fixed',
-            left: '30px',
-            top: '30px',
-            width: '100px',
-            height: '100px',
+            left: '1%',
+            top: '3%',
+            width: '90px',
+            height: '90px',
             background: 'none',
             border: 'none',
             zIndex: '5',

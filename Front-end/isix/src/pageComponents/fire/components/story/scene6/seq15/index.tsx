@@ -91,7 +91,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledCamImg>
-          <Image src='/resources/foldPanda.gif' width={400} height={300} alt="smoke"/>
+          <Image src='/resources/foldpandaTest.webp' width={400} height={280} alt="smoke"/>
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
