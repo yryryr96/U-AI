@@ -4,11 +4,10 @@ import { StyledStoryContainer } from "../../Story.styled"
 import AudioPlayer from "@/commonComponents/story/audioComponent"
 import HomeButton from "@/commonComponents/story/homeButtonComponent"
 
-const Seq26 = () => {
-  const text: string = `소방관 님들은 불이 난 곳에 바로 출동할 수 있도록
-    올바른 신고 전화를 기다리고 있어요.
-    그러니 119에 장난으로 전화를 걸면 안 되겠죠?`
-  const audioUrl: string = '/resources/audioFile/seq26.mp3'
+const Seq22 = () => {
+  const text: string = `불이 났을 때는 119에 전화를 해야 해요.
+    119에 전화할 땐, 불이 난 위치를 정확히 말해야 해요.`
+  const audioUrl: string = '/resources/audioFile/seq22.mp3'
   return (
     <>
       <StyledStoryContainer>
@@ -21,4 +20,4 @@ const Seq26 = () => {
   )
 }
 
-export default Seq26
+export default Seq22

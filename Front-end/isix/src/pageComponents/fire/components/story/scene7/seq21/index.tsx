@@ -15,7 +15,7 @@ interface WebcamProps {
 }
 
 const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
-  const text: string = '누구일까요?'
+  const text: string = '어디에 전화를 걸어야 할까요?'
   const [timer, setTimer] = useState<number>(-1);
   const [audioUrl, setAudioUrl] = useState<string>('')
   const [left, setLeft] = useState<number>(0);
@@ -37,7 +37,7 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         setLeft(response.data.left)
         setRight(response.data.right)
         if (timer === 0) {
-          if (response.data.left > response.data.right) {
+          if (response.data.left < response.data.right) {
             setState(state + 1)
           } else {
             setAudioUrl('/resources/audioFile/incorrect.mp3');
@@ -79,16 +79,16 @@ const Seq21: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <BorderWidth />
         <BorderWidth />
       </StyledBorders>
-
+  
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <Image src='/resources/text_firefighter2.png' width={330} height={130} alt="firefighter"/>
+          <Image src='/resources/text_teacher2.png' width={330} height={130} alt="teacher"/>
           <StyledLeft>{left}</StyledLeft>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
           <StyledRight>{right}</StyledRight>
-          <Image src='/resources/text_police2.png' width={330} height={130} alt="police"/>
+          <Image src='/resources/text_119_2.png' width={330} height={130} alt="119"/>
         </StyledQuizBox>
       </StyledStoryCam>
       {audioUrl && <AudioPlayer file={audioUrl} />}

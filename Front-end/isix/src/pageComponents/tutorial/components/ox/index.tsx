@@ -22,7 +22,7 @@ const OX = () => {
 
         <StyledLine />
         <StyledTutorialContainer>
-        <ImageComponent src='./resources/moving_panda4.png' style={{marginRight : "14vw", marginTop : "12vh"}} />
+        <ImageComponent src='/resources/moving_panda4.png' style={{marginRight : "14vw", marginTop : "12vh"}} />
         </StyledTutorialContainer>
 
         <TextComponent text={text} style={{marginTop : '10vh', fontSize: '3.5rem' }} />
