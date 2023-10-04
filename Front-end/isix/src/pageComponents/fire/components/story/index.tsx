@@ -41,7 +41,8 @@ import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
 import { useRouter } from 'next/navigation'
 import useImageUrlState from '@/stores/capture/useImageUrlState'
-import { customAxios } from '@/api/api'
+import { socketAxios } from '@/api/api'
+import { OCR_API_URL } from "@/config";
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -56,7 +57,6 @@ const Story = () => {
 
   // OCR
   const ocrEvent = async () => {
-    const url = "api/events/multiocr";
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
@@ -64,8 +64,10 @@ const Story = () => {
     };
 
     try {
-      const response = await customAxios.post(url, data);
-      console.log(response.data); 
+      if (OCR_API_URL) {
+        const response = await socketAxios.post(OCR_API_URL, data);
+        console.log(response.data); 
+      }
     } catch (error) {
       console.error('error', error);
     }

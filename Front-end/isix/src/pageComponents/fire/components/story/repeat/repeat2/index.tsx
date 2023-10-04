@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorders, BorderHeight, BorderWidth } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent"
-import { customAxios } from "@/api/api";
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {

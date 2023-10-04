@@ -2,10 +2,11 @@ import CamComponent from "@/commonComponents/story/camComponent"
 import { useEffect, useState, useRef } from "react"
 import { StyledLeft, StyledRight, BorderHeight, BorderWidth, StyledBorders, StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import Image from "next/image"
-import { customAxios } from "@/api/api";
+import { socketAxios } from "@/api/api";
 import AudioPlayer from "@/commonComponents/story/audioComponent";
 import html2canvas from "html2canvas";
 import useFireState from "@/stores/fire/useFireState";
+import { OX_API_URL } from "@/config"
 
 interface WebcamProps {
   videoElm: JSX.Element;
@@ -28,7 +29,6 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   
   // OX
   const oxEvent = async () => {
-    const url = "api/events/ox";
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
@@ -36,18 +36,20 @@ const Seq11: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
     };
 
     try {
-      const response = await customAxios.post(url, data);
-      if (response.data.result === 1) {
-        setLeft(response.data.left)
-        setRight(response.data.right)
-        if (timer === 0) {
-          if (response.data.left > response.data.right) {
-            setTimeout(() => {
-                setState(state + 1);
-            }, 500);
-          } else {
-            setAudioUrl('/resources/audioFile/incorrect.mp3');
-            setTimer(10)
+      if (OX_API_URL) {
+        const response = await socketAxios.post(OX_API_URL, data);
+        if (response.data.result === 1) {
+          setLeft(response.data.left)
+          setRight(response.data.right)
+          if (timer === 0) {
+            if (response.data.left > response.data.right) {
+              setTimeout(() => {
+                  setState(state + 1);
+              }, 500);
+            } else {
+              setAudioUrl('/resources/audioFile/incorrect.mp3');
+              setTimer(10)
+            }
           }
         }
       }
