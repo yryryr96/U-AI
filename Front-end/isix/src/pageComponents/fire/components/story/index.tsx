@@ -49,9 +49,8 @@ const Story = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
-  const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
+  const {videoElm , hiddenCanvasElm, startStream, stopStream, devices, setDeviceId}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   const { resetImageUrls } = useImageUrlState();
-  
   const totalPage = 32; // 총 페이지 수
 
   // OCR
@@ -86,20 +85,10 @@ const Story = () => {
     setIsLoading(true)
   };
 
-  const handleMouseClick = (e: any) => {
-    e.preventDefault();
-    if (e.button === 2) { 
-      setState(state + 1);
-    }
-  };
-
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('mousedown', handleMouseClick);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('mousedown', handleMouseClick);
     };
   }, [state])
 
@@ -120,7 +109,7 @@ const Story = () => {
   
   return (
     <>
-      {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
+      {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} devices={devices} setDeviceId={setDeviceId}/>}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 3 && <Seq3 />}

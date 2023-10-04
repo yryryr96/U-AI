@@ -5,15 +5,18 @@ import { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
+import CamSelect from "@/commonComponents/story/camSelectComponent";
 
 interface WebcamProps {
   videoElm: JSX.Element;
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
+  devices : any;
+  setDeviceId : any;
 }
 
-const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
+const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, devices, setDeviceId }) => {
   const text: string = `다같이 소방관 판다와 함께
     화재 안전에 대해 배워볼까요?`
   const audioUrl: string = '/resources/audioFile/seq0.mp3'
@@ -34,13 +37,13 @@ const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
     }
   };
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    handleCapture();
-  }, 2000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleCapture();
+    }, 2000);
 
-  return () => clearTimeout(timer);
-}, []);
+    return () => clearTimeout(timer);
+  }, []);
 
 
   return (
@@ -53,8 +56,11 @@ useEffect(() => {
         <BorderWidth />
         <BorderWidth />
       </StyledBorders>
-
-      <StyledCamText>{text}</StyledCamText>
+      
+      <StyledCamText>{text}
+      <CamSelect devices={devices} setDeviceId={setDeviceId}/>
+      </StyledCamText>     
+      
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>
