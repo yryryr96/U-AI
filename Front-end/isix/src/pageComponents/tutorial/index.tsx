@@ -4,6 +4,7 @@ import { StyledButtonContainer,StyledContainer,StyledPaperContainer,StyledTitleC
 import OX from './components/ox';
 import Sound from './components/sound';
 import OCR from './components/ocr';
+import HomeButton from '@/commonComponents/story/homeButtonComponent';
 
 const Tutorial = () => {
   const [state,setState] = useState<number>(0);
@@ -36,7 +37,8 @@ const Tutorial = () => {
   console.log(state,"스테이트")
   return (
     <>
-      <StyledContainer>
+      <HomeButton/>
+      <StyledContainer>   
         <StyledTitleContainer>
           <StyledText marginTop="15vh">
             {textByState()}

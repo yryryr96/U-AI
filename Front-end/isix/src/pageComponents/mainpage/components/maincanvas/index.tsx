@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import Loading from '@/commonComponents/loading'
 import Cover from '@/commonComponents/cover'
 import { StyledMainThemeContainer, StyledMainThemePaper } from './MainCanvas.styled'
+import TutorialButton from './tutorialButton'
 
 extend(geometry)
 
@@ -30,6 +31,8 @@ export const MainCanvas = () => {
 
   return (
     <>
+      {!isLoading ? <TutorialButton /> : null}
+      
       <Canvas style={isLoading ? {visibility: "hidden"} : {visibility:"visible"}} camera={{ fov: 6.7, position: [0, 0, 100] }} eventPrefix="client" gl={{alpha: true}}>
         <BackgroundImage />
         {/* {!match && <CharacterScene position={[1.6, 4.5, -1]} width={1000} height={1000} gifUrl='/resources/teacherpanda2.gif' />} */}
