@@ -1,10 +1,10 @@
-import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledStoryCam } from "../../Story.styled";
-import CamComponent from "@/commonComponents/story/camComponent";
-import AudioPlayer from "@/commonComponents/story/audioComponent";
-import Image from "next/image"
-import crawlPanda from "../../../../../../../public/resources/crawl_panda.json"
-import Lottie from "react-lottie-player";
+import CamComponent from "@/commonComponents/story/camComponent"
+import { useEffect, useState } from "react"
+import { StyledLeft, StyledRight, BorderHeight, BorderWidth, StyledBorders, StyledLine, StyledQuizBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
+import Image from "next/image";
 import { customAxios } from "@/api/api";
+import AudioPlayer from "@/commonComponents/story/audioComponent";
+import useFireState from "@/stores/fire/useFireState";
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
 
 interface WebcamProps {
@@ -15,27 +15,59 @@ interface WebcamProps {
 }
 
 const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
-  const text: string = '판다를 따라 몸을 굴러주세요'
-  const audioUrl: string = '/resources/audioFile/seq18.mp3'
-
-  // motion
-  const motionEvent = async () => {
-    const url = "api/events/motion";
+  const text: string = '누구일까요?'
+  const [timer, setTimer] = useState<number>(-1);
+  const [audioUrl, setAudioUrl] = useState<string>('')
+  const [left, setLeft] = useState<number>(0);
+  const [right, setRight] = useState<number>(0);
+  // zustand
+  const { state, setState } = useFireState();
+  // OX
+  const oxEvent = async () => {
+    const url = "api/events/ox";
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
-      eventName: 'evacuatefire',
       numChild: 1, // 처음에 입력받은 값 넣기
-      limit: 10 // 시간 초
     };
 
     try {
       const response = await customAxios.post(url, data);
-      console.log(response.data); 
+      if (response.data.result === 1) {
+        setLeft(response.data.left)
+        setRight(response.data.right)
+        if (timer === 0) {
+          if (response.data.left > response.data.right) {
+            setState(state + 1)
+          } else {
+            setAudioUrl('/resources/audioFile/incorrect.mp3');
+            setTimer(10)
+          }
+        }
+      }
     } catch (error) {
       console.error('error', error);
     }
   };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTimer(10);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  useEffect(() => {
+    if (0 <= timer) {
+      const intervalId = setInterval(async() => {
+        setTimer((prevTimer) => prevTimer - 1);
+        await oxEvent();
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [timer]);
 
   return (
     <>
@@ -48,15 +80,18 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <BorderWidth />
       </StyledBorders>
 
-      <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
-        <StyledCamImg>
-          <Lottie style={{width: 400, height: 400}} loop animationData={crawlPanda} play />
-        </StyledCamImg>
+        <StyledLine />
+        <StyledQuizBox>
+          <Image src='/resources/text_firefighter2.png' width={330} height={130} alt="firefighter"/>
+          <StyledLeft>{left}</StyledLeft>
+          <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
+          <StyledRight>{right}</StyledRight>
+          <Image src='/resources/text_police2.png' width={330} height={130} alt="police"/>
+        </StyledQuizBox>
       </StyledStoryCam>
-      <AudioPlayer file={audioUrl} />
-      <HomeButton />
+      {audioUrl && <AudioPlayer file={audioUrl} />}
     </>
   )
 }
