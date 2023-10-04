@@ -50,8 +50,8 @@ const Tutorial = () => {
           {/* text 부분 추후에 state로 관리 */}
         </StyledTitleContainer>
 
-        <StyledButtonContainer onClick={decrementState} src='/resources/storyButton/leftmovebutton.png' getLeft='4vw' />
-        <StyledButtonContainer onClick={incrementState} src='/resources/storyButton/rightmovebutton.png' getLeft='88vw'/>
+        <StyledButtonContainer onClick={decrementState} src='/resources/storyButton/leftmovebutton.png' getLeft='1vw' />
+        <StyledButtonContainer onClick={incrementState} src='/resources/storyButton/rightmovebutton.png' getLeft='93vw'/>
 
         <StyledPaperContainer>
           {state === 0 && <OX />}
