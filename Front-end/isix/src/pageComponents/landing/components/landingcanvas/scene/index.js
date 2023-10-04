@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import FliesEffect from '../flieseffect'
 import '../layermaterial'
+import CharacterScene from '../gifscene'
 
 const Scene = () => {
   const bgUrl = '/resources/sky1.png'
@@ -43,6 +44,8 @@ const Scene = () => {
           <layerMaterial movement={movement} textr={texture} factor={factor} ref={(el) => (layersRef.current[i] = el)} wiggle={wiggle} scale={scaleFactor} />
         </Plane>
       ))}
+      <CharacterScene position={[-100, -37, 0]} width={240} height={240} gifUrl='/resources/teacherpanda2.gif' />
+      <CharacterScene position={[60, -40, 0]} width={200} height={200} gifUrl='/resources/policepanda3.gif' />
     </group>
   )
 };
