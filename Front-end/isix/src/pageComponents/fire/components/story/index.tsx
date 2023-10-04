@@ -42,10 +42,12 @@ import useFireState from '@/stores/fire/useFireState'
 import { useRouter } from 'next/navigation'
 import useImageUrlState from '@/stores/capture/useImageUrlState'
 import { customAxios } from '@/api/api'
+import useOcrCorrect from '@/stores/ocr/useOcrCorrect'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const { state, setState } = useFireState();
+  const { correct, setCorrect } = useOcrCorrect();
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
@@ -54,7 +56,7 @@ const Story = () => {
   const totalPage = 32; // 총 페이지 수
 
   // OCR
-  const ocrEvent = async () => {
+  const ocrEvent = async (answer:string) => {
     const url = "api/events/multiocr";
     const sessionId = localStorage.getItem('socketId')
     const data = {
@@ -64,7 +66,11 @@ const Story = () => {
 
     try {
       const response = await customAxios.post(url, data);
-      console.log(response.data); 
+      console.log(response.data);
+      const correctPeople = response.data.ocrDtoList.filter(item => item.inferText === answer);
+      console.log(correctPeople);
+      setCorrect(correctPeople.length);
+
     } catch (error) {
       console.error('error', error);
     }
