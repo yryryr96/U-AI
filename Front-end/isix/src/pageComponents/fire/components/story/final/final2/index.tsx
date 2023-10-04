@@ -28,7 +28,7 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
       const imageUrl = canvas.toDataURL('image/png');
   
       const action = imageUrls.length < 4 ? 'add' : 'update';
-      updateImageUrl(imageUrl, action);
+      updateImageUrl(imageUrl, action, 3);
       console.log('캡쳐 완료');
     }
   };

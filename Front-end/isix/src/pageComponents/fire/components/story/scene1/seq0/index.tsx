@@ -29,7 +29,7 @@ const Seq0: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
   
       // 배열 비어있으면 추가, 한 개 있으면 마지막 값 변경
       const action = imageUrls.length == 0 ? 'add' : 'update';
-      updateImageUrl(imageUrl, action);
+      updateImageUrl(imageUrl, action, 0);
       console.log('캡쳐 완료');
     }
   };
