@@ -23,7 +23,7 @@ const HomeButton = () => {
             cursor : 'pointer'
         }}>
             <div style={{width:'100%', height:'100%'}}>
-                <Image src={'/resources/homebutton.png'} layout='fill' objectFit='cover' alt="" /> 
+                <Image src={'/resources/storyButton/homebutton.png'} layout='fill' objectFit='cover' alt="" /> 
             </div>
         </button>
     )
