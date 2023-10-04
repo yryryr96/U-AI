@@ -6,27 +6,27 @@ import { StyledTutorialContainer,StyledLine,StyledTextContainer, StyledText} fro
 const OX = () => {
 
   const text: string = `정답이라고 생각하는 곳에 서주세요 !`
-  // const audioUrl: string = '/resources/audioFile/seq1.mp3'
+  const audioUrl: string = '/resources/audioFile/tutorialOX.mp3'
   return (
     <>
-        <StyledTextContainer getLeft="20vw">
-          <StyledText marginTop="14vh">
+        <StyledTextContainer getLeft="21.6vw">
+          <StyledText marginTop="9.8vh">
             왼쪽
           </StyledText>
         </StyledTextContainer>
-        <StyledTextContainer getLeft="63.4vw">
-          <StyledText marginTop="14vh">
+        <StyledTextContainer getLeft="64.8vw">
+          <StyledText marginTop="9.8vh">
             오른쪽
           </StyledText>
         </StyledTextContainer>
 
         <StyledLine />
         <StyledTutorialContainer>
-        <ImageComponent src='/resources/images/moving_panda4.png' style={{marginRight : "14vw", marginTop : "12vh"}} />
+        <ImageComponent src='/resources/images/moving_panda4.png' width={950} height={950} style={{marginRight : "4vw", marginTop : "16vh"}} />
         </StyledTutorialContainer>
 
-        <TextComponent text={text} style={{marginTop : '10vh', fontSize: '3.5rem' }} />
-        {/* <AudioPlayer file={audioUrl} /> */}
+        <TextComponent text={text} style={{marginTop : '13vh', fontSize: '3.5rem' }} />
+        <AudioPlayer file={audioUrl} />
     </>
   )
 }

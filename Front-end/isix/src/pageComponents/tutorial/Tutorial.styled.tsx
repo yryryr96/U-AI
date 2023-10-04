@@ -31,19 +31,19 @@ export const StyledTitleContainer = styled.div`
     position : fixed;
     align-items : center;
     justify-content : center;
-    background-image: url('/resources/assets/panda_sign1.png'); 
+    background-image: url('/resources/assets/panda_sign3.png'); 
     background-size: 100% 100%;
     height : 40vh;
-    width : 20vw ;
-    margin-top : -70vh;
+    width : 22vw ;
+    margin-top : -91.5vh;
     
 `
 
 export const StyledPaperContainer = styled.div`
   position: relative;
-  height : 80vh;
-  width : 75vw;
-  margin-top : 10vh;
+  height : 85vh;
+  width : 85vw;
+  margin-top : 7.5vh;
 
   &::before {
     content: "";
@@ -68,7 +68,7 @@ export const StyledLine = styled.div`
   left: 50%;
   transform: translate(-50%);
   width: 1vw;
-  height: 65vh;
+  height: 66vh;
   background-image: url('/resources/assets/line2.png');
   background-size: cover;
   z-index: -1;
@@ -83,11 +83,11 @@ export const StyledTextContainer = styled.div.attrs<{getLeft?: string}>(props =>
   align-items : flex-start;
   justify-content : center;
   position: fixed;
-  background-image: url('/resources/assets/panda_sign2.png'); 
+  background-image: url('/resources/assets/text_sign.svg'); 
   background-size: 100% 100%;
-  width: 17vw;
+  width: 14vw;
   height: 25vh;
-  margin-top : -13vh;
+  margin-top : -5vh;
   
   z-index: 1;
 `;
@@ -108,10 +108,10 @@ export const StyledButtonContainer = styled.div.attrs<{ getLeft?: string, src?: 
   justify-content: center;
   margin-top : 6vh;
   position: fixed;
-  width: 8vw;
+  width: 6vw;
   background-size: 100% 100%;
   background-image: url(${props => props.src}); 
-  height: 16vh;
+  height: 12vh;
   z-index : 2;
 
 `;
