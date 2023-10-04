@@ -42,7 +42,7 @@ export const StyledTitleContainer = styled.div`
 export const StyledPaperContainer = styled.div`
   position: relative;
   height : 85vh;
-  width : 85vw;
+  width : 75vw;
   margin-top : 7.5vh;
 
   &::before {
@@ -108,10 +108,10 @@ export const StyledButtonContainer = styled.div.attrs<{ getLeft?: string, src?: 
   justify-content: center;
   margin-top : 6vh;
   position: fixed;
-  width: 6vw;
+  width: 7vw;
   background-size: 100% 100%;
   background-image: url(${props => props.src}); 
-  height: 12vh;
+  height: 14vh;
   z-index : 2;
 
 `;

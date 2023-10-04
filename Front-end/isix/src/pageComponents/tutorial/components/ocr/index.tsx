@@ -9,7 +9,7 @@ const OCR = () => {
     return (
       <>  
         <StyledTutorialContainer>
-          <ImageComponent src='/resources/images/ocr_panda.png' style={{marginRight : "14vw", marginTop : "12vh"}} />
+          <ImageComponent src='/resources/images/ocr_panda.png' style={{marginRight : "11vw", marginTop : "12vh"}} />
         </StyledTutorialContainer>
 
         <TextComponent text={text} style={{marginTop : '10vh', fontSize: '3.5rem' }} />
