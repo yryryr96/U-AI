@@ -43,11 +43,13 @@ import { useRouter } from 'next/navigation'
 import useImageUrlState from '@/stores/capture/useImageUrlState'
 import { socketAxios } from '@/api/api'
 import { OCR_API_URL } from "@/config";
+import useOcrCorrect from '@/stores/ocr/useOcrCorrect'
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
   const { state, setState } = useFireState();
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { correct, setCorrect } = useOcrCorrect();
   const router = useRouter()
 
   const {videoElm , hiddenCanvasElm, startStream, stopStream, devices, setDeviceId}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
@@ -55,7 +57,7 @@ const Story = () => {
   const totalPage = 32; // 총 페이지 수
 
   // OCR
-  const ocrEvent = async () => {
+  const ocrEvent = async (answer:string) => {
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
@@ -65,7 +67,9 @@ const Story = () => {
     try {
       if (OCR_API_URL) {
         const response = await socketAxios.post(OCR_API_URL, data);
-        console.log(response.data); 
+        const correctPeople = response.data.ocrDtoList.filter(item => item.inferText === answer);
+        setCorrect(correctPeople.length);
+
       }
     } catch (error) {
       console.error('error', error);

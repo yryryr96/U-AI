@@ -3,28 +3,33 @@ import { StyledStoryCam, StyledTimer, StyledQuizBox, StyledCamText, StyledBorder
 import CamComponent from "@/commonComponents/story/camComponent";
 import AudioPlayer from "@/commonComponents/story/audioComponent"
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
+import useOcrCorrect from "@/stores/ocr/useOcrCorrect";
 
 interface WebcamProps {
   videoElm: JSX.Element;
   hiddenCanvasElm: JSX.Element; 
   startStream: () => void;
   stopStream: () => void;
-  ocrEvent: () => void;
+  ocrEvent: any;
 }
+
 
 const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm, ocrEvent}) => {
   const text: string = '불을 끄고 사람을 구해주는 분들은 누구일까요?'
   const audioUrl: string = '/resources/audioFile/repeat3.mp3'
-  
+  const answer = "소방관";
+
   const [timer, setTimer] = useState<number>(0);
+  const {correct, setCorrect} = useOcrCorrect();
 
   useEffect(() => {
+    setCorrect(0);
     const timeoutId = setTimeout(() => {
       setTimer(10);
     }, 3000);
     
     setTimeout(() => {
-      ocrEvent();
+      ocrEvent(answer);
     },7000)
 
     return () => clearTimeout(timeoutId);

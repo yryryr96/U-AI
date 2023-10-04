@@ -114,6 +114,17 @@ export const StyledLeft = styled.div`
   text-align: center;
 `
 
+export const StyledCenter = styled.div`
+  font-size: 12rem;
+  font-weight: bold;
+  color: lightgreen;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  top : 100px;
+  text-align: center;
+`
+
 export const StyledSpan = styled.span`
   display: flex;
   justify-content: center;
