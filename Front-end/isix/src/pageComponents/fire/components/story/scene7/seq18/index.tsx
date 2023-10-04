@@ -84,11 +84,11 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
         <StyledLine />
         <StyledQuizBox>
-          <Image src='/resources/text_firefighter2.png' width={330} height={130} alt="firefighter"/>
+          <Image src='/resources/assets/text_firefighter2.png' width={330} height={130} alt="firefighter"/>
           <StyledLeft>{left}</StyledLeft>
           <StyledTimer>{timer > 0 ? timer : ''}</StyledTimer>
           <StyledRight>{right}</StyledRight>
-          <Image src='/resources/text_police2.png' width={330} height={130} alt="police"/>
+          <Image src='/resources/assets/text_police2.png' width={330} height={130} alt="police"/>
         </StyledQuizBox>
       </StyledStoryCam>
       {audioUrl && <AudioPlayer file={audioUrl} />}

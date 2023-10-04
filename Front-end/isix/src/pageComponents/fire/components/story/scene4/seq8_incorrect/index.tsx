@@ -11,11 +11,11 @@ const Seq8Incorrect = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='/resources/speak_fire.png'/>
+        <ImageComponent src='/resources/images/speak_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text}/>
       <StyledQuizBox>
-        <Image src='/resources/volume_icon.png' width={80} height={60} alt="volume_icon"/>
+        <Image src='/resources/assets/volume_icon.png' width={80} height={60} alt="volume_icon"/>
       </StyledQuizBox>
       <AudioPlayer file={audioUrl} />
       <HomeButton />

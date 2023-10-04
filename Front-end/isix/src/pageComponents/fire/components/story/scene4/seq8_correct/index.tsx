@@ -11,7 +11,7 @@ const Seq8Correct = () => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='/resources/speak_fire.png'/>
+        <ImageComponent src='/resources/images/speak_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text} />
       <AudioPlayer file={audioUrl} />

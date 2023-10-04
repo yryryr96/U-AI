@@ -17,11 +17,11 @@ const Seq7 = ({ onResult }: Seq7Props ) => {
   return (
     <>
       <StyledStoryContainer>
-        <ImageComponent src='/resources/speak_fire.png'/>
+        <ImageComponent src='/resources/images/speak_fire.png'/>
       </StyledStoryContainer>
       <TextComponent text={text}/>
       <StyledSpan>
-        <Image src='/resources/volume_icon.png' width={70} height={60} alt="volume_icon"/>
+        <Image src='/resources/assets/volume_icon.png' width={70} height={60} alt="volume_icon"/>
       </StyledSpan>
       {/* recordComponent에서 시간 axios 보내는 시간 조정하기 */}
       <RecordComponent onResult = { onResult }/>

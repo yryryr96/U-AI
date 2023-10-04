@@ -57,8 +57,8 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
       </StyledStoryCam>
       <StyledCamImg>
-        <Image src='/resources/firefighterpanda.svg' width={400} height={450} alt="firefighter"  style={{ marginTop: '14rem' }}/>
-        <Image src='/resources/teacherpanda.svg' width={400} height={450} alt="teacher"  style={{ marginTop: '12rem' }}/>
+        <Image src='/resources/images/firefighterpanda.svg' width={400} height={450} alt="firefighter"  style={{ marginTop: '14rem' }}/>
+        <Image src='/resources/images/teacherpanda.svg' width={400} height={450} alt="teacher"  style={{ marginTop: '12rem' }}/>
       </StyledCamImg>
       <AudioPlayer file={audioUrl} />
       <HomeButton />

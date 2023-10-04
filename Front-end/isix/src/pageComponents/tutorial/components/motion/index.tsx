@@ -1,8 +1,8 @@
 import TextComponent from "@/commonComponents/story/textComponent"
 import { StyledTutorialContainer } from "../../Tutorial.styled"
 
-const Sound = () => {
-    const text: string = `판다와 함께 크게 외쳐주세요!`
+const Motion = () => {
+    const text: string = `판다의 동작을 따라해주세요!`
     // const audioUrl: string = '/resources/audioFile/seq1.mp3'
     return (
       <>  
@@ -15,4 +15,4 @@ const Sound = () => {
     )
 }
 
-export default Sound
+export default Motion
