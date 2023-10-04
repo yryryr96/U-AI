@@ -5,11 +5,11 @@ import { useFrame } from '@react-three/fiber'
 import '../layermaterial'
 
 const Scene = () => {
-  const bgUrl = '/resources/sky1.png'
-  const cloud1Url = '/resources/back2.png'
-  const cloud2Url = '/resources/cloud4.png'
-  const cloud3Url = '/resources/cloud5.png'
-  const cloud4Url = '/resources/cloud6.png'
+  const bgUrl = '/resources/background/sky1.png'
+  const cloud1Url = '/resources/background/back2.png'
+  const cloud2Url = '/resources/background/cloud4.png'
+  const cloud3Url = '/resources/background/cloud5.png'
+  const cloud4Url = '/resources/background/cloud6.png'
   const scaleW = useAspect(2000, 1080, 1.05)
   const textures = useTexture([bgUrl, cloud1Url, cloud2Url, cloud3Url, cloud4Url])
   const group = useRef()
