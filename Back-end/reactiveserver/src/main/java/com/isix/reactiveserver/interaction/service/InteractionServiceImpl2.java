@@ -249,7 +249,7 @@ public class InteractionServiceImpl2 implements InteractionService {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            String serverUrl = "http://127.0.0.1:8000/voice/api/voicerecognition/";
+            String serverUrl = multiSocketHandler.getGpuServerEndpoint(sessionId)+"/voice/api/voicerecognition/";
             System.out.println("STT 요청 보냄");
             ResponseEntity<String> response = restTemplate.exchange(serverUrl,
                     HttpMethod.POST,
