@@ -8,7 +8,6 @@ const CamSelect: React.FC<CamSelectProps> = ({setDeviceId, devices}) => {
         <div style={{height:20}}>
         <select style={{position:'fixed', left:"2%", top: "17%"}} onChange={(e)=>{
             setDeviceId(e.target.value)
-            console.log("change",e.target.value)
             }}
             >
             {devices && devices.map((device,index) => 
