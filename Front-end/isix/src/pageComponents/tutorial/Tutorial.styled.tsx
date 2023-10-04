@@ -31,7 +31,7 @@ export const StyledTitleContainer = styled.div`
     position : fixed;
     align-items : center;
     justify-content : center;
-    background-image: url('resources/assets/panda_sign1.png'); 
+    background-image: url('/resources/assets/panda_sign1.png'); 
     background-size: 100% 100%;
     height : 40vh;
     width : 20vw ;
@@ -69,7 +69,7 @@ export const StyledLine = styled.div`
   transform: translate(-50%);
   width: 1vw;
   height: 65vh;
-  background-image: url('resources/assets/line2.png');
+  background-image: url('/resources/assets/line2.png');
   background-size: cover;
   z-index: -1;
 `
@@ -83,7 +83,7 @@ export const StyledTextContainer = styled.div.attrs<{getLeft?: string}>(props =>
   align-items : flex-start;
   justify-content : center;
   position: fixed;
-  background-image: url('resources/assets/panda_sign2.png'); 
+  background-image: url('/resources/assets/panda_sign2.png'); 
   background-size: 100% 100%;
   width: 17vw;
   height: 25vh;
