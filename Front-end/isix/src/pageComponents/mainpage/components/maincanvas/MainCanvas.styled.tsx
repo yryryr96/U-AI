@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const StyledMainThemeContainer = styled.div`
     position: fixed;
     display : flex;
-    background: url('/resources/backGround2.jpg') no-repeat center;
+    background: url('/resources/background/backGround2.jpg') no-repeat center;
     background-size : cover;
     align-items : center;
     justify-content: center;
@@ -25,7 +25,7 @@ export const StyledMainThemePaper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('/resources/backPaper.jpg');
+    background-image: url('/resources/background/backPaper.jpg');
     background-repeat: no-repeat;
     background-position:center; 
     background-size : cover; 

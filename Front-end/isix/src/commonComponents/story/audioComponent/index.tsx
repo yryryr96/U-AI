@@ -59,11 +59,11 @@ const AudioPlayer = ({ file } : any ) => {
     >
       {playing ? 
         <div style={{width:'100%', height:'100%'}}>
-          <Image src={'/resources/soundbutton.png'} layout='fill' objectFit='cover' alt="" /> 
+          <Image src={'/resources/storyButton/soundbutton.png'} layout='fill' objectFit='cover' alt="" /> 
         </div>
         :
         <div style={{width:'100%', height:'100%'}}>
-          <Image src={'/resources/reloadbutton.png'} layout='fill' objectFit='cover' alt="" /> 
+          <Image src={'/resources/storyButton/reloadbutton.png'} layout='fill' objectFit='cover' alt="" /> 
         </div>}
     </button>
   )
