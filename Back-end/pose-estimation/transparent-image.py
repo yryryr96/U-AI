@@ -26,4 +26,4 @@ def process_images(src_folder, dest_folder, target_rgb, tolerance=60):
 
 
 # usage example
-process_images('C:/Users/SSAFY/Desktop/ㅍ0ㅐㄴ더/processed', 'C:/Users/SSAFY/Desktop/ㅍ0ㅐㄴ더/processed/trans', (32, 173, 67))
+process_images('C:/Users/SSAFY/Desktop/ㅍ0ㅐㄴ더/processed', 'C:/Users/SSAFY/Desktop/ㅍ0ㅐㄴ더/processed/trans', (25, 167, 60))
