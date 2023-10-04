@@ -45,7 +45,7 @@ export const StyledCamText = styled.div`
 
 export const StyledCamImg = styled.div`
   position: absolute;
-  top: 3.5rem;
+  top: 6rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
