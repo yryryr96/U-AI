@@ -49,7 +49,7 @@ if __name__ == '__main__':
     )
     dummy_input = torch.randn(23)
     classification = keypoint_classification(dummy_input)
-    print(classification)
+    # print(classification)
 
 
 

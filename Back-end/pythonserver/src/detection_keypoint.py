@@ -85,6 +85,6 @@ class DetectKeypoint:
         return keypoint_data
     
     def __call__(self, image: np.array) -> Results:
-        results = self.model.predict(image, save=False)[0]
+        results = self.model.predict(image, save=False,verbose=False)[0]
         return results
 
