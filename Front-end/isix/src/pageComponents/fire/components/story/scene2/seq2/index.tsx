@@ -31,7 +31,7 @@ const Seq2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidden
       const imageUrl = canvas.toDataURL('image/png');
   
       const action = imageUrls.length < 2 ? 'add' : 'update';
-      updateImageUrl(imageUrl, action);
+      updateImageUrl(imageUrl, action, 1);
       console.log('캡쳐 완료');
     }
   };

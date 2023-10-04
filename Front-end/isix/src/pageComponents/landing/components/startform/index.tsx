@@ -3,6 +3,7 @@
 import useUserInfoStore from '@/stores/mypage/useUserInfoStore';
 import Link from 'next/link';
 import { TagContainer, StyledStartFormButton, StyledStartFormInput, StyledStartFormContainer, StyledServiceName, StyledStartFormName, StyledStartForm } from '../../Landing.styled';
+import { useState } from 'react';
 
 export default function StartForm() {
   const {
@@ -10,14 +11,17 @@ export default function StartForm() {
     people, setPeople
   } = useUserInfoStore();
 
+  const [check, setCheck] = useState(false);
+
   const saveKinder = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKindergarten(e.target.value);
+    const value = e.target.value;
+    setKindergarten(value);
+
+    if (value !== '') {
+      setCheck(true);
+    } 
   }
 
-  // const saveClass = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setClassName(e.target.value);
-  // }
-  
   const savePeople = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     if (!isNaN(value)) {
@@ -30,7 +34,7 @@ export default function StartForm() {
   }
 
   const checkLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (kindergarten === '') {
+    if (check === false) {
       e.preventDefault();
       alert('항목을 모두 입력해주세요')
     }
@@ -45,10 +49,6 @@ export default function StartForm() {
           <StyledStartFormName>단체명</StyledStartFormName>
           <StyledStartFormInput onChange={saveKinder}/>
         </StyledStartForm>
-        {/* <StyledStartForm>
-          <StyledStartFormName>반</StyledStartFormName>
-          <StyledStartFormInput onChange={saveClass}/>
-        </StyledStartForm> */}
         <StyledStartForm>
           <StyledStartFormName>인원 수</StyledStartFormName>
           <StyledStartFormInput value={people} type='number' max={6} min={1} step={1} onPaste={(e) => e.preventDefault()} onChange={savePeople}/>
