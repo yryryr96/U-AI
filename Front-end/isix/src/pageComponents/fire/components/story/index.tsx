@@ -22,14 +22,11 @@ import Seq16 from './scene6/seq16'
 import Seq17 from './scene7/seq17'
 import Seq18 from './scene7/seq18'
 import Seq19 from './scene7/seq19'
-import Seq20 from './scene8/seq20'
-import Seq21 from './scene8/seq21'
-import Seq22 from './scene8/seq22'
-import Seq23 from './scene8/seq23'
+import Seq20 from './scene7/seq20'
+import Seq21 from './scene7/seq21'
+import Seq22 from './scene7/seq22'
+import Seq23 from './scene7/seq23'
 import Seq24 from './scene8/seq24'
-import Seq25 from './scene8/seq25'
-import Seq26 from './scene8/seq26'
-import Seq27 from './scene9/seq27'
 import Repeat1 from './repeat/repeat1'
 import Repeat2 from './repeat/repeat2'
 import Repeat2Sol from './repeat/repeat2Sol'
@@ -39,7 +36,6 @@ import Final1 from './final/final1'
 import Final2 from './final/final2'
 
 import useWebcam from '@/Hooks/webcam/useWebcamHook';
-import Cover from '@/commonComponents/cover'
 import Loading from '@/commonComponents/loading'
 import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
@@ -56,7 +52,7 @@ const Story = () => {
   const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   const { resetImageUrls } = useImageUrlState();
   
-  const totalPage = 35; // 총 페이지 수
+  const totalPage = 32; // 총 페이지 수
 
   // OCR
   const ocrEvent = async () => {
@@ -81,8 +77,8 @@ const Story = () => {
     } else if (e.key === 'ArrowRight' && state === totalPage) {
       // main으로 이동
       if (window.confirm('메인 페이지로 이동하시겠습니까?')) {
-        setState(0)
         router.push('/main')
+        setState(0)
       }
     } else if (e.key === 'ArrowLeft' && state > 0) {
       setState(state - 1)
@@ -153,12 +149,9 @@ const Story = () => {
       {state === 21 && <Seq21 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 22 && <Seq22 />}
       {state === 23 && <Seq23 />}
-      {state === 24 && <Seq24 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
-      {state === 25 && <Seq25 />}
-      {state === 26 && <Seq26 />}
-      {state === 27 && <Seq27 />}
-      {state === 28 && <Repeat1 />}
-      {state === 29 &&
+      {state === 24 && <Seq24 />}
+      {state === 25 && <Repeat1 />}
+      {state === 26 &&
         <>
           {isLoading ?
             <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
@@ -169,7 +162,7 @@ const Story = () => {
           }
         </>
       }
-      { state === 30 &&
+      { state === 27 &&
         <>
           {isLoading ?
             <div style={{position:'fixed', top: '0', left: '0',width: "100vw", height: "100vh", backgroundColor: 'gray'}}>
@@ -180,7 +173,7 @@ const Story = () => {
           }
         </>
       }
-      {state === 31 &&
+      {state === 28 &&
         <>
           {isLoading ?
             <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
@@ -191,7 +184,7 @@ const Story = () => {
           }
         </>
       }
-      {state === 32 &&
+      {state === 29 &&
         <>
           {isLoading ?
             <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
@@ -202,7 +195,7 @@ const Story = () => {
           }
         </>
       }
-      {state === 33 &&
+      {state === 30 &&
         <>
           {isLoading ?
             <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
@@ -213,7 +206,7 @@ const Story = () => {
           }
         </>
       }
-      {state === 34 &&
+      {state === 31 &&
         <>
           {isLoading ?
             <div style={{ position: 'fixed', top: '0', left: '0', width: "100vw", height: "100vh", backgroundColor: 'gray' }}>
@@ -224,7 +217,7 @@ const Story = () => {
           }
         </>
       }
-      {state === 35 && <Ending/>}
+      {state === 32 && <Ending/>}
     </>
   )
 }

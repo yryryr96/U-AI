@@ -68,7 +68,7 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
           formData.append("type", "fire");
 
           try{
-            const res : AxiosResponse= await axios.post('http://localhost:8080/api/events/stt', formData); 
+            const res : AxiosResponse= await axios.post('http://127.0.0.1:8000/voice/api/voicerecognition/', formData); 
             console.log('res:', res.data); 
 
             if (res.data.result === -1) {
