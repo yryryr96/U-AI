@@ -130,7 +130,7 @@ export const StyledLine = styled.div`
   transform: translate(-50%);
   width: 2vw;
   height: 100vh;
-  background-image: url('/resources/line2.png');
+  background-image: url('/resources/assets/line2.png');
   background-size: cover;
   z-index: 2;
 `
@@ -147,7 +147,7 @@ export const BorderHeight = styled.div`
   top: 0;
   width: 2vw;
   height: 100vh;
-  background-image: url('/resources/line2.png');
+  background-image: url('/resources/assets/line2.png');
   background-size: cover;
   z-index: 2;
 
@@ -166,7 +166,7 @@ export const BorderWidth = styled.div`
   left: 0;
   width: 100vw;
   height: 3vh;
-  background-image: url('/resources/line1.png');
+  background-image: url('/resources/assets/line1.png');
   background-size: cover;
   z-index: 2;
 

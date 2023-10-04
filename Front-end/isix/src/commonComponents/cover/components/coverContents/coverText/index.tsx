@@ -30,7 +30,7 @@ const CoverTextComponent = ({ goal, items }: CoverTextProps) => {
       <br />
       <br />
       <ClickableImageContainer onClick={eduStart}>
-        <Image src='/resources/startButton.png' width={293} height={85} alt='start'/>
+        <Image src='/resources/assets/startButton.png' width={293} height={85} alt='start'/>
       </ClickableImageContainer>
     </StyledCoverText>
   )

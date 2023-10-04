@@ -37,7 +37,7 @@ export const MainCanvas = () => {
         <BackgroundImage />
         {/* {!match && <CharacterScene position={[1.6, 4.5, -1]} width={1000} height={1000} gifUrl='/resources/teacherpanda2.gif' />} */}
         <Frame name={1} id="1" bg="#e4cdac" position={[-5.4, .5, 0]} >
-        {!params && <ThemeImage scale={0.27} url='/resources/fireTheme2.svg' args={[20, 22]} position={[-.6,0,0]} />}
+        {!params && <ThemeImage scale={0.27} url='/resources/images/fireTheme2.svg' args={[20, 22]} position={[-.6,0,0]} />}
         </Frame>
         <Frame name={2} id="2" bg="#d1d1ca" position={[-.2, .5, 0]} >
         </Frame>

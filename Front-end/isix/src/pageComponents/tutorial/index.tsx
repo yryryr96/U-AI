@@ -5,12 +5,14 @@ import OX from './components/ox';
 import Sound from './components/sound';
 import OCR from './components/ocr';
 import HomeButton from '@/commonComponents/story/homeButtonComponent';
+import "@/styles/fire/style.css";
+import Motion from './components/motion';
 
 const Tutorial = () => {
   const [state,setState] = useState<number>(0);
 
   const incrementState = () => {
-    if (state < 4) {
+    if (state < 3) {
       setState(state + 1);
       console.log("증가")
     }
@@ -25,11 +27,13 @@ const Tutorial = () => {
   const textByState = () => {
     switch (state) {
       case 0:
-        return "OX퀴즈";
+        return "퀴즈";
       case 1:
-        return "소리내보기";
+        return "외치기";
       case 2:
-        return "따라 써보기";
+        return "따라하기";
+      case 3:
+        return "정답 쓰기"
       default:
         return "";
     }
@@ -52,7 +56,8 @@ const Tutorial = () => {
         <StyledPaperContainer>
           {state === 0 && <OX />}
           {state === 1 && <Sound />}
-          {state === 2 && <OCR />}
+          {state === 2 && <Motion/>}
+          {state === 3 && <OCR />}
         </StyledPaperContainer>
       </StyledContainer>
     </>
