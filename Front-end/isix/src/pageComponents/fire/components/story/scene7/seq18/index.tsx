@@ -38,7 +38,9 @@ const Seq18: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         setRight(response.data.right)
         if (timer === 0) {
           if (response.data.left > response.data.right) {
-            setState(state + 1)
+            setTimeout(() => {
+                setState(state + 1);
+            }, 500);
           } else {
             setAudioUrl('/resources/audioFile/incorrect.mp3');
             setTimer(10)
