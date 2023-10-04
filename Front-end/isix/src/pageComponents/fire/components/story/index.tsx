@@ -41,7 +41,8 @@ import Ending from '@/pageComponents/ending'
 import useFireState from '@/stores/fire/useFireState'
 import { useRouter } from 'next/navigation'
 import useImageUrlState from '@/stores/capture/useImageUrlState'
-import { customAxios } from '@/api/api'
+import { socketAxios } from '@/api/api'
+import { OCR_API_URL } from "@/config";
 
 const Story = () => {
   const [speakResult, setSpeakResult] = useState<boolean>(true);
@@ -49,14 +50,12 @@ const Story = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
 
-  const {videoElm , hiddenCanvasElm, startStream, stopStream}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
+  const {videoElm , hiddenCanvasElm, startStream, stopStream, devices, setDeviceId}=useWebcam('ws://passportlkm.iptime.org:32768/ws/chat',100);
   const { resetImageUrls } = useImageUrlState();
-  
   const totalPage = 32; // 총 페이지 수
 
   // OCR
   const ocrEvent = async () => {
-    const url = "api/events/multiocr";
     const sessionId = localStorage.getItem('socketId')
     const data = {
       sessionId: sessionId,
@@ -64,8 +63,10 @@ const Story = () => {
     };
 
     try {
-      const response = await customAxios.post(url, data);
-      console.log(response.data); 
+      if (OCR_API_URL) {
+        const response = await socketAxios.post(OCR_API_URL, data);
+        console.log(response.data); 
+      }
     } catch (error) {
       console.error('error', error);
     }
@@ -86,20 +87,10 @@ const Story = () => {
     setIsLoading(true)
   };
 
-  const handleMouseClick = (e: any) => {
-    e.preventDefault();
-    if (e.button === 2) { 
-      setState(state + 1);
-    }
-  };
-
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('mousedown', handleMouseClick);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('mousedown', handleMouseClick);
     };
   }, [state])
 
@@ -120,7 +111,7 @@ const Story = () => {
   
   return (
     <>
-      {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
+      {state === 0 && <Seq0 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} devices={devices} setDeviceId={setDeviceId}/>}
       {state === 1 && <Seq1 />}
       {state === 2 && <Seq2 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
       {state === 3 && <Seq3 />}

@@ -8,8 +8,8 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   
-  const [deviceId, setDeviceId] = useState("");
   const [devices, setDevices] = useState([]);
+  const [deviceId, setDeviceId] = useState(devices[0]?.deviceId);
   
   const handleDevices = useCallback(
       mediaDevices =>{
@@ -50,10 +50,9 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
 
   
   useEffect(() => {
-    console.log(devices)
-    console.log(devices[-1]?.deviceId)
+    
     if(isStreaming){
-      navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: devices[devices?.length-1]?.deviceId }} })
+      navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: deviceId }} })
         .then((stream) => {
           
           if (videoRef.current) {
@@ -97,7 +96,7 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
       
       };
     }
-  }, [isStreaming]);
+  }, [isStreaming, deviceId]);
 
   const startStream = () => {
     setIsStreaming(true);
@@ -111,7 +110,11 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
     startStream,
     stopStream, 
     videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%', transform: 'scaleX(-1)' }} ref={videoRef}  autoPlay playsInline muted />, 
-    hiddenCanvasElm : <canvas ref={canvasRef} style={{ display: 'none' }}/> };
+    hiddenCanvasElm : <canvas ref={canvasRef} style={{ display: 'none' }}/>,
+    devices : devices,
+    setDeviceId : setDeviceId
+   }
+    
 }
 
 export default useWebcam;

@@ -1,8 +1,7 @@
-import axios, { Axios, AxiosResponse } from "axios";
+import axios from "axios";
+import { SOCKET_API_URL } from "@/config";
 
-const SERVER_ADDRESS = "http://passportlkm.iptime.org:32768/";
-
-export const customAxios = axios.create({
-  baseURL: `${SERVER_ADDRESS}`,
+export const socketAxios = axios.create({
+  baseURL: `${SOCKET_API_URL}`,
 });
 
