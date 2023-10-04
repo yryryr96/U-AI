@@ -35,7 +35,7 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
 
         setTimeout(() => clearInterval(countdownIntervalId),3000);
 
-      }, 3500);
+      }, 3000);
       
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });

@@ -1,8 +1,8 @@
 import AudioPlayer from "@/commonComponents/story/audioComponent";
-import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledCaptureBox, StyledStoryCam } from "../../Story.styled"
+import { BorderHeight, BorderWidth, StyledBorders, StyledCamImg, StyledCamText, StyledCaptureBox, StyledStoryCam, StyledTimer } from "../../Story.styled"
 import CamComponent from "@/commonComponents/story/camComponent"
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import useImageUrlState from "@/stores/capture/useImageUrlState";
 import HomeButton from "@/commonComponents/story/homeButtonComponent";
@@ -17,6 +17,7 @@ interface WebcamProps {
 const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hiddenCanvasElm }) => {
   const text: string = `판다 친구들과 함께 사진 찍어볼까요?`
   const audioUrl: string = '/resources/audioFile/final2.mp3'
+  const [countdown, setCountdown] = useState(0);
 
   // 화면 캡쳐 후 url 저장
   const captureRef = useRef<HTMLDivElement | null>(null);
@@ -36,9 +37,19 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
   useEffect(() => {
     const timer = setTimeout(() => {
       handleCapture();
-    }, 3000);
+    }, 7500);
 
-    return () => clearTimeout(timer);
+    // return () => clearTimeout(timer);
+
+    setTimeout(() => {
+      setCountdown(3)
+      let countdownIntervalId = setInterval(() => {
+        setCountdown(prevCountdown => prevCountdown -1);
+      },1000);
+
+      setTimeout(() => clearInterval(countdownIntervalId),3000);
+
+    }, 4000);
   }, []);
 
   return (  
@@ -52,6 +63,7 @@ const Final2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidd
         <BorderWidth />
       </StyledBorders>
 
+      {countdown > 0 && <StyledTimer>{countdown}</StyledTimer>}
       <StyledCamText>{text}</StyledCamText>
       <StyledStoryCam>
         <CamComponent videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />
