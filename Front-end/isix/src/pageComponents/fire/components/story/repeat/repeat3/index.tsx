@@ -19,7 +19,7 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
   const audioUrl: string = '/resources/audioFile/repeat3.mp3'
   const answer = "소방관";
 
-  const [timer, setTimer] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(-1);
   const {correct, setCorrect} = useOcrCorrect();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
     
     setTimeout(() => {
       ocrEvent(answer);
-    },7000)
+    },8000)
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -42,8 +42,7 @@ const Repeat3: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
       }, 1000);
 
       return () => clearInterval(intervalId);
-    }
-    
+    }    
   }, [timer]);
 
 
