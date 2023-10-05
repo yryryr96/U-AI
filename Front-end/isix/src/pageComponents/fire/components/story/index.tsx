@@ -46,7 +46,7 @@ import { OCR_API_URL } from "@/config";
 import useOcrCorrect from '@/stores/ocr/useOcrCorrect'
 
 const Story = () => {
-  const [speakResult, setSpeakResult] = useState<boolean>(true);
+  const [speakResult, setSpeakResult] = useState<boolean>(false);
   const { state, setState } = useFireState();
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { correct, setCorrect } = useOcrCorrect();
@@ -124,11 +124,16 @@ const Story = () => {
       {state === 6 && <Seq6 />}
       {state === 7 && <Seq7 onResult={(result: number) => {
         if (result === 1) {
+          setSpeakResult(true)
+          setState(state + 1);
+        } else {
           setState(state + 1);
         }
       }}/>}
       {(state === 8 && speakResult) && <Seq8Correct />}
-      {(state === 8 && !speakResult) && <Seq8Incorrect />}
+      {(state === 8 && !speakResult) && <Seq8Incorrect onResult={(result: number) => {
+        setSpeakResult(true)
+      }}/>}
       {state === 9 && <Seq9 />}
       {state === 10 && <Seq10 />}
       {state === 11 && <Seq11 videoElm={videoElm} hiddenCanvasElm = { hiddenCanvasElm } startStream = {startStream} stopStream={stopStream} />}
