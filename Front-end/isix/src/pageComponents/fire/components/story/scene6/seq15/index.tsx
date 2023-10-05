@@ -55,7 +55,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
     const data = {
       sessionId: sessionId,
       eventName: 'evacuatefire',
-      numChild: 4, // 처음에 입력받은 값 넣기
+      numChild: 2, // 처음에 입력받은 값 넣기
       limit: 10 // 시간 초
     };
 
@@ -64,8 +64,10 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         const response = await socketAxios.post(MOTION_URL, data);
         if (response.data.result === 1) {
           setState(state + 1)
+          console.log('성공')
         } else {
           setAudioUrl2('/resources/audioFile/incorrect.mp3');
+          console.log('실패')
           motionEvent();
         }
       }

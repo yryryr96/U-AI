@@ -56,6 +56,11 @@ const Story = () => {
   const { resetImageUrls } = useImageUrlState();
   const totalPage = 32; // 총 페이지 수
 
+  type OcrResponseItem = {
+    inferText: string;
+    // 필요한 다른 속성들도 추가하세요.
+  };
+
   // OCR
   const ocrEvent = async (answer:string) => {
     const sessionId = localStorage.getItem('socketId')
@@ -67,7 +72,7 @@ const Story = () => {
     try {
       if (OCR_API_URL) {
         const response = await socketAxios.post(OCR_API_URL, data);
-        const correctPeople = response.data.ocrDtoList.filter(item => item.inferText === answer);
+        const correctPeople = response.data.ocrDtoList.filter((item: OcrResponseItem) => item.inferText === answer);
         setCorrect(correctPeople.length);
 
       }

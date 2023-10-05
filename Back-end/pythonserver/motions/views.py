@@ -112,7 +112,7 @@ def recognize_motion(request):
             frame += 1
 
             annotated_frame = image_draw
-            # print(res)
+            print(res)
             # cv2.imshow("YOLOv8 Inference", annotated_frame)
             if target in res:
                 if res[target] >= factor * child:

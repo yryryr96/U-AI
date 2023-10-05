@@ -10,7 +10,7 @@ const CamSelect: React.FC<CamSelectProps> = ({setDeviceId, devices}) => {
             setDeviceId(e.target.value)
             }}
             >
-            {devices && devices.map((device,index) => 
+            {devices && devices.map((device:any,index:number) => 
             <option value={device.deviceId} key={index}>{device?.label}</option>
             )}
         </select>
