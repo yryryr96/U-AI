@@ -73,7 +73,15 @@ const Story = () => {
       if (OCR_API_URL) {
         const response = await socketAxios.post(OCR_API_URL, data);
         const correctPeople = response.data.ocrDtoList.filter((item: OcrResponseItem) => item.inferText === answer);
-        setCorrect(correctPeople.length);
+        
+        const correct_count = correctPeople.length
+
+        if (correct_count !== 0) {
+          setCorrect(correct_count)
+          setState(state+1);
+          setIsLoading(true)
+        }
+        
 
       }
     } catch (error) {
@@ -165,7 +173,7 @@ const Story = () => {
               <Loading />
             </div>
             :
-            <Repeat2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} ocrEvent={ocrEvent}/>
+            <Repeat2 videoElm={videoElm} hiddenCanvasElm={hiddenCanvasElm} startStream={startStream} stopStream={stopStream} ocrEvent={ocrEvent} />
           }
         </>
       }
