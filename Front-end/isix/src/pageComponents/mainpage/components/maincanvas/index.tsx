@@ -13,11 +13,13 @@ import Cover from '@/commonComponents/cover'
 import { StyledMainThemeContainer, StyledMainThemePaper } from './MainCanvas.styled'
 import TutorialButton from './tutorialButton'
 import HomeButton from '@/commonComponents/story/homeButtonComponent'
+import AudioPlayer from '@/commonComponents/story/audioComponent'
 
 extend(geometry)
 
 export const MainCanvas = () => {
   const [match, params] = useRoute('/theme/:id')
+  const audioUrl : string = "/resources/bgmFile/동물농장2.mp3"
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -60,7 +62,7 @@ export const MainCanvas = () => {
       {params && params.id === '3' &&
         <HomeButton />
       }
-      {isLoading && <Loading />}
+      {isLoading ? <Loading /> : <AudioPlayer file={audioUrl} auto={true} />}
     </>
   )
 }
