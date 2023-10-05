@@ -7,12 +7,12 @@ import BackgroundImage from './backgroundimage'
 import ThemeImage from './themeimage'
 import Frame from './frame'
 import Rig from './rig'
-import CharacterScene from './gifscene'
 import { useEffect, useState } from 'react'
 import Loading from '@/commonComponents/loading'
 import Cover from '@/commonComponents/cover'
 import { StyledMainThemeContainer, StyledMainThemePaper } from './MainCanvas.styled'
 import TutorialButton from './tutorialButton'
+import HomeButton from '@/commonComponents/story/homeButtonComponent'
 
 extend(geometry)
 
@@ -45,12 +45,18 @@ export const MainCanvas = () => {
         </Frame>
         <Rig />
       </Canvas>
-      {params &&
+      {params && params.id === '1' &&
         <StyledMainThemeContainer>
           <StyledMainThemePaper>
             <Cover />
           </StyledMainThemePaper>
         </StyledMainThemeContainer>
+      }
+      {params && params.id === '2' &&
+        <HomeButton />
+      }
+      {params && params.id === '3' &&
+        <HomeButton />
       }
       {isLoading && <Loading />}
     </>
