@@ -1,10 +1,10 @@
 "use client"
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-const AudioPlayer = ({ file } : any ) => {
-  const [audio, setAudio] = useState(new Audio(file));
+const AudioPlayer = ({ file, auto = false } : any ) => {
+  const audio = useRef(new Audio(file));
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
@@ -13,33 +13,44 @@ const AudioPlayer = ({ file } : any ) => {
     }, 100);
 
     return () => {
-      audio.pause();
+      audio.current.pause();
       clearTimeout(timer)
     };
   }, []);
 
   useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
+    const handleEnded = () => {
+      if (auto) {
+        audio.current.currentTime = 0;
+        audio.current.play()
+      }
+    };
+
+    if (auto) {
+      audio.current.addEventListener('ended', handleEnded);
+    }
 
     return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
+      if (auto) {
+        audio.current.removeEventListener('ended', handleEnded);
+      }
     };
   }, []);
 
   useEffect(() => {
-    playing ? audio.play() : audio.pause();
+    playing ? audio.current.play() : audio.current.pause();
   }, [playing]);
 
   const handleClick = () => {
-    if (audio.paused && audio.currentTime > 0 && !audio.ended) {
-      setPlaying(true);
-    } else if (!audio.paused) {
-      setPlaying(false);
-    } else if (audio.paused && (audio.currentTime === 0 || audio.ended)) {
-      audio.currentTime = 0;
-      setPlaying(true);
-    }
-  };
+  if (audio.current.paused && audio.current.currentTime > 0 && !audio.current.ended) {
+    setPlaying(true);
+  } else if (!audio.current.paused) {
+    setPlaying(false);
+  } else if (audio.current.paused && (audio.current.currentTime === 0 || audio.current.ended)) {
+    audio.current.play().catch(error => console.log(error));
+    setPlaying(true);
+  }
+};
   
   return (
     <button

@@ -97,7 +97,9 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
         </StyledCamImg>
       </StyledStoryCam>
       <AudioPlayer file={audioUrl} />
-      {audioUrl2 && <AudioPlayer style={{visible: 'none'}} file={audioUrl2} />}
+      <div style={{visibility: 'hidden'}}>
+        {audioUrl2 && <AudioPlayer file={audioUrl2} />}
+      </div>
       <HomeButton />
     </StyledCaptureBox>
   )

@@ -7,10 +7,12 @@ import CharacterScene from './gifscene';
 import StartForm from '../startform';
 import Loading from '@/commonComponents/loading';
 import { useEffect, useState } from 'react';
+import AudioPlayer from '@/commonComponents/story/audioComponent';
 
 const LandingCanvas = () => {
 
   const [isLoading, setIsLoading] = useState(true);
+  const audioUrl : string = "/resources/bgmFile/동물농장2.mp3"
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +30,7 @@ const LandingCanvas = () => {
         {/* <CharacterScene position={[-100, -37, 0]} width={240} height={240} gifUrl='/resources/teacherpanda2.gif' /> */}
         <Effects />
       </Canvas>
-      {isLoading ? <Loading /> : <StartForm />}
+      {isLoading ? <Loading /> : <><StartForm /><AudioPlayer file={audioUrl} auto={true} /></>}
     </>
     
   );
