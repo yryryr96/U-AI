@@ -17,7 +17,7 @@ def voice_recognition(request):
 
     # MP3 파일 저장
     if mp3_file:  # 파일이 있을 경우만 처리
-        file_path = default_storage.save('media/mp3/' + mp3_file.name, mp3_file)
+        file_path = default_storage.save('media/mp3/' + sessionId+'.webm', mp3_file)
         print(f"File is saved at: {file_path}")
 
         print("저장된 파일명 = ", mp3_file.name)
