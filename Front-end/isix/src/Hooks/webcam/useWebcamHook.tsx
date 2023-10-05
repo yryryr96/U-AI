@@ -8,16 +8,22 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   
-  const [devices, setDevices] = useState([]);
+  type MediaDevice = {
+    kind: string;
+    deviceId: string;
+  };
+
+  const [devices, setDevices] = useState<MediaDevice[]>([]);
+
   const [deviceId, setDeviceId] = useState(devices[0]?.deviceId);
   
   const handleDevices = useCallback(
-      mediaDevices =>{
-        setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput"))
-      },
-          
-      [setDevices]
+    (mediaDevices: MediaDeviceInfo[]) => {
+      setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput"))
+    },
+    [setDevices]
   );
+
 
   useEffect(() => {
           navigator.mediaDevices.enumerateDevices().then(handleDevices);
@@ -66,7 +72,6 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
           // console.log(videoRef.current)
           // console.log(deviceId)
           if (socketRef.current?.readyState === WebSocket.OPEN && canvasRef.current && videoRef.current) {
-         
               const context = canvasRef.current.getContext('2d');
               if(context){
                   context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
