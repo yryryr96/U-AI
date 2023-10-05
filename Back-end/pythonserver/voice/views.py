@@ -20,13 +20,11 @@ def voice_recognition(request):
         file_path = default_storage.save('media/mp3/' + sessionId+'.webm', mp3_file)
         print(f"File is saved at: {file_path}")
 
-        print("저장된 파일명 = ", mp3_file.name)
-
         print("----------------- ai 처리중 -------------------")
         # MP3 파일 AI 로 처리하여 인식된 텍스트 출력
         # model은 whisper중 base 모델 사용
         model = whisper.load_model("base")
-        result = model.transcribe("media/mp3/" + mp3_file.name, fp16=False, language='ko')
+        result = model.transcribe("media/mp3/" + sessionId+'.webm', fp16=False, language='ko')
         recognition_text = result["text"]
 
         print("인식된 음성 = ", recognition_text)
