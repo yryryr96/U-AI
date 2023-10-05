@@ -21,7 +21,6 @@ const Repeat2: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hid
   const answer = "119";
 
   const {correct, setCorrect} = useOcrCorrect();
-  console.log(correct)
 
   useEffect(() => { 
     setCorrect(0);
