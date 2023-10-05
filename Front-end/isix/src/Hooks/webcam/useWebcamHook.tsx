@@ -114,7 +114,7 @@ const useWebcam = (socketUrl: string, sendInterval: number) => {
   return {
     startStream,
     stopStream, 
-    videoElm: <video style={{ objectFit: 'cover', width: '100%', height: '100%', transform: 'scaleX(-1)' }} ref={videoRef}  autoPlay playsInline muted />, 
+    videoElm: <video style={{ objectFit: 'fill', width: '100%', height: '100%', transform: 'scaleX(-1)' }} ref={videoRef}  autoPlay playsInline muted />, 
     hiddenCanvasElm : <canvas ref={canvasRef} style={{ display: 'none' }}/>,
     devices : devices,
     setDeviceId : setDeviceId
