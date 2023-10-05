@@ -129,9 +129,11 @@ const Story = () => {
       {state === 6 && <Seq6 />}
       {state === 7 && <Seq7 onResult={(result: number) => {
         if (result === 1) {
+          // 성공이면 speakResult를 true로 바꿔서 Seq8Correct로 가게
           setSpeakResult(true)
           setState(state + 1);
         } else {
+          // 실패면 state만 증가해서 Seq8Incorrect로 가게
           setState(state + 1);
         }
       }}/>}

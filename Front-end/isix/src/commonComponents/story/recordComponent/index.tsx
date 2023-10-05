@@ -55,10 +55,10 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
           console.log(sessionId)
 
           // // 정상 파일 테스트
-          //   await fetch('/resources/recorded-audio.mp3')
+          //   await fetch('/resources/fire_last.mp3')
           //     .then(res => res.blob())
           //     .then(blob => {
-          //       const file = new File([blob], "recorded_audio.mp3", { type: "audio/mp3"});
+          //       const file = new File([blob], "fire_last.mp3", { type: "audio/mp3"});
           //       console.log(file);
                 
     
@@ -83,21 +83,21 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
 
 
           // // 파일 확인용 다운로드 함수
-          function download() {
-            const a = document.createElement('a');
-            const url = URL.createObjectURL(mp3File);
+          // function download() {
+          //   const a = document.createElement('a');
+          //   const url = URL.createObjectURL(mp3File);
 
-            a.href = url; 
-            a.download = mp3File.name; 
+          //   a.href = url; 
+          //   a.download = mp3File.name; 
             
-            document.body.appendChild(a); 
-            a.click(); 
-            document.body.removeChild(a); 
-          }
+          //   document.body.appendChild(a); 
+          //   a.click(); 
+          //   document.body.removeChild(a); 
+          // }
             
           try{
             // 확인용 파일 다운로드
-            download();
+            // download();
 
             const res : AxiosResponse = await axios.post('http://passportlkm.iptime.org:32768/api/events/stt', formData); 
             console.log(res.data); 
@@ -133,7 +133,7 @@ const RecordComponent = ({ onResult }: RecordComponentProps): JSX.Element => {
     startTimerId = window.setTimeout(() => {
       mediaRecorderRef.current?.start(); 
       console.log('start');
-    }, 5500);
+    }, 5000);
 
     stopTimerId= window.setTimeout(() => {
       if(mediaRecorderRef.current?.state === 'recording'){
