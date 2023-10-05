@@ -63,12 +63,12 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
       if (MOTION_URL) {
         const response = await socketAxios.post(MOTION_URL, data);
         if (response.data.result === 1) {
-          // setState(state + 1)
+          setState(state + 1)
           console.log('성공')
         } else {
           setAudioUrl2('/resources/audioFile/incorrect.mp3');
-          // motionEvent();
           console.log('실패')
+          motionEvent();
         }
       }
     } catch (error) {

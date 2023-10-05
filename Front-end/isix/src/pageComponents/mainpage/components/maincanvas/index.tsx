@@ -37,11 +37,13 @@ export const MainCanvas = () => {
         <BackgroundImage />
         {/* {!match && <CharacterScene position={[1.6, 4.5, -1]} width={1000} height={1000} gifUrl='/resources/teacherpanda2.gif' />} */}
         <Frame name={1} id="1" bg="#e4cdac" position={[-5.4, .5, 0]} >
-        {!params && <ThemeImage scale={0.27} url='/resources/images/fireTheme2.svg' args={[20, 22]} position={[-.6,0,0]} />}
+          {!params && <ThemeImage scale={0.27} url='/resources/images/fireTheme2.svg' args={[20, 20]} position={[-.8,0,0]} />}
         </Frame>
         <Frame name={2} id="2" bg="#d1d1ca" position={[-.2, .5, 0]} >
+          {!params && <ThemeImage scale={0.27} url='/resources/images/classroom_panda2.jpg' args={[28, 20]} position={[.8,-.2,0]} />}
         </Frame>
         <Frame name={3} id="3" bg="#d1d1ca" position={[5, .5, 0]} >
+          {!params && <ThemeImage scale={0.35} url='/resources/images/police_office_panda2.png' args={[28, 20]} position={[.4,.4,0]} />}
         </Frame>
         <Rig />
       </Canvas>
