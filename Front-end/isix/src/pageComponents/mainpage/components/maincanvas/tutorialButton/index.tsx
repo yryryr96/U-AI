@@ -13,8 +13,8 @@ const TutorialButton = () => {
         
         style = {{
             position: 'fixed',
-            right: '1%',
-            top: '3%',
+            right: '8%',
+            top: '3.5%',
             width: '90px',
             height: '90px',
             background: 'none',
