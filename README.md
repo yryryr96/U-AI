@@ -6,25 +6,25 @@
 
 ## :books: 목차
 
-1. [프로젝트 개요](#:speech_balloon:-프로젝트-개요)
+1. [프로젝트 개요](#speech_balloon-프로젝트-개요)
 
-2. [주요 기능](#:loudspeaker:-주요-기능)
+2. [주요 기능](#loudspeaker-주요-기능)
 
-3. [기대 효과](#:sunny:-기대-효과)
+3. [기대 효과](#sunny-기대-효과)
 
-4. [기술 스택](#:black_nib:-기술-스택)
+4. [기술 스택](#black_nib-기술-스택)
 
-5. [시스템 아키텍처](#:open_file_folder:-시스템-아키텍처)
+5. [시스템 아키텍처](#open_file_folder-시스템-아키텍처)
 
-6. [와이어 프레임](#:microscope:-와이어-프레임)
+6. [와이어 프레임](#microscope-와이어-프레임)
 
-7. [요구사항 명세서](#:memo:-요구사항-명세서)
+7. [요구사항 명세서](#memo-요구사항-명세서)
 
-8. [API 명세서](#:pencil2:-API-명세서)
+8. [API 명세서](#pencil2-api-명세서)
 
-9. [결과물](:trophy:-결과물)
+9. [결과물](#trophy-결과물)
 
-10. [팀원 소개](#:family:-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
+10. [팀원 소개](#family-팀원-소개)
 
 <br/>
 
@@ -42,15 +42,23 @@
 
 ### 랜딩 페이지
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-14-47-52-image.png)
+<img title="" src="README/랜딩페이지.png" alt="랜딩" width="615">
 
 - 교육을 받는 단체 이름과 인원 수를 입력 받습니다.
 
 <br/>
 
+### 메인페이지
+
+<img title="" src="README/메인페이지.png" alt="메인" width="615">
+
+- 소방, 예절, 교통 교육 중 테마를 선택할 수 있으며, `?` 아이콘을 클릭하면 진행 방법을 설명하는 튜토리얼을 확인할 수 있습니다.
+
+<br/>
+
 ### 튜토리얼
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-22-38-image.png)
+<img title="" src="README/튜토리얼페이지.png" alt="튜토리얼" width="615">
 
 - 상호작용을 통해 진행되는 부분에 대해 튜토리얼을 통해 진행 방법을 안내합니다.
 
@@ -58,17 +66,33 @@
 
 ### 스토리 진행
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-24-17-image.png)
+<img title="" src="README/커버페이지.png" alt="커버" width="615">
 
 - 학습 목표와 준비물을 포함한 표지를 통해 교육 시작 전 흥미를 유발합니다.
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-33-41-image.png)
+<img title="" src="README/ox페이지.png" alt="ox" width="615">
+
+- 다중 객체 인식을 통해 사람 수를 파악하여 스토리를 진행합니다.
+
+<img title="" src="README/stt페이지.png" alt="stt" width="615">
 
 - STT를 활용하여 아동이 소리를 외치면 정확도를 판단하여 다시 외치도록 유도하거나, 다음 페이지로 이동합니다.
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-29-38-image.png)
+<img title="" src="README/모션인식페이지.png" alt="모션" width="615">
+
+- 판다의 동작을 따라하고, 정확도를 판단하여 정확한 동작을 하면 다음 페이지로 이동합니다.
+
+<img title="" src="README/ocr페이지.jpg" alt="ocr" width="615">
+
+- 퀴즈의 정답을 화이트보드에 작성하면, 이를 인식하여 몇 명이 정답을 맞혔는지 제공합니다.
+
+<img title="" src="README/판다페이지.png" alt="판다" width="615">
 
 - 친근한 판다 캐릭터를 통해 아동들의 관심을 유도합니다.
+
+<img title="" src="README/캡처페이지.png" alt="캡처" width="615">
+
+- 활동 사진을 스토리 마지막에 제공하며, 클릭 시 사진 파일 다운로드가 가능합니다.
 
 <br/>
 
@@ -94,52 +118,53 @@
 
 ## :open_file_folder: 시스템 아키텍처
 
-![화면 캡처 2023-10-04 091304.png](C:\Users\SSAFY\Downloads\화면%20캡처%202023-10-04%20091304.png)
+<img title="" src="README/architecture.png" alt="아키텍처" width="615">
 
 <br/>
 
 ## :microscope: 와이어 프레임
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-53-46-image.png)
+<img title="" src="README/와이어프레임.png" alt="와이어프레임" width="615">
 
 <br/>
 
 ## :memo: 요구사항 명세서
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-51-23-image.png)
+<img title="" src="README/요구사항_명세서1.png" alt="요구사항_명세서1" width="615">
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-52-27-image.png)
+<img title="" src="README/요구사항_명세서2.png" alt="요구사항_명세서2" width="615">
 
 <br/>
 
 ## :pencil2: API 명세서
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-56-40-image.png)
+<img title="" src="README/api_모션인식.png" alt="api1" width="615">
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-56-56-image.png)
+<img title="" src="README/api_ox.png" alt="api2" width="615">
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-57-14-image.png)
+<img title="" src="README/api_ocr.png" alt="api3" width="615">
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-57-34-image.png)
+<img title="" src="README/api_음성인식.png" alt="api4" width="615">
 
 <br/>
 
 ## :trophy: 결과물
 
 - [중간 발표 자료](https://drive.google.com/file/d/1HFNwo7lHW85fRsJFJW48vq73_kQEnRpQ/view?usp=drive_link)
+- [최종 발표 자료](https://drive.google.com/file/d/1SAf3oBKZLmWy3u49IUph8HGWM52VC65J/view?usp=drive_link)
 
 <br/>
 
 ## :family: 팀원 소개
 
-- **이강민 **
+- **이강민** : BE
 
-- **곽은정 **
+- **곽은정** : FE
 
-- **전대현 **
+- **전대현** : FE
 
-- **정근모 **
+- **정근모** : BE
 
-- **정영록 **
+- **정영록** : FE
 
-- **정훈석 **
+- **정훈석** : FE
