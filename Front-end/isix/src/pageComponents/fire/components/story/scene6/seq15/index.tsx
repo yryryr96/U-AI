@@ -49,35 +49,40 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
 
   // zustand
   const { state, setState } = useFireState();
-  // motion
-  const motionEvent = async () => {
-    const sessionId = localStorage.getItem('socketId')
-    const data = {
-      sessionId: sessionId,
-      eventName: 'evacuatefire',
-      numChild: 2, // 처음에 입력받은 값 넣기
-      limit: 10 // 시간 초
-    };
-
-    try {
-      if (MOTION_URL) {
-        const response = await socketAxios.post(MOTION_URL, data);
-        if (response.data.result === 1) {
-          setState(state + 1)
-          console.log('성공')
-        } else {
-          setAudioUrl2('/resources/audioFile/incorrect.mp3');
-          console.log('실패')
-          motionEvent();
-        }
-      }
-    } catch (error) {
-      console.error('error', error);
-    }
-  };
+  
 
   useEffect(() => {
+    let isCancelled = false;
+    // motion
+    const motionEvent = async () => {
+      const sessionId = localStorage.getItem('socketId')
+      const data = {
+        sessionId: sessionId,
+        eventName: 'evacuatefire',
+        numChild: 2, // 처음에 입력받은 값 넣기
+        limit: 10 // 시간 초
+      };
+
+      try {
+        if (!isCancelled && MOTION_URL) {
+          const response = await socketAxios.post(MOTION_URL, data);
+          if (response.data.result === 1) {
+            setState(state + 1)
+            console.log('성공')
+          } else {
+            setAudioUrl2('/resources/audioFile/incorrect.mp3');
+            console.log('실패')
+            motionEvent();
+          }
+        }
+      } catch (error) {
+        console.error('error', error);
+      }
+    };
     motionEvent();
+    return () => { 
+      isCancelled = true; 
+    };
   }, [])
 
   return (
