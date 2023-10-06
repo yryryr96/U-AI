@@ -150,8 +150,9 @@
 
 ## :trophy: 결과물
 
-- [중간 발표 자료](https://drive.google.com/file/d/1HFNwo7lHW85fRsJFJW48vq73_kQEnRpQ/view?usp=drive_link)
-- [최종 발표 자료](https://drive.google.com/file/d/1SAf3oBKZLmWy3u49IUph8HGWM52VC65J/view?usp=drive_link)
+- [중간 발표 자료](https://pusanackr-my.sharepoint.com/:b:/g/personal/dms5474_pusan_ac_kr/EdYfrfbSQK1AmbHjr76aG4ABV8LxUfg7SpzbedS7987-tQ?e=ZzXzLH)
+- [최종 발표 자료](https://pusanackr-my.sharepoint.com/:b:/g/personal/dms5474_pusan_ac_kr/Ed9kCHgnj-NNkQkg6hxphIoBCc6rLg9zOEChNYiSMZ2ejA?e=L5T4Al)
+- [UCC](https://pusanackr-my.sharepoint.com/:v:/g/personal/dms5474_pusan_ac_kr/EZwTi-auz_lMvhtIYoo9W30BCF7K1JFNEK_eUiw7RzHyBg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=JqfjY2)
 
 <br/>
 
@@ -159,7 +160,7 @@
 
 - **이강민** : 스크럼 마스터, 백엔드 주요 API 개발, 서버 아키텍처 설계, 통합 및 배포, AI 데이터 학습 및 채택
 
-- **곽은정** : FE
+- **곽은정** : 화재 교육 전체 페이지 구성, STT 클라이언트, 활동 사진 제공 기능 구현, 시작폼 및 커버 페이지 제작
 
 - **전대현** : FE
 
