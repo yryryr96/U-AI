@@ -41,7 +41,7 @@ const Seq15: React.FC<WebcamProps> = ({ startStream, stopStream, videoElm, hidde
   useEffect(() => {
     const timer = setTimeout(() => {
       handleCapture();
-    }, 4000);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);
