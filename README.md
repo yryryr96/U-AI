@@ -42,15 +42,23 @@
 
 ### 랜딩 페이지
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-14-47-52-image.png)
+![랜딩](C:\Users\SSAFY\Desktop\S09P22E104\README\랜딩페이지.png)
 
 - 교육을 받는 단체 이름과 인원 수를 입력 받습니다.
 
 <br/>
 
+### 메인페이지
+
+![메인](C:\Users\SSAFY\Desktop\S09P22E104\README\메인페이지.png)
+
+- 소방, 예절, 교통 교육 중 테마를 선택할 수 있으며, `?` 아이콘을 클릭하면 진행 방법을 설명하는 튜토리얼을 확인할 수 있습니다.
+
+<br/>
+
 ### 튜토리얼
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-22-38-image.png)
+![튜토리얼](C:\Users\SSAFY\Desktop\S09P22E104\README\튜토리얼페이지.png)
 
 - 상호작용을 통해 진행되는 부분에 대해 튜토리얼을 통해 진행 방법을 안내합니다.
 
@@ -62,13 +70,29 @@
 
 - 학습 목표와 준비물을 포함한 표지를 통해 교육 시작 전 흥미를 유발합니다.
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-33-41-image.png)
+![ox](C:\Users\SSAFY\Desktop\S09P22E104\README\ox페이지.png)
+
+- 다중 객체 인식을 통해 사람 수를 파악하여 스토리를 진행합니다.
+
+![페이지](C:\Users\SSAFY\Desktop\S09P22E104\README\stt페이지.png)
 
 - STT를 활용하여 아동이 소리를 외치면 정확도를 판단하여 다시 외치도록 유도하거나, 다음 페이지로 이동합니다.
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-29-38-image.png)
+![모션인식](C:\Users\SSAFY\Desktop\S09P22E104\README\모션인식페이지.png)
+
+- 판다의 동작을 따라하고, 정확도를 판단하여 정확한 동작을 하면 다음 페이지로 이동합니다.
+
+![ocr](C:\Users\SSAFY\Desktop\S09P22E104\README\ocr페이지.jpg)
+
+- 퀴즈의 정답을 화이트보드에 작성하면, 이를 인식하여 몇 명이 정답을 맞혔는지 제공합니다.
+
+![판다페이지](C:\Users\SSAFY\Desktop\S09P22E104\README\판다페이지.png)
 
 - 친근한 판다 캐릭터를 통해 아동들의 관심을 유도합니다.
+
+![캡처](C:\Users\SSAFY\Desktop\S09P22E104\README\캡처페이지.png)
+
+- 활동 사진을 스토리 마지막에 제공하며, 클릭 시 사진 파일 다운로드가 가능합니다.
 
 <br/>
 
@@ -94,52 +118,53 @@
 
 ## :open_file_folder: 시스템 아키텍처
 
-![화면 캡처 2023-10-04 091304.png](C:\Users\SSAFY\Downloads\화면%20캡처%202023-10-04%20091304.png)
+![시스템 아키텍처](C:\Users\SSAFY\Desktop\S09P22E104\README\architecture.png)
 
 <br/>
 
 ## :microscope: 와이어 프레임
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-53-46-image.png)
+![와이어 프레임](C:\Users\SSAFY\Desktop\S09P22E104\README\와이어프레임.png)
 
 <br/>
 
 ## :memo: 요구사항 명세서
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-51-23-image.png)
+![요구사항 명세서](C:\Users\SSAFY\Desktop\S09P22E104\README\요구사항_명세서1.png)
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-16-52-27-image.png)
+![요구사항 명세서](C:\Users\SSAFY\Desktop\S09P22E104\README\요구사항_명세서2.png)
 
 <br/>
 
 ## :pencil2: API 명세서
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-56-40-image.png)
+![API 모션인식](C:\Users\SSAFY\Desktop\S09P22E104\README\api_모션인식.png)
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-56-56-image.png)
+![API_OX](C:\Users\SSAFY\Desktop\S09P22E104\README\api_ox.png)
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-57-14-image.png)
+![API_OCR](C:\Users\SSAFY\Desktop\S09P22E104\README\api_ocr.png)
 
-![](C:\Users\SSAFY\AppData\Roaming\marktext\images\2023-10-05-15-57-34-image.png)
+![API_음성인식](C:\Users\SSAFY\Desktop\S09P22E104\README\api_음성인식.png)
 
 <br/>
 
 ## :trophy: 결과물
 
 - [중간 발표 자료](https://drive.google.com/file/d/1HFNwo7lHW85fRsJFJW48vq73_kQEnRpQ/view?usp=drive_link)
+- [최종 발표 자료](https://drive.google.com/file/d/1SAf3oBKZLmWy3u49IUph8HGWM52VC65J/view?usp=drive_link)
 
 <br/>
 
 ## :family: 팀원 소개
 
-- **이강민 **
+- **이강민** : BE
 
-- **곽은정 **
+- **곽은정** : FE
 
-- **전대현 **
+- **전대현** : FE
 
-- **정근모 **
+- **정근모** : BE
 
-- **정영록 **
+- **정영록** : FE
 
-- **정훈석 **
+- **정훈석** : FE
