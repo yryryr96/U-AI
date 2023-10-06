@@ -108,7 +108,7 @@
 
 ## :black_nib: 기술 스택
 
-- Front-end :  `React`, `Next.js`, `TypeScript`, `Three.js`, `Styled-component`
+- Front-end : `React`, `Next.js`, `TypeScript`, `Three.js`, `Styled-component`
 
 - Back-end : `JAVA`, `Spring Boot`, `Django`, `Pytorch`
 
@@ -158,12 +158,12 @@
 
 ## :family: 팀원 소개
 
-       [BE]
+[BE]
 
 - **이강민** : 스크럼 마스터, 백엔드 주요 API 개발, 서버 아키텍처 설계, 통합 및 배포, AI 데이터 학습 및 채택
 
-- **정근모** : 백엔드 주요 API 개발, stt 기능 개발 및 다중 객체 ocr 개발(AI)
-  
+- **정근모** : 백엔드 주요 API 개발, stt 기능 개발 및 다중 객체 ocr 개발(AI), UCC 제작, 소켓 통신
+
   [FE]
 
 - **곽은정** : 화재 교육 전체 페이지 구성, STT 클라이언트, 활동 사진 제공 기능 구현, 시작폼 및 커버 페이지 제작
@@ -172,4 +172,4 @@
 
 - **정영록** : 캐릭터 생성 및 애니메이션 제작, OCR 기능 연결 및 테스트, 커스텀 훅 사용 및 캠 설정 기능 구현
 
-- **정훈석** : Motion Event 및 OX Event 연결 WebCamHook 구현, 랜딩 및 메인 페이지 제작, audio 구현, 
+- **정훈석** : Motion Event 및 OX Event 연결 WebCamHook 구현, 랜딩 및 메인 페이지 제작, audio 구현,
