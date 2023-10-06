@@ -42,7 +42,7 @@
 
 ### 랜딩 페이지
 
-![랜딩](C:\Users\SSAFY\Desktop\S09P22E104\README\랜딩페이지.png)
+![랜딩](README\랜딩페이지.png)
 
 - 교육을 받는 단체 이름과 인원 수를 입력 받습니다.
 
